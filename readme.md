@@ -1,10 +1,13 @@
+![](https://creativecommons.org/images/support/2010/cc-support.png)
+
+
 [官方站点](http://www.hlzblog.top/)  
 
 本次项目是基于 `Laravel5` 系列框架开发的  
 遵循 `PSR` 标准  
 采用了多种设计模式  
 本次版本升级，重构了后端代码  
-目前后台功能尚不完善，处于 `Alpha` 阶段
+目前后台功能尚不完善，处于 `Alpha` 阶段  
 
 ## 目录结构
 
