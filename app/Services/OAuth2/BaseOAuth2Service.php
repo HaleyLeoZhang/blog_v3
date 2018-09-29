@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\OAuth2;
 
-// 示例，见文末，请先开启session
 interface BaseOAuth2Service
 {
     public function get_third_login_url(); // 去第三方登录的地址
