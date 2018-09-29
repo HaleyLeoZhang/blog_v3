@@ -1,0 +1,93 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Debug gracefully</title>
+    <meta name="keywords" content="云天河API调试台" />
+    <meta name="description" content="优雅地调试" />
+<style>
+    .instance_contaner{
+        font-family: '微软雅黑','Times New Roman';
+        margin-left: 20px;
+        float:left;
+    }
+    .instance_contaner > div{
+        color: red ;
+        font-size: 15px;
+        width:500px;
+        clear:both;
+        margin-bottom: 15px;
+    }
+    .instance_contaner > div > span{
+        color:blue;
+        width:50px;
+        float:left;
+        
+    }
+    .instance_contaner > div > a{
+        color: #E066FF ;
+    }
+    .instance_contaner input{
+        padding-left: 3px;
+    }
+    .instance_contaner button{
+        background-color :#EE82EE;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="instance_contaner">
+    <h1>Instance of msg_code</h1>
+    <div>
+        <span>url</span>
+        <a href="/err/error.json" target='_blank'>/err/error.json</a>
+    </div>
+    <div>
+        <span>code</span>
+        <input type="text" id="get_code" size='30' placeholder="Please input error code">
+        <button id='bt_1'  >Search</button>
+    </div>
+    <div >
+        <span>msg</span>
+        <p id="msg">/</p>
+    </div>
+    <div >
+        <span>Time</span>
+        <p id="time">/</p>
+    </div>
+</div>
+
+
+<div class="instance_contaner">
+    <h1>Api Console</h1>
+    <div>
+        <span>url</span>
+        <a href="/err" target='_blank' id='now_url'>/err</a>
+    </div>
+    <div>
+        <span>Con</span>
+        <input type="text" id="con" size='15' placeholder='Controller'><br>
+    </div>
+    <div>
+        <span>Act</span>
+        <input type="text" id="act" size='23' placeholder='Action'>
+    </div>
+    <div>
+        <span>Param</span>
+        <input type="text" id="param" size='30' placeholder='Post param'>
+        <button id='bt_2' >Submit</button>
+    </div>
+    <div >
+        <span>Time</span>
+        <p id="use_time">/</p>
+    </div>
+    <div id="markdown_container">
+        <pre id='back_data'>暂无</pre>
+    </div>
+</div>
+
+<script src="/static_pc/js/global.js"></script>
+<script src="/err/this.js"></script>
+<script src="/err/hlz_markdown.js"></script>
+</body>
+</html>

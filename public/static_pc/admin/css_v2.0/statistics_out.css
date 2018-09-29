@@ -1,0 +1,44 @@
+#yth-echarts-container{
+  width: 100%;
+}
+.yth_chart_item {
+  clear:both;
+  width: 820px;
+  padding: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+  cursor: default;
+}
+#user_info span{
+  width: 240px;
+  height: 155px;
+  margin-left: 30px;
+  float: left;
+  text-align: center;
+}
+#user_info > span > div{
+  padding: auto;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  margin-top: 5px;
+}
+#user_info > span > div > img{
+  width: 100%;
+  height: 100%;
+}
+#user_info > span > h3{
+  font-size: 15px;
+  font-family: 微软雅黑;
+  font-weight: 600;
+  margin-top: 5px;
+  color:black;
+}
+#user_info > span > p{
+  font-size: 12px;
+  font-family: 微软雅黑;
+  font-weight: 300;
+  margin-top: 3px;
+  color:#111;
+}
+

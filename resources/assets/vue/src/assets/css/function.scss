@@ -1,0 +1,4 @@
+// 计算像素
+@function px2rem($px, $base-font-size: 75px) {
+  @return ($px / $base-font-size) * 1rem;
+}

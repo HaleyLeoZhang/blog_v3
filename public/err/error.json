@@ -1,0 +1,66 @@
+{
+	"Author"      : "Yun TianHe",
+
+	"Description" : "Parsing Error Code which contains Internal Error OR Api Error OF yth_mall  ",
+
+	"Home Page"   : "http://hlzblog.top/",
+
+	"Language"    : "English",
+
+	"Prefix"      : "c_",
+
+	"Err":{
+		"Title_1": "Set of yth_mall debug code",
+
+		"c_1000" : "Unknown!",
+
+		"c_1001" : "This API is not exists!",
+
+		"c_1002" : "Auth Denied!",
+
+		"c_1003" : "Access token is expired!",
+
+		"c_1004" : "Param Error!",
+
+		"c_1005" : "Not our website!",
+
+		"c_1006" : "Async task failed!",
+
+		"c_1007" : "Geting Api too fast , system regarded it as the reptile which IP would be opened in tomorrow!",
+
+		"c_1008" : "Your ip has been denied for this day!",
+
+		"c_1009" : "This is not an int value!",
+
+		"c_1010" : "File Not Found in this server!",
+
+		"c_1011" : "File del permission deny!",
+
+		"c_1012" : "Some params can't be empty strings!",
+
+		"c_1013" : "You may a CSRF victim",
+
+		"c_1014" : "User reply auth deny",
+
+		"c_1015" : "Exception occured",
+		
+
+		"Title_2": "About slide valide",
+
+		"c_2000" : "Validate successfully!",
+
+		"c_2001" : "Validate is failed!",
+
+		"c_2002" : "One of check-data is not int!",
+
+		"c_2003" : "Captchar time out!",
+
+		"c_2004" : "Validation's times  exceeding!",
+
+		"c_2005" : "Cannot Initialize new GD image stream",
+
+		"c_2006" : "Original PNG soucre is not found!",
+
+		"c_2007" : "Param Error"
+	}
+}

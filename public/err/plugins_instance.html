@@ -1,0 +1,150 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>yth商城,js集成插件演示</title>
+</head>
+<body>
+
+
+
+
+
+<h3>一、js模板渲染与分页类的使用</h3>
+<h5>jQuery分页插件cypager,回调函数内嵌js模板渲染插件</h5>
+<pre>
+	$(function(){
+		// 分页
+		$("#btn_1").cypager({
+		//pg_cur_count: 1,          // 当前页数（如果需要默认显示指定页面，则设置）
+		pgerId        : "",         // 插件的ID 默认 : cy_pager
+		pg_size       : 10,         // 每页显示记录数 默认：10条
+		pg_nav_count  : 10,         // 显示多少个导航数  默认：7个
+		pg_total_count: 194,        // 总记录数
+		pg_prev_name  : "<",     // 上一页按钮名称（默认：PREV）
+		pg_next_name  : ">",     // 下一页按钮名称 (默认：NEXT)
+		pg_call_fun   : function(to_page){ //  to_page 点击按钮的数字
+			// 渲染
+			var data = {
+				title: 'yth_mall V 2.0',
+				list: [
+			  		{name: '黎晓舜' , city: '杭州'}, 
+				  	{name: '沐临风' , city: '北京'}, 
+				  	{name: '云天河' , city: '青岛'}, 
+				  	{name: '潇涯&nbsp;' , city: '重庆'}
+				],
+				page_now:to_page
+			};
+			render("tpl","tpl_container",data);
+		}
+		});
+	});
+</pre>
+
+
+<div id="btn_1">这里是按钮</div>
+
+
+<div id="tpl_container">
+	<font color="red">模板，一会儿在这里渲染</font>
+</div>
+
+<h5>模板如下,其中 `type=text/yth_temp` 标签是自定义的，只要浏览器不认识就好</h5>
+<pre><code>&lt;script id=&quot;tpl&quot; type=&quot;text/yth_temp&quot; title=&quot;这里的yth_temp标签是自定义的，只要浏览器不认识就好&quot;&gt;
+    &lt;div style=&quot;padding:10px;background:black;color:white&quot;&gt;
+    &lt;h1&gt;{{ d.title }}&lt;/h1&gt;
+    &lt;ul&gt;
+    {{# for(var i = 0; i &lt; d.list.length; i++){ }}
+      &lt;li&gt;
+        &lt;span&gt;姓名：{{ d.list[i].name }}&lt;/span&gt;
+        &lt;span&gt;城市：{{ d.list[i].city }}&lt;/span&gt;
+      &lt;/li&gt;
+    {{# } }}
+    &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    刚刚你点击的是第&lt;font color=&quot;#CDCD00&quot; &gt;{{d.page_now}}&lt;/font&gt;页
+&lt;/div&gt;
+&lt;/script&gt;
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script id="tpl" type="text/yth_temp" title="这里的yth_temp标签是自定义的，只要浏览器不认识就好">
+<div style="padding:10px;background:black;color:white;width:580px">
+	<h1>{{ d.title }}</h1>
+	<ul>
+	{{# for(var i = 0; i < d.list.length; i++){ }}
+	  <li>
+	    <span>姓名：{{ d.list[i].name }}</span>
+	    <span>城市：{{ d.list[i].city }}</span>
+	  </li>
+	{{# } }}
+	</ul>
+	<div>
+		刚刚你点击的是第<font color="#CDCD00" >{{d.page_now}}</font>页
+	</div>
+</div>
+</script>
+
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript" src="/static_pc/js/global.js"></script>
+<script>
+$(function(){
+	// 分页
+	$("#btn_1").cypager({
+	// pg_cur_count: 1,			//当前页数（如果需要默认显示指定页面，则设置）
+	pgerId        : "",			// 插件的ID 默认 : cy_pager
+	pg_size       : 10,			// 每页显示记录数 默认：10条
+	pg_nav_count  : 10,			//显示多少个导航数  默认：7个
+	pg_total_count: 194,		// 总记录数
+	pg_prev_name  : "<",		//上一页按钮名称（默认：PREV）
+	pg_next_name  : ">",		//下一页按钮名称 (默认：NEXT)
+	pg_call_fun   : function(to_page){ //  to_page => 点击的数字
+		$.ajax({
+			url:api("Admin_order")
+		});
+		// 渲染
+		var data = {
+			title: 'yth_mall V 2.0',
+			list: [
+		  		{name: '黎晓舜' , city: '杭州'}, 
+			  	{name: '沐临风' , city: '北京'}, 
+			  	{name: '云天河'  , city: '青岛'}, 
+			  	{name: '潇涯&nbsp;', city: '重庆'}
+			],
+			page_now:to_page
+		};
+		render("tpl","tpl_container",data);
+	}
+	});
+});
+</script>
+</body>
+</html>

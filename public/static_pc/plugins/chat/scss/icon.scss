@@ -1,0 +1,37 @@
+/* show chat icon */
+$basic: (
+	cursor: pointer,
+	width: 20px,
+	height: 20px,
+	background-image: url(../img/icon.png), 
+	background-repeat: no-repeat,
+	display: inline-block
+);
+
+$icon_list:(
+	icon_gendar_gentleman,
+	icon_gendar_lady,
+	icon_crown ,
+	icon_praise,
+	icon_praised,
+	icon_status_info,
+	icon_status_success,
+	icon_status_warn,
+	icon_v_pink,
+	icon_v_purple,
+	icon_v_yellow
+);
+
+$i : 0 ;
+
+@each $name in $icon_list {
+	.#{$name} {
+	  @each $k, $v in $basic {
+		#{$k} : $v;
+	  }
+	  background-position: -#{$i}px 0px;
+	}
+ 	$i: $i +20;
+}
+
+/* show other icons */

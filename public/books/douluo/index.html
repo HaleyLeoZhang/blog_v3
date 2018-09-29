@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../common.css">
+</head>
+<body></body>
+	<script>
+	var title_en_us = 'douluo',
+	  	title_zh_cn = '斗罗大陆';
+
+	// 拉取对应页面数据
+	function to_page() {
+		set_page_num();
+
+		var pic_src_prefix, // 图片资源 前半段
+			  pic_src_suffix; // 图片资源 后半段
+	  // 配置项
+	  pic_src_suffix = '.jpg-mht.middle'; 
+	  // ~~~~~~~~~~~~~~~~~~~~~~~~~~每一段区域的解析规则如下~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  //   // 被拆分前
+		// // 解析至 189 话
+  //   if( page>176 ){
+  //       http://mhpic.manhualang.com/comic/D/斗罗大陆/177全GQ/1.jpg-kmw.middle"
+  //       pic_src_prefix = 'http://mhpic.manhualang.com/comic/D/斗罗大陆/' + page + '全GQ/';
+  //   }
+  //   else if( page>175 ){
+  //       pic_src_prefix = 'http://mhpic.manhualang.com/comic/D/斗罗大陆/' + page + '话GQ上/';
+  //   }else{
+  //   // 1~ 175
+  //       pic_src_prefix = 'http://mhpic.manhualang.com/comic/D/斗罗大陆/' + give_zero(page) + '话/';
+  //   }
+
+    // 被拆分后 --- 版权原因
+    switch(true){
+        case page>590:
+            pic_src_prefix = 'http://mhpic.manhualang.com/comic/D/斗罗大陆拆分版/' + page + '话GQ/';
+            break;
+        default:
+            pic_src_prefix = 'http://mhpic.manhualang.com/comic/D/斗罗大陆拆分版/' + page + '话/';
+    }
+
+		
+	  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	  page_common(pic_src_prefix, pic_src_suffix);
+	}
+	</script>
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="../common_lazy.js"></script>
+	<script src="../common.js"></script>
+</html>
+
+
+
+
+
+

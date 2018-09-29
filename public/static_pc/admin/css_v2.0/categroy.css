@@ -1,0 +1,38 @@
+﻿  .categroy{
+    width: 100%;
+    float: left;
+    clear: both;
+  }
+  .categroy_bar_1{
+    margin-top: 30px;
+  }
+  .categroy_bar_v1{
+    padding-top: 10px;
+    width: 15%;
+    float: left;
+  }
+  .categroy_bar_2{
+    margin-top: 20px;
+  }
+  .categroy_bar_bg_v1{
+    background-color: #2F4056;
+  }
+  .categroy_bar_v2{
+    padding-top: 10px;
+    width: 45%;
+    float: left;
+  }
+  .categroy_bar_bg_v2{
+    background-color: #009688;
+  }
+  .categroy_bar_content{
+    padding-top: 10px;
+    margin-left:10px;
+    margin-right: 10px;
+    font-family: Microsoft YaHei,微软雅黑;
+    font-weight: 800;
+    float: left;
+  }
+  .categroy_bar_button{
+    float: left;
+  }

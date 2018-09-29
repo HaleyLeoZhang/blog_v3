@@ -1,0 +1,353 @@
+#markdown_container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  word-wrap: break-word;
+  font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+
+  img {
+    max-width: 100%;
+    cursor: pointer;
+  }
+  pre {
+    overflow: auto;
+    color: black;
+    width: 100%;
+    border-left: 10px solid rgb(176, 147, 229);
+    margin: 5px 0 5px 0;
+    background-color: #FFF68F;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding: 0;
+    font-size: inherit;
+    white-space: pre-wrap;
+    border-radius: 0;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #000;
+    font-family: 'Microsoft Yahei', Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    padding: 5px 5px 5px 5px;
+  }
+  p {
+    margin: 15px 0 15px 40px;
+    padding: 5px 5px 5px 5px;
+    line-height: 30px;
+    color: #5e5e5e;
+    box-shadow: 2px 2px 2px 2px #ecece6;
+    > code {
+      border: 1px solid #ddd;
+      background: #f6f6f6;
+      padding: 3px;
+      border-radius: 3px;
+    }
+  }
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+    margin: 24px 0 6px;
+    border-bottom: 1px dotted rgba(163, 101, 245, 0.4);
+  }
+  h3 {
+    font-size: 24px;
+  }
+  h4 {
+    font-size: 21px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    color: rgb(14, 109, 174);
+    padding: 2px;
+    font-family: 'Serif';
+    font-weight: bold;
+  }
+  a:hover {
+    color: blue;
+  }
+  aside {
+    display: block;
+    float: right;
+    width: 390px;
+  }
+  blockquote {
+    color: #6a737d;
+    margin: 0;
+    padding-left: 1em;
+    border-left: 0.5em #EEE solid;
+    background: rgb(254, 254, 254);
+  }
+  blockquote cite {
+    font-size: 14px;
+    line-height: 20px;
+    color: #bfbfbf;
+  }
+  blockquote cite:before {
+    content: '014 A0';
+  }
+  blockquote p {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    line-height: 30px;
+    box-shadow: none;
+  }
+  hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #999;
+  }
+  button,
+  input,
+  select,
+  textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+  }
+  button,
+  input {
+    line-height: normal;
+    *overflow: visible;
+  }
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  button,
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'] {
+    cursor: pointer;
+    -webkit-appearance: button;
+  }
+  input[type=checkbox],
+  input[type=radio] {
+    cursor: pointer;
+  }
+  input:not([type='image']),
+  textarea {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  input[type='search'] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  label,
+  input,
+  select,
+  textarea {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: normal;
+    margin-bottom: 18px;
+  }
+  input[type=checkbox],
+  input[type=radio] {
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+  input[type=text],
+  input[type=password],
+  textarea,
+  select {
+    display: inline-block;
+    width: 210px;
+    padding: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    height: 18px;
+    color: #808080;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+  select,
+  input[type=file] {
+    height: 27px;
+    line-height: 27px;
+  }
+  textarea {
+    height: auto;
+  }
+   ::-moz-placeholder {
+    color: #bfbfbf;
+  }
+   ::-webkit-input-placeholder {
+    color: #bfbfbf;
+  }
+  input[type=text],
+  input[type=password],
+  select,
+  textarea {
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  input[type=text]:focus,
+  input[type=password]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  }
+  button {
+    height: 30px;
+    background-color: #3bb3e0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
+    background-image: linear-gradient(to bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    background-image: -o-linear-gradient(to bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    background-image: -moz-linear-gradient(to bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    background-image: -webkit-linear-gradient(to bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    background-image: -ms-linear-gradient(to bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(44, 160, 202)), color-stop(1, rgb(62, 184, 229)));
+    -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+    -moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+    -o-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+    box-shadow: inset 0px 1px 0px #7fd2f1, 0px 6px 0px #156785;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+  }
+  button::before {
+    background-color: #072239;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 4px;
+    left: -2px;
+    top: 5px;
+    z-index: -1;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 1px 0px #fff;
+    -moz-box-shadow: 0px 1px 0px #fff;
+    -o-box-shadow: 0px 1px 0px #fff;
+    box-shadow: 0px 1px 0px #fff;
+  }
+  button:active {
+    color: #156785;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.3);
+    background: rgb(44, 160, 202);
+    -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+    -moz-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+    -o-box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+    box-shadow: inset 0px 1px 0px #7fd2f1, inset 0px -1px 0px #156785;
+    top: 7px;
+  }
+  button:active::before {
+    top: -2px;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px;
+  }
+  thead th {
+    background-color: rgb(81, 130, 187);
+    color: #fff;
+    border-bottom-width: 0;
+  }
+  td {
+    color: #000;
+    vertical-align: top;
+  }
+  td,
+  th {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: bold;
+  }
+  tr,
+  th {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(81, 130, 187);
+  }
+
+  ul,
+  ol {
+    padding-left: 2em;
+  }
+
+  li {
+    // margin: 0.5em 0;
+    font-size: 14px;
+  }
+  /* Space paragraphs in a list the same as the list itself. */
+  li p {
+    /* Needs !important to override rule above. */
+    // margin: 0.5em 0 !important;
+  }
+  /* Smaller spacing for sub-lists */
+  ul ul,
+  ul ol,
+  ol ul,
+  ol ol {
+    margin: 0; // padding-left: 1em;
+  }
+  /* Use letters for unordered-lists. (Like Github.) */
+  ul ul,
+  ul,
+  ul {
+    list-style-type: square;
+    font-size: 14px;
+  }
+  /* Use letters for sub-ordered-lists. (Like Github.) */
+  ol ol,
+  ul ol {
+    list-style-type: lower-roman;
+  }
+  /* Use Roman numerals for sub-sub-ordered lists. (Like Github.) */
+  ul ul ol,
+  ul ol ol,
+  ol ul ol,
+  ol ol ol {
+    list-style-type: lower-alpha;
+  }
+}

@@ -1,0 +1,37 @@
+<script>
+var json_post_format = function(data){
+	var temp='',t2;
+	for(var v in data){
+		//判断是否为数组
+		if( typeof data[v] === 'object'  &&  data[v].length ){
+			t2 = data[v];
+			for(var j in t2 ){
+				temp += "&"+encodeURIComponent(v)+"="+t2[j];
+			}
+		}else{
+			temp += "&"+encodeURIComponent(v)+"="+data[v];
+		}
+	}
+	return temp;
+}
+	var param = {"yth":"云天河","arr":["xxx","xx","x"]} ,
+		real_param,
+    	url = "http://web.tp5.com/index/test",
+        xhr = new XMLHttpRequest(),
+        data;
+        real_param = json_post_format(param); // Use my func to format
+        console.log(real_param); // Reveal the debuging website!
+        xhr.open("post", url, true);
+        xhr.onload = function () {
+            if (this.status === 200) {
+                data = this.responseText;
+                console.log(data);
+            }
+        };
+        xhr.onerror = function (e) {
+            console.log( e );
+        };
+        xhr.setRequestHeader("Cache-Control", "no-cache");
+        xhr.setRequestHeader("Content-type" ,"application/x-www-form-urlencoded");
+        xhr.send( real_param );
+</script>

@@ -1,0 +1,69 @@
+{
+    "name": "云天河博客v2.1",
+    "description": "云天河博客v2.1，引入各种设计模式与个人开发的模块",
+    "keywords": ["云天河博客", "v2.1", "设计模式"],
+    "license": "Apache",
+    "type": "project",
+    "require":
+    {
+        "php": ">=7.0.0",
+        "laravel/framework": "5.3.*",
+        "intervention/image": "^2.3",
+        "sentry/sentry-laravel": "^0.9.0",
+        "prettus/l5-repository": "^2.6",
+        "predis/predis": "^1.1",
+        "earnp/laravel-google-authenticator": "dev-master",
+        "maatwebsite/excel": "~2.1.0",
+        "qiniu/php-sdk": "^7.2"
+    },
+    "require-dev":
+    {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1",
+        "barryvdh/laravel-ide-helper": "^2.4"
+    },
+    "autoload":
+    {
+        "classmap": [
+            "database"
+        ],
+        "psr-4":
+        {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev":
+    {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "scripts":
+    {
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "pre-update-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-update-cmd": [
+            "php artisan optimize"
+        ],
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ]
+    },
+    "config":
+    {
+        "preferred-install": "dist"
+    }
+}

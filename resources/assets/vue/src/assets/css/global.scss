@@ -1,0 +1,74 @@
+/* Default */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    cursor: url(http://img.cdn.hlzblog.top/18-1-14/72663679.jpg), default;
+}
+
+html,
+body,
+dd,
+dl,
+dt,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    word-wrap: break-word;
+    font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+a {
+    cursor: pointer;
+    color: #666;
+    text-decoration: none;
+    transition: color .2s linear;
+    &:hover {
+        color: #00c3f5;
+    }
+}
+
+.clr {
+    clear: both;
+    height: 0;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px
+}
+
+::-webkit-scrollbar-button:vertical {
+    display: none
+}
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-track {
+    background-color: #e2e2e2
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, .3)
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+    background-color: rgba(0, 0, 0, .35)
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+    background-color: rgba(0, 0, 0, .38)
+}

@@ -1,0 +1,186 @@
+.message_board {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    float: right;
+    img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+
+
+// leaveMessage.php      time_roller_Area时间轴部分
+.board_container {
+    margin-top: 30px;
+    min-height: 700px;
+    padding-left: 120px;
+}
+
+
+.message_list {
+    width: 666px;
+    float: left;
+    >li {
+        padding: 20px 0;
+        margin-bottom: 20px;
+    }
+}
+
+
+// 时间轴的颜色控制
+.arrow_box {
+    background: #d7fcef;
+    width: 630px;
+    color: #b9b9b9;
+    border-radius: 6px;
+    position: relative;
+    margin-top: -59px;
+}
+
+.right_box {
+    border-radius: 50px;
+    position: relative;
+    display: inline;
+    left: 668px;
+    margin-top: -30px;
+    width: 0;
+    height: 0;
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+    }
+}
+
+.ti {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0px 0 20px 22px;
+    border-color: transparent transparent transparent rgb(223, 199, 241);
+    position: absolute;
+    left: 630px;
+    top: 20px;
+}
+
+
+
+// 圆形定义边框色与背景一致
+.arrow_box h2.title {
+    padding: 0 0 0 20px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0.5px 0.5px 0.5px #000;
+}
+
+
+// 留言部分
+.textinfo {
+    color: #2b2b2b;
+    line-height: 24px;
+    padding: 20px 20px 20px 20px;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.arrow_box p {
+    line-height: 24px;
+    padding: 0 20px 20px;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.details {
+    background: #e1ebe9;
+    border-radius: 0 0 6px 6px;
+    padding: 0 10px;
+    li {
+        line-height: 26px;
+        display: inline;
+        font-size: 12px;
+        color: #1a1c1d;
+        a {
+            text-decoration: none;
+            color: rgb(117, 117, 113);
+            &:hover {
+                color: rgb(56, 57, 58);
+            }
+        }
+    }
+}
+
+.icon-time {
+    padding: 0 0 0 10px;
+    .fa-qq {
+        color: #8acef7;
+        font-size: 17px;
+    }
+    .fa-weibo {
+        color: #b95a5a;
+        font-size: 17px;
+    }
+    .login_method_icon {
+        width: 17px;
+        height: 17px;
+        margin-bottom: -4px;
+    }
+    .fa-qq,
+    .fa-weibo,
+    .login_method_icon {
+        margin-right: 10px;
+    }
+}
+
+.comments {
+    float: right;
+    padding: 0 10px 0 0;
+    .fa-clock-o {
+        font-size: 14px;
+        color: #8a8484,
+    }
+}
+
+.aside {
+    width: 200px;
+    float: right;
+    margin: 20px 0;
+    border-radius: 6px;
+    padding: 15px;
+    background: rgb(144, 255, 200);
+    margin-bottom: 20px;
+    overflow: hidden;
+    line-height: 26px;
+    display: inline;
+    font-size: 15px;
+    margin-right: 10px;
+    color: rgb(233, 149, 123);
+    text-shadow: 0.5px 0.5px 0.5px #000;
+}
+
+
+
+// 这是留言板内部回复 透明回复版面框
+.replay_content {
+    width: 460px;
+    color: rgb(89, 101, 125);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
+}
+
+
+// 图标都在这里
+.icon {
+    height: 59px;
+    width: 55px;
+    display: block;
+    float: left;
+    border-top-left-radius: 0.3em;
+    -o-border-top-left-radius: 0.3em;
+    -moz-border-top-left-radius: 0.3em;
+    -webkit-border-top-left-radius: 0.3em;
+    border-border-bottom-left-radius: 0.3em;
+    -o-border-bottom-left-radius: 0.3em;
+    -moz-border-bottom-left-radius: 0.3em;
+    -webkit-border-bottom-left-radius: 0.3em;
+}

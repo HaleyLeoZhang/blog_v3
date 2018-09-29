@@ -1,0 +1,15 @@
+#!/bin/bash
+# - 备份数据库
+mysql_dump_path="项目根路径/storage/backups"
+mysql_database="yth_blog" #数据库名称
+mysql_user="" # 数据库帐号
+mysql_password="" # 数据库密码
+
+
+last_day=`date -d last-day +%Y%m%d`
+
+mysql_dump_path="项目根路径/storage/backups"
+# backup database  in raw
+mysqldump --sock=/tmp/mysql.sock -u${mysql_user} -p ${mysql_password} ${mysql_database} > ${mysql_database}.sql 
+tar -zcvf ${mysql_dump_path}/${last_day}.tar.gz yth_blog.sql 
+rm -rf yth_blog.sql 

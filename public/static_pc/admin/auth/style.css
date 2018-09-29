@@ -1,0 +1,75 @@
+html,body{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* 顶部 */
+.yth_header{
+	z-index: 999;
+	position: fixed;
+	top:0px;
+	min-width: 1300px;
+	width:100%;
+	height: 60px;
+	background-color:#23262E;
+	clear:both;
+}	/* logo */
+.yth_logo{
+	float:left;
+	left: 0;
+	width: 200px;
+	height: 60px;
+}
+.yth_logo > a{
+	width: 130px;
+	height: 50px;
+	position: absolute;
+    left: 35px;
+    top: 5px;
+}
+.yth_logo > a > img {
+	width: 100%;
+	height: 100%;
+}
+.yth_staff_name{
+	float: left;
+}	/* 导航栏，右边 */
+.yth_header_right > .layui-nav{
+	float:right;
+	right:20px;
+	min-width:1100px;
+	background-color:#23262E;
+}		/*头像*/
+.yth_header_right > .layui-nav > .layui-nav-item > a > img{
+	margin-top: 5px;
+	width: 50px;
+	height: 50px;
+	border-radius:25px;
+}
+
+.yth_header_right > .layui-nav > .layui-nav-item{
+	float: right;
+}	/* 导航栏，左边 */
+.yth_nav_left{
+	z-index: 999;
+	position: fixed;
+	background-color:#393D49;
+	left: 0;
+	top:60px;
+	bottom:0;
+	width: 200px;
+    overflow-x: hidden;
+}
+
+
+/* 容器 */
+.yth_container{
+	min-width: 1300px;
+	width:100%;
+	height: 100%;
+}	/* 主体 */
+.yth_container_content{
+	padding-left:200px; 
+	padding-top:50px; 
+}
