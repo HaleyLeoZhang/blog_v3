@@ -40,7 +40,7 @@ class UploadAdminLogic
             $cdn_path            = self::upload_images($file_info);
             $success             = [];
             $success["state"]    = "SUCCESS";
-            $success["url"]      = $path;
+            $success["url"]      = $cdn_path;
             $success["title"]    = "查看图片";
             $success["original"] = "-";
             return $success;

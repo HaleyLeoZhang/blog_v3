@@ -33,7 +33,7 @@ class ArticleAdminLogic
         if (is_null($object)) {
             $data   = compact('title');
             $object = new ArticleCategory();
-            $objec->where('id', $id)
+            $object->where('id', $id)
                 ->update($data);
         } else {
             if ($id == $object->id) {

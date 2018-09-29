@@ -22,6 +22,10 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "success": 1,
+     *     "url": "\/\/tencent.cdn.hlzblog.top\/blog\/upload\/img\/2018_09_29_KAsu7WUa.jpg"
+     * }
      */
     public function markdown()
     {
@@ -41,6 +45,12 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "state": "SUCCESS",
+     *     "url": "\/\/tencent.cdn.hlzblog.top\/blog\/upload\/img\/2018_09_29_QLSwfPWw.jpg",
+     *     "title": "\u67e5\u770b\u56fe\u7247",
+     *     "original": "-"
+     * }
      */
     public function editor()
     {

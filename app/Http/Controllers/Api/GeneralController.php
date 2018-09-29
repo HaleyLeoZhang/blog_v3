@@ -18,6 +18,14 @@ class GeneralController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data":
+     *     {
+     *         "url": "http:\/\/fs.w.kugou.com\/201809291650\/b16704e072bc4b64d73c2274b2e406b3\/G087\/M06\/01\/05\/94YBAFiHguyALcJ1ADJXXPiRjh8038.mp3"
+     *     }
+     * }
      */
     public function memorabilia_bg()
     {

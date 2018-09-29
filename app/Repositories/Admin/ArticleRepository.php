@@ -40,7 +40,7 @@ class ArticleRepository
      */
     public static function category_edit($id, $title)
     {
-        ArticleAdminLogic::category_del($id, $title);
+        ArticleAdminLogic::category_edit($id, $title);
     }
 
     /**

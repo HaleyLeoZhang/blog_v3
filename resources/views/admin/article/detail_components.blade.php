@@ -311,7 +311,7 @@
      <div class="col-xs-4 col-sm-4">
          <div class="radio radio-info bg_id_radio" data-id="<%d[i].id%>">
              <input type="radio" id="radio_bg_id_<%d[i].id%>"  
-                 value="<%d[i].id%>" name="bg_id"
+                 value="<%d[i].id%>" name="bg_id_radio"
              <% d[i].id == document.getElementById('bg_id').value  ? 'checked' : ''  %>   />
              <label for="radio_bg_id_<%d[i].id%>"> 
                 <img src="<% d[i].url %>" width="190px" height="100px" alt="背景图">

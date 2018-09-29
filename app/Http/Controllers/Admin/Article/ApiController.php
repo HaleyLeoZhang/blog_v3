@@ -15,7 +15,7 @@ class ApiController extends BaseController
     // ---------------------- 文章分类 ----------------------
 
     /**
-     * @api {get} /admni/article/category_info 博文分类：查看
+     * @api {get} /admin/article/category_info 博文分类：查看
      * @apiName category_info
      * @apiGroup article
      *
@@ -24,6 +24,28 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data":
+     *     {
+     *         "info": [
+     *         {
+     *             "id": 36,
+     *             "title": "111",
+     *             "is_deleted": 0,
+     *             "updated_at": "2018-09-22 02:36:27",
+     *             "created_at": "2018-09-22 02:36:27"
+     *         },
+     *         {
+     *             "id": 23,
+     *             "title": "Golang",
+     *             "is_deleted": 0,
+     *             "updated_at": "2018-08-05 15:16:22",
+     *             "created_at": "2018-08-05 15:16:22"
+     *         }]
+     *     }
+     * }
      */
     public function category_info(Request $request)
     {
@@ -33,7 +55,7 @@ class ApiController extends BaseController
     }
 
     /**
-     * @api {post} /admni/article/category_edit 博文分类：修改
+     * @api {post} /admin/article/category_edit 博文分类：修改
      * @apiName category_edit
      * @apiGroup article
      *
@@ -45,6 +67,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function category_edit(Request $request)
     {
@@ -60,7 +87,7 @@ class ApiController extends BaseController
     }
 
     /**
-     * @api {post} /admni/article/category_del 博文分类：删除
+     * @api {post} /admin/article/category_del 博文分类：删除
      * @apiName category_del
      * @apiGroup article
      *
@@ -71,6 +98,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function category_del(Request $request)
     {
@@ -84,7 +116,7 @@ class ApiController extends BaseController
     }
 
     /**
-     * @api {post} /admni/article/category_add 博文分类：添加
+     * @api {post} /admin/article/category_add 博文分类：添加
      * @apiName category_add
      * @apiGroup article
      *
@@ -95,6 +127,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function category_add(Request $request)
     {
@@ -129,6 +166,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function detail_create(Request $request)
     {
@@ -161,7 +203,7 @@ class ApiController extends BaseController
      * @apiParam {string} title 标题
      * @apiParam {string} type 文本类型 0=>Markdown 1=>Editor
      * @apiParam {string} sticky 置顶项[0=>未置顶、1=>置顶]
-     * @apiParam {string} sequence 置顶顺序号（权重）
+     * @apiParam {string} sequence 置顶顺序号（权重），选填
      * @apiParam {string} original [0=>原创,1=>转载]
      * @apiParam {string} is_online [0=>下线,1=>上线]
      * @apiParam {string} raw_content 未转为html之前的文章内容
@@ -175,6 +217,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function detail_edit(Request $request)
     {
@@ -183,7 +230,7 @@ class ApiController extends BaseController
             'title'       => 'required',
             'type'        => 'required',
             'sticky'      => 'required',
-            'sequence'    => 'required',
+            // 'sequence'    => 'required',
             'original'    => 'required',
             'is_online'   => 'required',
             'raw_content' => 'required',
@@ -211,6 +258,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function detail_del(Request $request)
     {
@@ -261,6 +313,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function background_add(Request $request)
     {
@@ -274,7 +331,7 @@ class ApiController extends BaseController
     }
 
     /**
-     * @api {get} /article/background/background_info 背景主题：分页查看
+     * @api {get} /article/article/background_info 背景主题：分页查看
      * @apiName background_info
      * @apiGroup article
      *
@@ -285,6 +342,30 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data":
+     *     {
+     *         "info": [
+     *         {
+     *             "id": 35,
+     *             "url": "http:\/\/img.cdn.hlzblog.top\/18-2-7\/74292535.jpg",
+     *             "is_deleted": 0,
+     *             "updated_at": "2018-08-05 15:13:34",
+     *             "created_at": "0000-00-00 00:00:00"
+     *         },
+     *         {
+     *             "id": 33,
+     *             "url": "http:\/\/img.cdn.hlzblog.top\/18-2-7\/53540060.jpg",
+     *             "is_deleted": 0,
+     *             "updated_at": "2018-08-05 15:13:34",
+     *             "created_at": "0000-00-00 00:00:00"
+     *         }],
+     *         "page_count": 3,
+     *         "total": 26
+     *     }
+     * }
      */
     public function background_info(Request $request)
     {
@@ -305,6 +386,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function background_edit(Request $request)
     {
@@ -331,6 +417,11 @@ class ApiController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function background_del(Request $request)
     {

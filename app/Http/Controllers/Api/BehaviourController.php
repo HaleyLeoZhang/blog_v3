@@ -22,6 +22,11 @@ class BehaviourController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
      */
     public function foot_mark(Request $request)
     {

@@ -111,7 +111,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -151,7 +151,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"info\": [\n        {\n            \"id\": 17,\n            \"time\": \"2018-03-26 16:22:24\",\n            \"content\": \"ლ(′◉❥◉｀ლ)\",\n            \"name\": \"Itaustin Inc.\",\n            \"type\": 2,\n            \"pic\": \"http:\\/\\/thirdqq.qlogo.cn\\/qqapp\\/101309589\\/9CDCBEF210CA8ADDEBB4C2A33EBBA2D4\\/100\"\n        },\n        {\n            \"id\": 16,\n            \"time\": \"2017-11-16 15:41:09\",\n            \"content\": \"云神\",\n            \"name\": \"Naturo\",\n            \"type\": 2,\n            \"pic\": \"http:\\/\\/thirdqq.qlogo.cn\\/qqapp\\/101309589\\/7FF6D43C9DCF71A26D253174AE9E696F\\/100\"\n        }],\n        \"render\": \"\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -198,7 +198,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"id\": 50\n    }\n}",
           "type": "json"
         }
       ]
@@ -218,7 +218,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"url\": \"http:\\/\\/fs.w.kugou.com\\/201809291650\\/b16704e072bc4b64d73c2274b2e406b3\\/G087\\/M06\\/01\\/05\\/94YBAFiHguyALcJ1ADJXXPiRjh8038.mp3\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -421,39 +421,6 @@
   {
     "type": "post",
     "url": "/article/background/background_add",
-    "title": "背景主题：添加",
-    "name": "background_add",
-    "group": "article",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "url",
-            "description": "<p>图片地址</p>"
-          }
-        ]
-      }
-    },
-    "description": "<p>添加背景主题</p>",
-    "version": "3.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/background/background_add",
     "title": "背景主题：修改",
     "name": "background_add",
     "group": "article",
@@ -483,7 +450,40 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
+    "groupTitle": "article"
+  },
+  {
+    "type": "post",
+    "url": "/article/background/background_add",
+    "title": "背景主题：添加",
+    "name": "background_add",
+    "group": "article",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "url",
+            "description": "<p>图片地址</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>添加背景主题</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -516,7 +516,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -526,7 +526,7 @@
   },
   {
     "type": "get",
-    "url": "/article/background/background_info",
+    "url": "/article/article/background_info",
     "title": "背景主题：分页查看",
     "name": "background_info",
     "group": "article",
@@ -549,7 +549,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"info\": [\n        {\n            \"id\": 35,\n            \"url\": \"http:\\/\\/img.cdn.hlzblog.top\\/18-2-7\\/74292535.jpg\",\n            \"is_deleted\": 0,\n            \"updated_at\": \"2018-08-05 15:13:34\",\n            \"created_at\": \"0000-00-00 00:00:00\"\n        },\n        {\n            \"id\": 33,\n            \"url\": \"http:\\/\\/img.cdn.hlzblog.top\\/18-2-7\\/53540060.jpg\",\n            \"is_deleted\": 0,\n            \"updated_at\": \"2018-08-05 15:13:34\",\n            \"created_at\": \"0000-00-00 00:00:00\"\n        }],\n        \"page_count\": 3,\n        \"total\": 26\n    }\n}",
           "type": "json"
         }
       ]
@@ -559,7 +559,7 @@
   },
   {
     "type": "post",
-    "url": "/admni/article/category_add",
+    "url": "/admin/article/category_add",
     "title": "博文分类：添加",
     "name": "category_add",
     "group": "article",
@@ -582,7 +582,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -592,7 +592,7 @@
   },
   {
     "type": "post",
-    "url": "/admni/article/category_del",
+    "url": "/admin/article/category_del",
     "title": "博文分类：删除",
     "name": "category_del",
     "group": "article",
@@ -615,7 +615,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -625,7 +625,7 @@
   },
   {
     "type": "post",
-    "url": "/admni/article/category_edit",
+    "url": "/admin/article/category_edit",
     "title": "博文分类：修改",
     "name": "category_edit",
     "group": "article",
@@ -655,7 +655,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -665,7 +665,7 @@
   },
   {
     "type": "get",
-    "url": "/admni/article/category_info",
+    "url": "/admin/article/category_info",
     "title": "博文分类：查看",
     "name": "category_info",
     "group": "article",
@@ -675,7 +675,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"info\": [\n        {\n            \"id\": 36,\n            \"title\": \"111\",\n            \"is_deleted\": 0,\n            \"updated_at\": \"2018-09-22 02:36:27\",\n            \"created_at\": \"2018-09-22 02:36:27\"\n        },\n        {\n            \"id\": 23,\n            \"title\": \"Golang\",\n            \"is_deleted\": 0,\n            \"updated_at\": \"2018-08-05 15:16:22\",\n            \"created_at\": \"2018-08-05 15:16:22\"\n        }]\n    }\n}",
           "type": "json"
         }
       ]
@@ -764,7 +764,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -797,7 +797,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -847,7 +847,7 @@
             "type": "string",
             "optional": false,
             "field": "sequence",
-            "description": "<p>置顶顺序号（权重）</p>"
+            "description": "<p>置顶顺序号（权重），选填</p>"
           },
           {
             "group": "Parameter",
@@ -907,7 +907,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -927,7 +927,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"state\": \"SUCCESS\",\n    \"url\": \"\\/\\/tencent.cdn.hlzblog.top\\/blog\\/upload\\/img\\/2018_09_29_QLSwfPWw.jpg\",\n    \"title\": \"\\u67e5\\u770b\\u56fe\\u7247\",\n    \"original\": \"-\"\n}",
           "type": "json"
         }
       ]
@@ -947,12 +947,72 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": 1,\n    \"url\": \"\\/\\/tencent.cdn.hlzblog.top\\/blog\\/upload\\/img\\/2018_09_29_KAsu7WUa.jpg\"\n}",
           "type": "json"
         }
       ]
     },
     "filename": "app/Http/Controllers/Admin/Upload/ApiController.php",
     "groupTitle": "upload"
+  },
+  {
+    "type": "post",
+    "url": "/admin/user/comments_update",
+    "title": "更新用户评论",
+    "name": "comments_update",
+    "group": "user",
+    "description": "<p>更新用户评论</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/User/ApiController.php",
+    "groupTitle": "user"
+  },
+  {
+    "type": "post",
+    "url": "/admin/user/hanld_bind_relation",
+    "title": "修改与管理员的绑定关系",
+    "name": "hanld_bind_relation",
+    "group": "user",
+    "description": "<p>修改与管理员的绑定关系</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/User/ApiController.php",
+    "groupTitle": "user"
+  },
+  {
+    "type": "post",
+    "url": "/admin/user/user_list_handle",
+    "title": "修改用户状态",
+    "name": "user_list_handle",
+    "group": "user",
+    "description": "<p>修改用户状态</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/User/ApiController.php",
+    "groupTitle": "user"
   }
 ]
