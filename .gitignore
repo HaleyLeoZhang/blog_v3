@@ -1,5 +1,6 @@
 .env
 
-vendor
+/vendor
+
 node_modules
 package-lock.json
