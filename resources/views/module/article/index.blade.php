@@ -3,7 +3,7 @@
 {{-- 页面标题 --}}
 @section('set_title') {{ $article_obj->title }}_云天河博客 @endsection
 {{-- 页面描述 --}}
-@section('seo_description') 这篇文章主要阐述了{{ $article_obj->title }}的相关内容 @endsection
+@section('seo_description') 这篇文章主要阐述了{{ $article_obj->descript }}的相关内容 @endsection
 {{-- 文章详情 --}}
 @section('content')
 
