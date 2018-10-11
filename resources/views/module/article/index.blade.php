@@ -2,6 +2,8 @@
 @extends('module/index/layout')
 {{-- 页面标题 --}}
 @section('set_title') {{ $article_obj->title }}_云天河博客 @endsection
+{{-- 页面SEO --}}
+@section('seo_keywords')云天河博客,{{ $article_obj->title }}云天河博客@endsection
 {{-- 页面描述 --}}
 @section('seo_description') 这篇文章主要阐述了{{ $article_obj->descript }}的相关内容 @endsection
 {{-- 文章详情 --}}

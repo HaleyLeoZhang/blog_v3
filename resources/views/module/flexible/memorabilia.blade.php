@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="author" content="'云天河Blog'官网 http://www.hlzblog.top/ 请尊重作者成果，请保留此项">
-		<meta name="keywords" content="云天河,作品"/>
+		<meta name="keywords" content="云天河,云天河作品,云天河大事记"/>
 		<meta name="description" content="一路走来 云天河所做过的努力">
 		<title>作品 | 云天河Blog</title>
 		<link rel="shortcut icon" href="{{ static_host() }}/favicon.ico"  />
