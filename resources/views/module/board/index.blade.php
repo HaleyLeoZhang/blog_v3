@@ -2,6 +2,8 @@
 @extends('module/index/layout')
 {{-- 页面标题 --}}
 @section('set_title') 留言板_云天河博客 @endsection
+{{-- 页面SEO --}}
+@section('seo_keywords')留言板,云天河博客,云天河,hlzblog,在路上的架构师@endsection
 {{-- 页面描述 --}}
 @section('seo_description') 留言板 @endsection
 {{-- 文章详情 --}}
