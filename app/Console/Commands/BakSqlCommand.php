@@ -36,7 +36,8 @@ class BakSqlCommand extends Command
 
     const FILE_SUFFIX = '.tar.gz'; // 备份文件的文件后缀名
     const FILE_EXPIRE = 30; // 每次删除，指定天数前的备份文件
-    const LOGO_SRC    = 'http://img.cdn.hlzblog.top/17-11-1/90327252.jpg'; // 站点 LOGO 图片： 650px * 144px
+    const LOGO_SRC    = 'https://i.loli.net/2018/10/12/5bc0020f34867.jpg'; // 站点 LOGO 图片： 650px * 144px，采用图床
+    // const LOGO_SRC    = 'http://img.cdn.hlzblog.top/17-11-1/90327252.jpg'; // 站点 LOGO 图片： 650px * 144px，备份用
 
     public function backups()
     {
@@ -44,7 +45,7 @@ class BakSqlCommand extends Command
         $last_day      = date("Ymd", strtotime("-1 day"));
         $set_file_name = $last_day . self::FILE_SUFFIX;
         $to            = env('BAKUPS_SQL_TO_EMAIL', '');
-        $title         = 'blog v2.1 - 数据备份';
+        $title         = 'blog v3 - 数据备份';
         $view_data     = [
             'logo'      => self::LOGO_SRC,
             'file_name' => $set_file_name,
