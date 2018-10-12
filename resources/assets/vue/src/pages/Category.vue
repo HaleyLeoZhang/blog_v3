@@ -83,11 +83,6 @@ export default {
                   _this.articleList,
                   list.info
                 );
-                // 最后一页，则取消循环
-                console.error({
-                  page: list.page_count,
-                  now: _this.pageNow
-                });
                 if(list.page_count <= _this.pageNow) {
                   clearInterval(_this.timerIndex);
                 }
