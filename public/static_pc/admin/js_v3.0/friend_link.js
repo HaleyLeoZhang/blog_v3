@@ -44,7 +44,7 @@
 <div class="row" style="width: 420px;  margin-left:7px; margin-top:10px;">
     <div class="col-sm-12">
         <div class="input-group"> <span class="input-group-addon">名称</span>
-            <input id="title_0" type="password" class="form-control " placeholder="请输入站点名"> </div>
+            <input id="title_0" type="text" class="form-control " placeholder="请输入站点名"> </div>
     </div>
     <div class="col-sm-12" style="margin-top: 10px">
         <div class="input-group"> <span class="input-group-addon">链接</span>

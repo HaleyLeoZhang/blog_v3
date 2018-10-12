@@ -272,10 +272,25 @@
 				</div>
 
 
+				<div class="timeList_item step" data-x="2600" data-y="0" >
+					<div class="circle">09/29</div>
+					<h2 class="timeList_item_title">博客 v3.0</h2>
+					<div class="list_show show1">
+						<img src="//tencent.cdn.hlzblog.top/blog/upload/img/2018_10_12_QQ9tRLXI.jpg" width="500">
+						<h2><a href="https://github.com/HaleyLeoZhang/blog_v3" target="_blank" >博客 v3.0</a></h2>
+						<p>
+							基于第二版前端视图，后端重构<br>
+							Laravel+Gulp+Vue<br>
+							更多的设计模式<br>
+							更优雅的代码<br>
+						</p>
+					</div>
+				</div>
 
 
 
-				<div class="timeList_item step refresh" data-x="2600" data-y="0"  yth-end_tag="true">
+
+				<div class="timeList_item step refresh" data-x="3000" data-y="0"  yth-end_tag="true">
 					<div class="list_show">
 						<a href='javascript:replay();'><img src="/Others/memorabilia/img/refress.png"/></a>
 						<p class="end">遇见更好的自己 ... </p>
