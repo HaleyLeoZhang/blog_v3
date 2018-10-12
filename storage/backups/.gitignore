@@ -1,4 +1,4 @@
 *
 !.gitignore
-!yth_blog.template.sql
-!yth_blog.template.sql
+!yth_blog_avatar.template.sql
+!yth_blog_ext.template.sql

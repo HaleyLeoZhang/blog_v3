@@ -77,14 +77,18 @@ export default {
               }
               // 分类名
               window.document.title = list.info[0].cate_name + ' | 文章分类 | 云天河博客';
-              if(list.page_count <= _this.pageNow) {
+              if(list.page_count >= _this.pageNow) {
                 // 加载数据
                 _this.articleList = [].concat.call(
                   _this.articleList,
                   list.info
                 );
                 // 最后一页，则取消循环
-                if(list.page_count >= _this.pageNow) {
+                console.error({
+                  page: list.page_count,
+                  now: _this.pageNow
+                });
+                if(list.page_count <= _this.pageNow) {
                   clearInterval(_this.timerIndex);
                 }
 
