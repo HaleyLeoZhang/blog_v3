@@ -60,7 +60,7 @@
                                         <td>版权所有：<a href="https://github.com/HaleyLeoZhang" target="_blank">https://github.com/HaleyLeoZhang</a></td>
                                     </tr>
                                     <tr>
-                                        <td>法律声明：<a href="/info/law.html" target="_blank">查看声明</a></td>
+                                        <td>法律声明：<a href="/Info/law.html" target="_blank">查看声明</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
