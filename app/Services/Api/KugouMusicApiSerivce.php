@@ -17,7 +17,7 @@ class KugouMusicApiSerivce
     /**
      * @param String : API_SEARCH    搜索歌曲信息
      * @param String : API_PALY_URL  查询播放地址
-     * @param Int    : timer         设置超时时间，单位，秒
+     * @param Int    : TIMER         设置超时时间，单位，秒
      */
     const API_SEARCH   = 'http://songsearch.kugou.com/song_search_v2';
     const API_PALY_URL = 'http://www.kugou.com/yy/index.php';

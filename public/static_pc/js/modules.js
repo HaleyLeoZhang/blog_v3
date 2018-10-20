@@ -12,32 +12,6 @@ function show_render_container(get_module) {
     }
 }
 
-// Return an icon of login method
-function login_method_icon_src(this_type) {
-    var pic_src, title, pic;
-    switch(parseInt(this_type)) {
-    case 0: // Blog owner
-        pic_src = "/static_pc/img/default/icon_v_yellow.png";
-        title = "博主";
-        pic = '<img class="login_method_icon"  src="' + pic_src + '" title="' + title + '">';
-        break;
-    case 1: // Sina
-        title = "Sina 用户";
-        pic = '<i class="fa fa-weibo" title="' + title + '"></i>';
-        break;
-    case 2: // QQ
-        title = "QQ 用户";
-        pic = '<i class="fa fa-qq" title="' + title + '"></i>';
-        break;
-    case 3: // Github
-        title = "Github 用户";
-        pic = '<i class="fa fa-github" title="' + title + '"></i>';
-        break;
-    }
-    return pic;
-}
-
-
 // ----------------------------------------------------------------------
 //                             Module - Field
 // ----------------------------------------------------------------------

@@ -16,4 +16,9 @@ class TestController extends BaseController
         return view('test/slide_verify/index');
     }
 
+    public function express_delivery(Request $request)
+    {
+        return view('module/test/express_delivery');
+    }
+
 }

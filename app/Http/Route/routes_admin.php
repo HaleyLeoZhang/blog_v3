@@ -63,6 +63,7 @@ Route::Group(['prefix' => 'admin'], function () {
             Route::Group(['namespace' => 'Index'], function () {
                 Route::get('hall', ['uses' => 'ViewController@hall']); // 默认首页
                 Route::get('login_log', ['uses' => 'ViewController@login_log']); // 登录日志
+                Route::get('self_info', ['uses' => 'ViewController@self_info']); // 修改个人帐号信息
             });
 
             // - 博文

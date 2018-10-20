@@ -37,4 +37,17 @@ class IndexRepository
         return $data;
     }
 
+    /**
+     *
+     * @return array
+     */
+    public static function self_info($params)
+    {
+        $admin = \CommonService::$admin;
+        list($account_info, $render) = IndexAdminLogic::self_info($admin);
+        $data               = [];
+        $data['tds']        = $tds;
+        return $data;
+    }
+
 }

@@ -46,6 +46,8 @@ Route::Group(['namespace' => 'Common'], function () {
     Route::Group(['prefix' => 'test'], function () {
         // - 滑动验证码，示例
         Route::get('slide_verify', ['uses' => 'TestController@slide_verify']);
+        // - 快递查询，示例
+        Route::get('express_delivery', ['uses' => 'TestController@express_delivery']);
     });
 
 

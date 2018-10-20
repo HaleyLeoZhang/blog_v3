@@ -18,7 +18,7 @@ class ExpressDeliveryApiService
     /**
      * @param String : API_LINK        快递所属物流公司
      * @param String : api_detail      快递具体信息
-     * @param Int    : timer           设置超时时间，单位，秒
+     * @param Int    : TIMER           设置超时时间，单位，秒
      */
     const API_LINK   = 'http://www.kuaidi100.com/autonumber/autoComNum?text=';
     const API_DETAIL = 'http://www.kuaidi100.com/query?';

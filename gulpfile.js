@@ -36,8 +36,8 @@ var sourcemaps = require("gulp-sourcemaps");
 
 // 这个 task 负责调用其他 task
 gulp.task('default', function () {
-  // 顺序执行指定任务
-  sequence('start');
+    // 顺序执行指定任务
+    sequence('start');
 });
 
 
@@ -45,35 +45,36 @@ gulp.task('default', function () {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //      SCSS
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-var scss_src = 'resource/assets/scss/*.scss'; // 监听scss文件
-var css_dst_dir = 'public/static/css';
+var scss_src = 'resources/assets/scss/*.scss'; // 监听scss文件
+var css_dst_dir = 'public/static_pc/css';
 // SCSS 编译与压缩 
 gulp.task('compile_scss', function () {
-  return gulp.src(scss_src)
-    .pipe(sass())
-    .pipe(autoprefixer({
-      browsers: ['last 5 versions', 'Android >= 4.0'],
-      cascade: false
-    }))
-    .pipe(cssmin())
-    .pipe(gulp.dest(css_dst_dir));
+    return gulp.src(scss_src)
+        .pipe(sass())
+        .pipe(autoprefixer({
+            browsers: ['last 5 versions', 'Android >= 4.0'],
+            cascade: false
+        }))
+        .pipe(cssmin())
+        .pipe(gulp.dest(css_dst_dir));
 });
 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //      JS 编成es5
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
-var js_assets_dir = 'resource/assets/js/';
+var js_assets_dir = 'resources/assets/js/';
 var js_es6_src = js_assets_dir + 'es6/**/*.js'; // 书写的文件
 var js_es5_dir = js_assets_dir + 'es5'; // 编译成浏览器兼容前的临时区
 var js_path = 'public/static_pc/js';
-// var js_dst_dir = 'public/static/js';
+// var js_dst_dir = 'public/static_pc/js';
 gulp.task('compile_js', function () {
-  gulp.src(js_es6_src)
-    // .pipe(jshint())
-    // .pipe(jshint.reporter('default'))
-    .pipe(babel())
-    .pipe(gulp.dest(js_es5_dir));
+    gulp.src(js_es6_src)
+        // - js 语法检测
+        // .pipe(jshint())
+        // .pipe(jshint.reporter('default'))
+        .pipe(babel())
+        .pipe(gulp.dest(js_es5_dir));
 });
 
 
@@ -81,27 +82,27 @@ gulp.task('compile_js', function () {
 //      Browserify es5模块编译到正式环境
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 gulp.task("browserify", function () {
-  // 需要打包的文件目录
-  var entiryFiles = [
-    js_es5_dir + '/mobile/mobile.js',
-    js_es5_dir + '/test.js',
-    // 早期的未使用es6标准书写，目前忽略
-    // js_es5_dir + '/global.js',
-    // js_es5_dir + '/hlz_rsa.js',
-    // js_es5_dir + '/modules.js',
-    // js_es5_dir + '/xss_filter.js',
-  ];
+    // 需要打包的文件目录
+    var entiryFiles = [
+        js_es5_dir + '/gulp_test/test.js',
+        // js_es5_dir + '/test.js',
+        // 早期的未使用es6标准书写，目前忽略
+        // js_es5_dir + '/global.js',
+        // js_es5_dir + '/modules.js',
+        // js_es5_dir + '/xss_filter.js',
+    ];
 
-  entiryFiles.map(function (entry) {
-    var _temp_arr = entry.split("/");
-    var file_name = _temp_arr[_temp_arr.length - 1];
-    return browserify({ entries: [entry] })
-      .bundle()
-      .pipe(source(file_name)) // 存储时的对应层级与文件名
-      .pipe(buffer())
-      .pipe(uglify())
-      .pipe(gulp.dest(js_path));
-  });
+    entiryFiles.map(function (entry) {
+        var _temp_arr = entry.split("/");
+        var file_name = _temp_arr[_temp_arr.length - 1];
+        return browserify({ entries: [entry] })
+            .bundle()
+            .pipe(source(file_name)) // 存储时的对应层级与文件名
+            .pipe(buffer())
+            .pipe(uglify())
+            .pipe(gulp.dest(js_path));
+    });
+
 
 });
 
@@ -109,18 +110,24 @@ gulp.task("browserify", function () {
 //  监听对应目录所有文件的变化，如果变化， 则执行任务
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 gulp.task('watch', function () {
-  gulp.watch(scss_src, ['compile_scss']);
-  gulp.watch(js_es6_src, function () {
-    sequence('compile_js', 'browserify');
-  });
+    gulp.watch(scss_src, ['compile_scss']);
+    gulp.watch(js_es6_src, function () {
+        sequence(
+            'compile_js',
+            'browserify'
+        );
+    });
 });
 
 
 // ----------------------------------------------------
 gulp.task('start', function () {
-  sequence('compile_scss', 'compile_js', 'browserify', 'watch');
+    sequence(
+        'compile_scss',
+        'compile_js',
+        'browserify',
+        'watch'
+    );
 
-  // sequence( 'compile_js', 'browserify', 'watch');
+    // sequence( 'compile_js', 'browserify', 'watch');
 });
-
-

@@ -10,7 +10,9 @@
 */
 
 // - Sentry
-Raven.config('http://51ead30b25094535a3ab950116a91262@sentry.ops.hlzblog.top/4').install();
+if( undefined != Raven){
+    Raven.config('http://51ead30b25094535a3ab950116a91262@sentry.ops.hlzblog.top/4').install();
+}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++                Ajax调试 API

@@ -1,6 +1,6 @@
 {
-    "name": "blog_v2",
-    "version": "2.0.0",
+    "name": "blog_v3",
+    "version": "3.0.0",
     "description": "HaleyLeoZhang's blog",
     "main": "gulpfile.js",
     "dependencies": {
@@ -34,7 +34,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HaleyLeoZhang/blog_v2.git"
+        "url": "git+https://github.com/HaleyLeoZhang/blog_v3.git"
     },
     "keywords": [
         "hlzblog"
@@ -42,7 +42,7 @@
     "author": "yuntianhhe",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/HaleyLeoZhang/blog_v2/issues"
+        "url": "https://github.com/HaleyLeoZhang/blog_v3/issues"
     },
-    "homepage": "https://github.com/HaleyLeoZhang/blog_v2#readme"
+    "homepage": "https://github.com/HaleyLeoZhang/blog_v3#readme"
 }

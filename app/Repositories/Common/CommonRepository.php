@@ -17,8 +17,20 @@ class CommonRepository
      */
     public static function memorabilia_bg()
     {
-        $url       = CommonLogic::memorabilia_bg();
-        $data      = compact('url');
+        $url  = CommonLogic::memorabilia_bg();
+        $data = compact('url');
+        return $data;
+    }
+
+    /**
+     * 快递查询
+     * @param string tracking_number 快递单号
+     * @return array
+     */
+    public static function express_delivery($tracking_number)
+    {
+        $track_info  = CommonLogic::express_delivery($tracking_number);
+        $data = compact('track_info');
         return $data;
     }
 

@@ -208,6 +208,39 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/general/express_delivery",
+    "title": "快递查询",
+    "name": "express_delivery",
+    "group": "ExpressDelivery",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "tracking_number",
+            "description": "<p>快递单号</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>快递查询</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"track_info\": [\n        {\n            \"time\": \"2018-10-17 00:54:46\",\n            \"ftime\": \"2018-10-17 00:54:46\",\n            \"context\": \"【佛山市】 快件离开 【佛山中心】 发往 【北京】\",\n            \"location\": \"佛山中心\"\n        },\n        {\n            \"time\": \"2018-10-17 00:52:23\",\n            \"ftime\": \"2018-10-17 00:52:23\",\n            \"context\": \"【佛山市】 快件到达 【佛山中心】\",\n            \"location\": \"佛山中心\"\n        },\n        {\n            \"time\": \"2018-10-16 21:10:31\",\n            \"ftime\": \"2018-10-16 21:10:31\",\n            \"context\": \"【广州市】 快件离开 【番禺新大石】 发往 【北京】\",\n            \"location\": \"番禺新大石\"\n        },\n        {\n            \"time\": \"2018-10-16 15:08:53\",\n            \"ftime\": \"2018-10-16 15:08:53\",\n            \"context\": \"【广州市】 【番禺新大石】（020-31063349、020-31065201、020-39292257） 的 客户曼曼 （13222222222） 已揽收\",\n            \"location\": \"番禺新大石\"\n        }]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/GeneralController.php",
+    "groupTitle": "ExpressDelivery"
+  },
+  {
+    "type": "get",
     "url": "/api/general/memorabilia_bg",
     "title": "大事记 - 背景音乐",
     "name": "kugou_music",
@@ -421,6 +454,39 @@ define({ "api": [
   {
     "type": "post",
     "url": "/article/background/background_add",
+    "title": "背景主题：添加",
+    "name": "background_add",
+    "group": "article",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "url",
+            "description": "<p>图片地址</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>添加背景主题</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
+    "groupTitle": "article"
+  },
+  {
+    "type": "post",
+    "url": "/article/background/background_add",
     "title": "背景主题：修改",
     "name": "background_add",
     "group": "article",
@@ -445,39 +511,6 @@ define({ "api": [
       }
     },
     "description": "<p>修改背景主题</p>",
-    "version": "3.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/background/background_add",
-    "title": "背景主题：添加",
-    "name": "background_add",
-    "group": "article",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "url",
-            "description": "<p>图片地址</p>"
-          }
-        ]
-      }
-    },
-    "description": "<p>添加背景主题</p>",
     "version": "3.0.0",
     "success": {
       "examples": [

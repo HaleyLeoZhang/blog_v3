@@ -36,6 +36,7 @@ Route::Group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']],
     // - 通用接口
     Route::Group(['prefix' => 'general'], function () {
         Route::get('memorabilia_bg', 'GeneralController@memorabilia_bg');
+        Route::get('express_delivery', 'GeneralController@express_delivery'); // 快递查询
     });
 
     // - 移动端 SPA

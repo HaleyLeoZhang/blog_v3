@@ -34,4 +34,16 @@ class ViewController extends BaseController
         $data = IndexRepository::login_log($params);
         return view('admin.index.login_log', $data);
     }
+
+    /**
+     * 个人帐号信息修改页
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function self_info(Request $request)
+    {
+        $params =  $request->all();
+        $data = IndexRepository::self_info($params);
+        return view('admin.index.self_info', $data);
+    }
 }
