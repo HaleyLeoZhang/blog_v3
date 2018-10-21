@@ -85,9 +85,14 @@ class InfoAuthService
     //      内部逻辑
     // ------------------------------------
 
-    public static function get_token_name()
+    public static function get_token_name($target_token = '')
     {
-        $token_name = self::$passport_info['token_prefix'] . self::$token;
+        if ('' == $target_token) {
+            $real_token = self::$token;
+        } else {
+            $real_token = $target_token;
+        }
+        $token_name = self::$passport_info['token_prefix'] . $real_token;
         return $token_name;
     }
 
@@ -126,11 +131,12 @@ class InfoAuthService
 
     /**
      * 删除 过期 token
+     * @param string $target_token 指定的要删除的token
      * @return Void
      */
-    public static function delete()
+    public static function delete($target_token = '')
     {
-        $token_name = self::get_token_name();
+        $token_name = self::get_token_name($target_token);
         Redis::del($token_name);
     }
 

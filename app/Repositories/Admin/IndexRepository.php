@@ -2,6 +2,7 @@
 namespace App\Repositories\Admin;
 
 use App\Repositories\Admin\Logic\IndexAdminLogic;
+use App\Repositories\Admin\Logic\CommonAdminLogic;
 
 // ----------------------------------------------------------------------
 // 仓储 - 首页
@@ -39,15 +40,12 @@ class IndexRepository
 
     /**
      *
-     * @return array
+     * @return void
      */
-    public static function self_info($params)
+    public static function user_password_edit($password_raw)
     {
-        $admin = \CommonService::$admin;
-        list($account_info, $render) = IndexAdminLogic::self_info($admin);
-        $data               = [];
-        $data['tds']        = $tds;
-        return $data;
+        $password = CommonAdminLogic::decrypt($password_raw);
+        IndexAdminLogic::user_password_edit($password);
     }
 
 }

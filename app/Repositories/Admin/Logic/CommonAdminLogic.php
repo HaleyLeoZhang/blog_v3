@@ -137,7 +137,7 @@ class CommonAdminLogic
      * @param string $param 待解密的参数
      * @return string
      */
-    protected static function decrypt($param)
+    public static function decrypt($param)
     {
         $temp      = urldecode($param);
         $real_data = RsaCryptService::decrypt($temp);

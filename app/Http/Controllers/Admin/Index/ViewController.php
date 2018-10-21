@@ -42,8 +42,6 @@ class ViewController extends BaseController
      */
     public function self_info(Request $request)
     {
-        $params =  $request->all();
-        $data = IndexRepository::self_info($params);
-        return view('admin.index.self_info', $data);
+        return view('admin.index.self_info');
     }
 }

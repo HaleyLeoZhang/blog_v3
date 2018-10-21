@@ -24,7 +24,7 @@ class MenuAdminLogic
         $menu_html .= self::module('sidebar/index', '首页', 'home')
             ->sidebar('admin/hall', '概览', 'eye')
             ->sidebar('admin/login_log', '登录日志', 'video-camera')
-            ->sidebar('', '帐号操作', 'lock') // 修改帐号密码
+            ->sidebar('admin/self_info', '帐号操作', 'lock') // 修改帐号密码
             ->output();
 
         $menu_html .= self::module('sidebar/auth', '权限', 'anchor')

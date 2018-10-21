@@ -3,6 +3,8 @@ namespace App\Repositories\Admin\Logic;
 
 use App\Models\AdminAuth\Admin;
 use App\Models\Logs\AdminLoginLog;
+use App\Helpers\Token;
+use App\Services\Auth\InfoAuthService;
 
 class IndexAdminLogic
 {
@@ -87,6 +89,33 @@ class IndexAdminLogic
         $th[] = '创建时间';
         return $th;
 
+    }
+
+
+    /**
+     * 修改密码
+     * - 修改后，清空已经登录过的帐号信息
+     * @return void
+     */
+    public static function user_password_edit($password)
+    {
+        if( strlen($password) < 6 ){
+            throw new \ApiException("密码至少得6位哟！");
+        }
+        // Logic
+        $secret            = Token::rand_str(4);
+        $password_add_salt = md5($password . $secret);
+        $params            = [
+            'secret'         => $secret, // 密码 - 盐值，每次生成密码时会重置
+            'password'       => $password_add_salt, // 密码加盐后
+        ];
+        // - 修改密码
+        $admin = \CommonService::$admin;
+        $admin->secret = $secret; // 密码 - 盐值，每次生成密码时会重置
+        $admin->password = $password_add_salt; // 密码加盐后
+        $admin->save();
+        // - 清空当前帐号登录信息
+        InfoAuthService::delete($admin->remember_token);
     }
 
 }
