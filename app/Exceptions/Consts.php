@@ -36,7 +36,6 @@ class Consts
     const USER_ACCOUNT_STATUS_NOT_EXISTS = 10005; // 该用户状态不存在
     const USER_GOOGLE_CATCHAR_NOT_CREATE = 10006; // 谷歌验证码未设置
 
-    const MOBILE_WAS_INVITED = 20001; // 您输入的手机号已被邀请，您可在小白App>我的>我的邀请人查看详情
 
     /**
      * 服务类错误
@@ -71,7 +70,6 @@ class Consts
         self::USER_ACCOUNT_STATUS_NOT_EXISTS => '该用户状态不存在',
         self::USER_GOOGLE_CATCHAR_NOT_CREATE => '谷歌验证码未设置',
 
-        self::MOBILE_WAS_INVITED             => '您输入的手机号已被邀请，您可在小白App>我的>我的邀请人查看详情',
 
         /**
          * 服务类错误

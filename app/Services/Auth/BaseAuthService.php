@@ -29,7 +29,7 @@ class BaseAuthService
     {
         if (config('hlz_auth')) {
             //可设置配置项 hlz_auth, 此配置项为数组。
-            $this->_config = array_merge($this->_config, config('auth')); // 请新扩展auth配置文件
+            $this->_config = array_merge($this->_config, config('hlz_auth')); // 请先配置 config/hlz_auth.php 文件
         }
     }
 
@@ -65,7 +65,7 @@ class BaseAuthService
             $REQUEST = unserialize(strtolower(serialize($_REQUEST)));
         }
         foreach ($authList as $auth) {
-            // // - 处理 restful
+            // // - 处理 restful，最好不要这种方式，解析对比时，会有攻击点
             // $auth       = strtolower($auth);
             // $split_rule = explode('/', $auth);
             // $query      = preg_replace('/^.+\?/U', '', $auth);
