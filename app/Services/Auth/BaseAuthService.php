@@ -66,9 +66,9 @@ class BaseAuthService
         }
         foreach ($authList as $auth) {
             // // - 处理 restful，最好不要这种方式，解析对比时，会有攻击点
-            // $auth       = strtolower($auth);
+            $auth       = strtolower($auth);
             // $split_rule = explode('/', $auth);
-            // $query      = preg_replace('/^.+\?/U', '', $auth);
+            $query      = preg_replace('/^.+\?/U', '', $auth);
             // // --- 取差集
             // $diff_split = array_diff($split_rule, $split_name);
             // if (0 == count($diff_split)) {
