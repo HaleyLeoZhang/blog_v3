@@ -107,9 +107,9 @@ function show_render_container(get_module) {
     };
     // - 创作源标注
     Article.prototype.if_original = function () {
-        // IF `original` eq 0  => it is an original pieces 
+        // IF `original` eq 1  => it is an original pieces 
         var if_original = parseInt($("#yth_original").attr("yth_original"));
-        if(if_original) {
+        if(!if_original) {
             var tmp_html = $("#yth_original").html(),
                 from_others_logo = '[转载] ';
             $("#yth_original").html(from_others_logo + tmp_html);
