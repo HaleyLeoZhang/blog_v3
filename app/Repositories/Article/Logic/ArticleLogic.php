@@ -68,10 +68,10 @@ class ArticleLogic
                 `article_categorys` AS a
                 INNER JOIN `articles` AS b ON a.`id` = b.`cate_id`
             WHERE
-                a.`is_deleted` = ?
+                a.`is_deleted` = ? AND b.`is_online` = ?
             GROUP BY
                 b.`cate_id`
-        ', [ArticleCategory::IS_DELETED_NO]);
+        ', [ArticleCategory::IS_DELETED_NO, Article::IS_ONLINE_YES]);
         return $cate_list;
     }
 
@@ -83,6 +83,7 @@ class ArticleLogic
     public static function get_comments_counter($location)
     {
         $comments_counter = Comment::where('location', $location)
+            ->where('status', Comment::STATUS_NORMAL)
             ->where('is_deleted', Comment::IS_DELETED_NO)
             ->count();
         return $comments_counter;
