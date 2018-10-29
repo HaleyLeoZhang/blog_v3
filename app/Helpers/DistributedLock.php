@@ -1,6 +1,8 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Redis;
+
 // ----------------------------------------------------------------------
 // 分布式排他锁
 // ----------------------------------------------------------------------
@@ -25,13 +27,12 @@ class DistributedLock
         // 防止多处调用，重复增加数据
         $red_lock = Redis::connection();
         $redis_key = self::LOCK_PREFIX. $unique_key;
-        $ttl = self::TTL;
         $log = [
             'lock_key' => $redis_key,
             'ttl'      => self::TTL,
         ];
         if( $red_lock->setnx($redis_key, self::LOCK_VALUE) ){
-            $red_lock->expire($redis_key, $ttl);
+            $red_lock->expire($redis_key, self::TTL);
             \Log::debug('锁住-NO ', $log);
             return true;
         }else{
