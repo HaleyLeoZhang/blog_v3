@@ -18,7 +18,7 @@ class ExpectValueTest extends \TestCase
             9,
             8,
             9.554,
-            3,
+            9,
             6,
             10,
             7,
@@ -28,12 +28,12 @@ class ExpectValueTest extends \TestCase
             'expect'
         );
         LogService::info(__CLASS__ . '@' . __FUNCTION__ . '.info ', $log);
-        $arr[]  = $expect;
-        $expect = ExpectValue::compute($arr);
-        $log    = compact(
-            'expect'
-        );
-        LogService::info(__CLASS__ . '@' . __FUNCTION__ . '.info ', $log);
+        // $arr[]  = $expect;
+        // $expect = ExpectValue::compute($arr);
+        // $log    = compact(
+        //     'expect'
+        // );
+        // LogService::info(__CLASS__ . '@' . __FUNCTION__ . '.info ', $log);
         LogService::info(__CLASS__ . '@' . __FUNCTION__ . '.end');
     }
 }
