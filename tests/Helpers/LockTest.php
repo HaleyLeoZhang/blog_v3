@@ -8,6 +8,9 @@ use LogService;
 class LockTest extends \TestCase
 {
 
+    /**
+     * 测试分布式锁
+     */
     public function test_distribute_lock()
     {
         LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.start');
