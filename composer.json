@@ -1,7 +1,7 @@
 {
-    "name": "云天河博客v2.1",
-    "description": "云天河博客v2.1，引入各种设计模式与个人开发的模块",
-    "keywords": ["云天河博客", "v2.1", "设计模式"],
+    "name": "云天河博客v3",
+    "description": "云天河博客v3，引入各种设计模式与个人开发的模块",
+    "keywords": ["云天河博客", "v3", "设计模式"],
     "license": "Apache",
     "type": "project",
     "require":

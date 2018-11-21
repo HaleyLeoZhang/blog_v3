@@ -55,7 +55,7 @@
                                 亲爱的
                                   <b style="color:#EEE0E5" title="昵称">
                                     {{ \CommonService::$admin->truename }}</b>，
-                                  <span id="hello_user">傍晚好！</span></a>
+                                  <span id="hello_user">{{ current_time_alias() }}！</span></a>
                             </span>
                         </a>
                                 <ul class="dropdown-menu">

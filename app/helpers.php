@@ -73,3 +73,43 @@ if (!function_exists('link_src')) {
         }
     }
 }
+
+
+
+/**
+ * 获取当前时间的别名
+ */
+if (!function_exists('current_time_alias')) {
+    // Link_source [css、js、jpg、png]
+    function current_time_alias()
+    {
+        $hour = intval( date('H') );
+        switch (true) {
+            case $hour < 3 :
+                $greeting = '别熬夜了，对身体不好';
+                break;
+            case $hour < 6 :
+                $greeting = '天快亮了，别忘了看日出哟';
+                break;
+            case $hour < 11 :
+                $greeting = '早上好';
+                break;
+            case $hour < 13 :
+                $greeting = '中午好';
+                break;
+            case $hour < 18 :
+                $greeting = '下午好';
+                break;
+            case $hour < 22 :
+                $greeting = '晚上好';
+                break;
+            case $hour < 24 :
+                $greeting = '夜深了，记得好好休息';
+                break;
+            default:
+                $greeting = '早上好';
+                break;
+        }
+        return $greeting;
+    }
+}
