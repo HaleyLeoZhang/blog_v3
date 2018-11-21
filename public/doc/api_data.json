@@ -38,7 +38,26 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"\",\n    \"data\":\n    {\n        \"quert_string\": \"token_name=End-Token&token_value=9abc3156eb404f72b8a7d9286d01307b&expire_at=1542867765\" // 身份令牌信息\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 10003,\n    \"message\": \"帐号或者密码不正确\",\n    \"data\": null\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 501,\n    \"message\": \"谷歌验证码不正确\",\n    \"data\": null\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 10006,\n    \"message\": \"谷歌验证码未设置\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]
@@ -78,6 +97,15 @@
       "examples": [
         {
           "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"\",\n    \"data\":\n    {\n        \"quert_string\": \"token_name=End-Token&token_value=9abc3156eb404f72b8a7d9286d01307b&expire_at=1542867765\" // 身份令牌信息\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
           "content": "HTTP/1.1 200 OK\n{\n    \"code\": 10003,\n    \"message\": \"帐号或者密码不正确\",\n    \"data\": null\n}",
           "type": "json"
         }
@@ -291,7 +319,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    status: false,\n    Err: 2000,\n    out: \"验证码通过\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"status\": false,\n    \"Err\": 2000,\n    \"out\": \"验证码通过\"\n}",
           "type": "json"
         }
       ]
@@ -443,7 +471,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
           "type": "json"
         }
       ]

@@ -51,6 +51,16 @@ class AccountController extends BaseController
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
      * {
+     *     "code": 200,
+     *     "message": "",
+     *     "data":
+     *     {
+     *         "quert_string": "token_name=End-Token&token_value=9abc3156eb404f72b8a7d9286d01307b&expire_at=1542867765" // 身份令牌信息
+     *     }
+     * }
+     * @apiErrorExample Error-Response:
+     * HTTP/1.1 200 OK
+     * {
      *     "code": 10003,
      *     "message": "帐号或者密码不正确",
      *     "data": null
@@ -85,6 +95,35 @@ class AccountController extends BaseController
      * @apiVersion 3.0.0
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "",
+     *     "data":
+     *     {
+     *         "quert_string": "token_name=End-Token&token_value=9abc3156eb404f72b8a7d9286d01307b&expire_at=1542867765" // 身份令牌信息
+     *     }
+     * }
+     * @apiErrorExample Error-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *     "code": 10003,
+     *     "message": "帐号或者密码不正确",
+     *     "data": null
+     * }
+     * @apiErrorExample Error-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *     "code": 501,
+     *     "message": "谷歌验证码不正确",
+     *     "data": null
+     * }
+     * @apiErrorExample Error-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *     "code": 10006,
+     *     "message": "谷歌验证码未设置",
+     *     "data": null
+     * }
      */
     public function login_google(Request $request)
     {

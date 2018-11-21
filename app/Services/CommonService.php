@@ -11,7 +11,7 @@ namespace App\Services;
 class CommonService
 {
     /**
-     * @param User $user     用户模型，一般是获取Token后，会存储下来
+     * @param App\Models\User $user 用户模型，一般是获取Token后，会存储下来
      * @param App\Models\AdminAuth\Admin $admin 管理员模型，一般是获取Token后，会存储下来
      */
     public static $user = null;

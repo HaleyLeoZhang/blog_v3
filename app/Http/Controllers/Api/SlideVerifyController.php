@@ -55,9 +55,9 @@ class SlideVerifyController extends BaseController
      * @apiSuccessExample Success-Response:
      * HTTP/1.1 200 OK
      * {
-     *     status: false,
-     *     Err: 2000,
-     *     out: "验证码通过"
+     *     "status": false,
+     *     "Err": 2000,
+     *     "out": "验证码通过"
      * }
      */
     public function check()
