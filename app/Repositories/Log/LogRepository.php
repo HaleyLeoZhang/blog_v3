@@ -50,4 +50,13 @@ class LogRepository
     public static function visitor_read_log($params){
         VisitorLogLogic::visitor_read_log($params);
     }
+
+    /**
+     * 访客足迹查看
+     * @param array $params
+     * @return Pagnate
+     */
+    public static function visitor_foot_analysis_log($params){
+        return VisitorLogLogic::visitor_foot_analysis_log($params);
+    }
 }

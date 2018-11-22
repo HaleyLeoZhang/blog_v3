@@ -46,7 +46,7 @@ class MenuAdminLogic
 
         $menu_html .= self::module('sidebar/visitor', '访客', 'sellsy') // 需要中间件对PC端所有视图层，增加访问日志（收集、headers、req）
             ->sidebar('', '封杀IP历史', 'chain') // 开始封杀时间、结束封杀时间、生效状态、备注
-            ->sidebar('', '足迹分析', 'bar-chart') // 访客设备、忠实粉丝（依据不同天数内访问过的同一IP）、地理位置、访问入口、趋势分析
+            ->sidebar('admin/visitor/foot_mark_analysis', '足迹分析', 'bar-chart') // 访客设备、忠实粉丝（依据不同天数内访问过的同一IP）、地理位置、访问入口、趋势分析
             ->sidebar('', '文章概况', 'motorcycle') // 博文访问的浏览量需要拆分开来（文章ID、阅读时间）
             ->output();
 

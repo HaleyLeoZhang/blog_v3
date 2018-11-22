@@ -18,7 +18,7 @@ class LogService
         'time_zone' => 'Asia/Chongqing', // 时区
         'path'      => 'logs', // 日志存放路径
         'log_name'  => 'laravel', // 日志文件名
-        'overdue'   => 30, // 日志过期时间，单位天
+        'ttl_day'   => 30, // 日志过期时间，单位天
         'suffix'    => '.log', // 日志文件名后缀
     ];
 
@@ -142,17 +142,17 @@ class LogService
         $fp        = fopen($file_path, 'a+');
         fwrite($fp, $str);
         fclose($fp);
-        self::del_overdue_log();
+        self::del_ttl_day_log();
     }
 
     /**
      * 删除过期日志
      */
-    private static function del_overdue_log()
+    private static function del_ttl_day_log()
     {
         $dir_path        = self::$_ini['path'];
-        $overdue_time    = strtotime('-' . self::$_ini['overdue'] . ' day');
-        $last_month_date = date('Y-m-d', $overdue_time);
+        $ttl_day_time    = strtotime('-' . self::$_ini['ttl_day'] . ' day');
+        $last_month_date = date('Y-m-d', $ttl_day_time);
         $file_path       = self::get_log_file_name($last_month_date);
         if (file_exists($file_path)) {
             @unlink($file_path);

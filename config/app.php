@@ -96,7 +96,7 @@ return [
      */
 
     'log'             => env('LOGE_MODE', 'daily'),
-    'log_path'        => env('LOG_PATH', 'storage/logs'),
+    'log_path'        => env('LOG_PATH', '/data/logs/app/blog'),
     'log_name'        => env('LOG_NAME', 'laravel'),
 
     // 站点配置

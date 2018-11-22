@@ -61,7 +61,7 @@ class AnalysisVisitorJob extends Job implements ShouldQueue
             'type'   => $this->type,
             'object' => $this->object,
         ];
-        LogService::info('AnalysisVisitorJob.execute', $log);
+        LogService::debug('AnalysisVisitorJob.execute', $log);
         switch ($this->type) {
             case self::ACTION_LOCATION_ANALYSIS:
                 $ip         = $this->object->ip;
@@ -75,7 +75,7 @@ class AnalysisVisitorJob extends Job implements ShouldQueue
                 VisitorLogLogic::visitor_foot_analysis($foot_mark);
                 
                 $log = compact('ip', 'location', 'header', 'is_article');
-                LogService::info('AnalysisVisitorJob.done.log', $log);
+                LogService::debug('AnalysisVisitorJob.done.log', $log);
                 break;
             default:
                 LogService::info('AnalysisVisitorJob.queue.empty');

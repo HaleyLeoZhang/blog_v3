@@ -20,6 +20,9 @@ class VisitorFootMarkAnalysis extends Model
         'created_at', // 创建时间（与访客足迹的采集时间保持一致）
     ];
 
+    // ---- 全部类型 ----
+    const SHOW_ALL = -200; // 显示全部内容
+
     /**
      * 设备类型
      */
@@ -28,4 +31,21 @@ class VisitorFootMarkAnalysis extends Model
     const DEVICE_TYPE_SPIDER = 0;
     const DEVICE_TYPE_MOBILE = 1;
     const DEVICE_TYPE_PC = 2;
+
+    public static $device_type_list = [
+        self::DEVICE_TYPE_UNKNOW,
+        self::DEVICE_TYPE_OTHERS,
+        self::DEVICE_TYPE_SPIDER,
+        self::DEVICE_TYPE_MOBILE,
+        self::DEVICE_TYPE_PC,
+    ];
+
+    public static $device_type_text = [
+        self::SHOW_ALL        => '---全部---',
+        self::DEVICE_TYPE_UNKNOW=> '未知',
+        self::DEVICE_TYPE_OTHERS=> '其他',
+        self::DEVICE_TYPE_SPIDER=> '搜索引擎',
+        self::DEVICE_TYPE_MOBILE=> '移动端',
+        self::DEVICE_TYPE_PC=> '电脑端',
+    ];
 }

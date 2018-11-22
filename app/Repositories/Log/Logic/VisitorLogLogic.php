@@ -98,4 +98,32 @@ class VisitorLogLogic
         $analysis->save();
     }
 
+
+    /**
+     * 访客足迹查看
+     * @param array $params
+     * @return array
+     */
+    public static function visitor_foot_analysis_log($params)
+    {
+        extract($params); // device_type、ip、time_start, time_end
+        $chain = VisitorFootMarkAnalysis::selectRaw('*');
+        if( VisitorFootMarkAnalysis::SHOW_ALL != $device_type ){
+            $chain = $chain->where('device_type', $device_type);
+        }
+        if ('' != $time_start) {
+            $chain = $chain->where('created_at', '>=', $time_start);
+        }
+        if ('' != $time_end) {
+            $chain = $chain->where('created_at', '<=', $time_end);
+        }
+        if( '' != $ip ){
+            $chain = $chain->where('ip', $ip);
+        }
+        $page = $chain->orderBy('id', 'desc')
+            ->paginate(\CommonService::END_VISITOR_ANALYSIS_PAGE_SIZE);
+        $page->appends($params);
+        return $page;
+    }
+
 }

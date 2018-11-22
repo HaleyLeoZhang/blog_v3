@@ -107,6 +107,12 @@ Route::Group(['prefix' => 'admin'], function () {
                 Route::post('comments_update', ['uses' => 'ApiController@comments_update']);
             });
 
+            // - 访客
+            Route::Group(['prefix' => 'visitor', 'namespace' => 'Visitor'], function () {
+                // - 访客解析结果
+                Route::get('foot_mark_analysis', ['uses' => 'ViewController@foot_mark_analysis']);
+            });
+
             // - 公共配置
             Route::Group(['prefix' => 'common', 'namespace' => 'Common'], function () {
                 Route::get('friend_link', ['uses' => 'ViewController@friend_link']);
