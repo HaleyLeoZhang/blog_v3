@@ -10,7 +10,8 @@ namespace App\Jobs;
 // ----------------------------------------------------------------------
 
 use App\Helpers\Location;
-use App\Models\Logs\VisitorFooterMark;
+use App\Repositories\Log\Logic\VisitorLogLogic;
+use App\Models\Logs\VisitorFootMark;
 use App\Models\Logs\VisitorLookLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -69,8 +70,10 @@ class AnalysisVisitorJob extends Job implements ShouldQueue
                 $is_article = $this->is_article();
                 $url        = $this->object->url;
                 $data       = compact('ip', 'location', 'url', 'header');
-                VisitorFooterMark::create($data);
 
+                $foot_mark = VisitorFootMark::create($data);
+                VisitorLogLogic::visitor_foot_analysis($foot_mark);
+                
                 $log = compact('ip', 'location', 'header', 'is_article');
                 LogService::info('AnalysisVisitorJob.done.log', $log);
                 break;

@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisitorFootMarkAnalysis extends Model
 {
-    protected $table      = 'visitor_footer_mark_analysis';
+    protected $table      = 'visitor_foot_mark_analysis';
     protected $connection = 'yth_blog_ext';
 
     protected $fillable = [
         'ip', // 访客IP
+        'location', // 依据IP，查询出来的地理信息
         'device_type', // 设备类型：-2->没有相关信息、-1->其他、0->蜘蛛、1->移动端、2->PC
         'device_name', // 设备详细名称
         'referer', // 来源站点

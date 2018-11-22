@@ -2,7 +2,8 @@
 namespace App\Repositories\Log\Logic;
 
 use App\Helpers\Location;
-use App\Models\Logs\VisitorFooterMark;
+use App\Models\Logs\VisitorFootMark;
+use App\Models\Logs\VisitorFootMarkAnalysis;
 use App\Models\Logs\VisitorLookLog;
 
 class VisitorLogLogic
@@ -28,7 +29,7 @@ class VisitorLogLogic
 
         $location = implode(' ', $locate);
         $log      = compact('ip', 'location', 'url', 'header');
-        VisitorFooterMark::create($log);
+        VisitorFootMark::create($log);
         // 数据入队
 
     }
@@ -46,7 +47,7 @@ class VisitorLogLogic
 
     /**
      * 访客足迹拆解
-     * @param App\Models\Logs\VisitorFooterMark $foot_mark
+     * @param App\Models\Logs\VisitorFootMark $foot_mark
      * @return void
      */
     public static function visitor_foot_analysis($foot_mark)
@@ -55,8 +56,14 @@ class VisitorLogLogic
         $header   = json_decode(preg_replace('/(\[|\])/', '', $foot_mark->header));
         // 获取访客IP
         $analysis->ip = $foot_mark->ip;
+        // 访客地理位置
+        $analysis->location = $foot_mark->location;
         // 设备类型：-2->没有相关信息、-1->其他、0->蜘蛛、1->移动端、2->PC
         $agent = 'user-agent';
+        if( !$header->$agent ){
+            \LogService::error('暂无agent信息');
+            return;
+        }
         switch (true) {
             case preg_match('/phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone/', $header->$agent, $match):
                 $device_type = VisitorFootMarkAnalysis::DEVICE_TYPE_MOBILE;
@@ -79,7 +86,6 @@ class VisitorLogLogic
                 $device_name = '';
                 break;
         }
-
         $analysis->device_type = $device_type;
         // 设备详细名称
         $analysis->device_name = $device_name;

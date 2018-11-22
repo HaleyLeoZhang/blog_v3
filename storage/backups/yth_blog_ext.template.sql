@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-09-28 11:30:03
+-- Generation Time: 2018-11-22 06:20:12
 -- 服务器版本： 5.6.33-0ubuntu0.14.04.1
 -- PHP Version: 7.1.12
 
@@ -121,10 +121,10 @@ CREATE TABLE `user_login_logs` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `visitor_footer_marks`
+-- 表的结构 `visitor_foot_marks`
 --
 
-CREATE TABLE `visitor_footer_marks` (
+CREATE TABLE `visitor_foot_marks` (
   `id` int(11) UNSIGNED NOT NULL,
   `ip` varchar(16) NOT NULL COMMENT '访客IP',
   `url` varchar(150) NOT NULL COMMENT '请求进来的链接地址',
@@ -133,6 +133,24 @@ CREATE TABLE `visitor_footer_marks` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户足迹' ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `visitor_foot_mark_analysis`
+--
+
+CREATE TABLE `visitor_foot_mark_analysis` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `ip` char(16) NOT NULL COMMENT 'IP',
+  `location` varchar(100) NOT NULL COMMENT '依据IP，查询出来的地理信息',
+  `device_type` tinyint(1) NOT NULL COMMENT '设备类型：-2->没有相关信息、-1->其他、0->蜘蛛、1->移动端、2->PC',
+  `device_name` varchar(50) NOT NULL COMMENT '设备详细名称',
+  `referer` varchar(100) NOT NULL COMMENT '来源站点',
+  `target` varchar(100) NOT NULL COMMENT '访问地址',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间（与访客足迹的采集时间保持一致）'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='访客足迹分析';
 
 -- --------------------------------------------------------
 
@@ -194,10 +212,19 @@ ALTER TABLE `user_login_logs`
   ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
--- Indexes for table `visitor_footer_marks`
+-- Indexes for table `visitor_foot_marks`
 --
-ALTER TABLE `visitor_footer_marks`
+ALTER TABLE `visitor_foot_marks`
   ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `visitor_foot_mark_analysis`
+--
+ALTER TABLE `visitor_foot_mark_analysis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `device_type` (`device_type`) USING HASH,
+  ADD KEY `ip` (`ip`),
+  ADD KEY `created_at` (`created_at`);
 
 --
 -- Indexes for table `visitor_look_logs`
@@ -214,17 +241,17 @@ ALTER TABLE `visitor_look_logs`
 -- 使用表AUTO_INCREMENT `admin_footer_marks`
 --
 ALTER TABLE `admin_footer_marks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增字段';
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增字段', AUTO_INCREMENT=242;
 --
 -- 使用表AUTO_INCREMENT `admin_login_logs`
 --
 ALTER TABLE `admin_login_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- 使用表AUTO_INCREMENT `upload_logs`
 --
 ALTER TABLE `upload_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- 使用表AUTO_INCREMENT `user_deny_ips`
 --
@@ -241,15 +268,20 @@ ALTER TABLE `user_hit_logs`
 ALTER TABLE `user_login_logs`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- 使用表AUTO_INCREMENT `visitor_footer_marks`
+-- 使用表AUTO_INCREMENT `visitor_foot_marks`
 --
-ALTER TABLE `visitor_footer_marks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `visitor_foot_marks`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1945;
+--
+-- 使用表AUTO_INCREMENT `visitor_foot_mark_analysis`
+--
+ALTER TABLE `visitor_foot_mark_analysis`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1945;
 --
 -- 使用表AUTO_INCREMENT `visitor_look_logs`
 --
 ALTER TABLE `visitor_look_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

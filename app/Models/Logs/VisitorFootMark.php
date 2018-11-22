@@ -5,9 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 
 // 用户访问足迹
 
-class VisitorFooterMark extends Model
+class VisitorFootMark extends Model
 {
-    protected $table = 'visitor_footer_marks';
+    protected $table = 'visitor_foot_marks'; 
     protected $connection = 'yth_blog_ext';
 
     protected $fillable = [
