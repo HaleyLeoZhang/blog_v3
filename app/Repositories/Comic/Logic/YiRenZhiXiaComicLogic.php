@@ -4,6 +4,7 @@ namespace App\Repositories\Comic\Logic;
 use App\Helpers\CurlRequest;
 use App\Models\Logs\ComicDownloadLogs;
 use App\Services\Cdn\SmCdnService;
+use Illuminate\Support\Facades\Redis;
 
 class YiRenZhiXiaComicLogic
 {
@@ -26,6 +27,13 @@ class YiRenZhiXiaComicLogic
             $succes_counter = 0;
             // 每话里面 多少内容，遇到 404 状态码则退出
             for ($j = 0; $j < 99999; $j++) {
+                $succes_counter ++ ;
+                // 每30秒检测一次程序是否需要重启
+                $token_name = 'test_download';
+                $token_life = time() + 30;
+                Redis::set($token_name, 1);
+                $redis_expire = Redis::expireAt($token_name, $token_life);
+
                 $current_pic = $j + 1;
 
                 $log_name_format = '《一人之下》.' . $i . '话.' . $current_pic . '张';
@@ -52,6 +60,10 @@ class YiRenZhiXiaComicLogic
                     fclose($fp);
                     // 上传到图床 sm.ms
                     $cdn_path = SmCdnService::get_instance()->upload($pic_local_path);
+                    // 每四张图片，休息3秒再传，防止被封
+                    if( $j % 4 == 0 ){
+                        sleep(3);
+                    }
                     $data     = [
                         'comic_id'   => ComicDownloadLogs::COMMIC_ID_YIRENZHIXIA,
                         'page'       => $i,
@@ -64,6 +76,9 @@ class YiRenZhiXiaComicLogic
                     \LogService::warn($log_name_format . '.下载完毕 ');
                     break;
                 }
+            }
+            if( 0 == $succes_counter ){
+                \LogService::debug('《一人之下》.第 '. $i .'话，还未更新');
             }
         }
         \LogService::debug('《一人之下》.----------------DONE');
