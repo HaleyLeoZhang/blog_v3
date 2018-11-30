@@ -46,9 +46,15 @@ Route::Group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']],
         Route::get('article_detail', 'SpaController@article_detail');
     });
 
-    // 用户模块
+    // - 用户模块
     Route::Group(['middleware' => 'auth_user'], function () {
         Route::post('comment/reply_add', 'CommentController@reply_add');
+    });
+
+
+    // - 动漫图片
+    Route::Group(['prefix' => 'comic'], function () {
+        Route::get('pic_list', 'ComicController@pic_list'); // 图片列表
     });
 
 

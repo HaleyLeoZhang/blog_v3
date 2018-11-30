@@ -148,6 +148,55 @@ define({ "api": [
     "groupTitle": "Behaviour"
   },
   {
+    "type": "post",
+    "url": "/api/comic/pic_list",
+    "title": "漫画图片 - 每话图片列表",
+    "name": "pic_list",
+    "group": "Comic",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "comic_id",
+            "description": "<p>动漫ID，如，1表示《一人之下》</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>第多少话，如，1表示第一话</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>如，爬取的《一人之下》这漫画的相关资源，已经被转存到第三方图床，</p> <p>每话的地址都会从这里传出去，前端按顺序显示图片即可</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\":\n    {\n        \"pic_list\": [\n        {\n            \"src\": \"https:\\/\\/i.loli.net\\/2018\\/11\\/30\\/5c0123b635b04.jpg\"\n        },\n        {\n            \"src\": \"https:\\/\\/i.loli.net\\/2018\\/11\\/30\\/5c0123d5ebeaf.jpg\"\n        }]\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 501,\n    \"message\": \"暂无资源\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/ComicController.php",
+    "groupTitle": "Comic"
+  },
+  {
     "type": "get",
     "url": "/api/comment/info",
     "title": "回复列表",
@@ -482,39 +531,6 @@ define({ "api": [
   {
     "type": "post",
     "url": "/article/background/background_add",
-    "title": "背景主题：添加",
-    "name": "background_add",
-    "group": "article",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "url",
-            "description": "<p>图片地址</p>"
-          }
-        ]
-      }
-    },
-    "description": "<p>添加背景主题</p>",
-    "version": "3.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
-    "groupTitle": "article"
-  },
-  {
-    "type": "post",
-    "url": "/article/background/background_add",
     "title": "背景主题：修改",
     "name": "background_add",
     "group": "article",
@@ -539,6 +555,39 @@ define({ "api": [
       }
     },
     "description": "<p>修改背景主题</p>",
+    "version": "3.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"message\": \"请求成功\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Admin/Article/ApiController.php",
+    "groupTitle": "article"
+  },
+  {
+    "type": "post",
+    "url": "/article/background/background_add",
+    "title": "背景主题：添加",
+    "name": "background_add",
+    "group": "article",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "url",
+            "description": "<p>图片地址</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>添加背景主题</p>",
     "version": "3.0.0",
     "success": {
       "examples": [
