@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-11-22 06:20:12
+-- Generation Time: 2018-12-04 10:28:45
 -- 服务器版本： 5.6.33-0ubuntu0.14.04.1
 -- PHP Version: 7.1.12
 
@@ -53,6 +53,23 @@ CREATE TABLE `admin_login_logs` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='后台登录日志' ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `comic_download_logs`
+--
+
+CREATE TABLE `comic_download_logs` (
+  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
+  `comic_id` tinyint(4) UNSIGNED NOT NULL COMMENT 'comic编号，如，1->一人之下',
+  `page` int(11) UNSIGNED NOT NULL COMMENT '第多少话',
+  `inner_page` int(11) UNSIGNED NOT NULL COMMENT '这页的第多少张',
+  `src` varchar(200) DEFAULT NULL COMMENT '图片地址（目前转存至sm.ms）',
+  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '0->不可用，1->可用',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -185,6 +202,14 @@ ALTER TABLE `admin_login_logs`
   ADD KEY `admin_id` (`admin_id`) USING BTREE;
 
 --
+-- Indexes for table `comic_download_logs`
+--
+ALTER TABLE `comic_download_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comic_id` (`comic_id`),
+  ADD KEY `page` (`page`);
+
+--
 -- Indexes for table `upload_logs`
 --
 ALTER TABLE `upload_logs`
@@ -241,17 +266,22 @@ ALTER TABLE `visitor_look_logs`
 -- 使用表AUTO_INCREMENT `admin_footer_marks`
 --
 ALTER TABLE `admin_footer_marks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增字段', AUTO_INCREMENT=242;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增字段', AUTO_INCREMENT=276;
 --
 -- 使用表AUTO_INCREMENT `admin_login_logs`
 --
 ALTER TABLE `admin_login_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- 使用表AUTO_INCREMENT `comic_download_logs`
+--
+ALTER TABLE `comic_download_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=6096;
 --
 -- 使用表AUTO_INCREMENT `upload_logs`
 --
 ALTER TABLE `upload_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 --
 -- 使用表AUTO_INCREMENT `user_deny_ips`
 --
@@ -281,7 +311,7 @@ ALTER TABLE `visitor_foot_mark_analysis`
 -- 使用表AUTO_INCREMENT `visitor_look_logs`
 --
 ALTER TABLE `visitor_look_logs`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
