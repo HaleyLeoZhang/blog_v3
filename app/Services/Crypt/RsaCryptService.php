@@ -67,9 +67,9 @@ class RsaCryptService implements BaseCryptService
 
         $file_variable = 'rsa_file_' . $key_type;
         if ('multi_line' == $method) {
-            return file($rsa_file_private);
+            return file($$file_variable);
         } else {
-            return file_get_contents($rsa_file_private);
+            return file_get_contents($$file_variable);
         }
     }
 

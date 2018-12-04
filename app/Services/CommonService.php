@@ -26,6 +26,7 @@ class CommonService
     const AUTH_CHECK_SUCCESS = true; // 鉴权成功
     const AUTH_CHECK_FAILED  = false; // 鉴权失败
 
+    const RAS_KEY_LEN      = 512; // 字节数 512 1024 2048 4096 等
     const RSA_FILE_PUBLIC  = 'keys/rsa_public_key.pem'; // RSA公钥路径，相对于 storage 目录
     const RSA_FILE_PRIVATE = 'keys/rsa_private_key.pem'; // RSA私钥路径，相对于 storage 目录
     const RSA_FILE_JS_PATH = 'static_pc/js/hlz_rsa.js'; // RSA前端生成对应加密的JS路径
