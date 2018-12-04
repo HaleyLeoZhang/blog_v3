@@ -25,6 +25,31 @@ class CurlRequest
      */
     public static function run($url, $data = null, $header = null)
     {
+        list($content, $http_code) = self::handle($url, $data, $header);
+        return $content;
+    }
+
+    /**
+     * POST或GET请求，并返回数据 - 附带状态码
+     * @param  String      url     访问地址
+     * @param  Array|JSON  data    用于POST的数据
+     * @param  Array       header  HTTP头请求
+     * @return array  返回数据 content 、 状态码 http_code
+     */
+    public static function run_with_status($url, $data = null, $header = null)
+    {
+        return self::handle($url, $data, $header);
+    }
+
+    /**
+     * POST或GET请求，并返回数据
+     * @param  String      url     访问地址
+     * @param  Array|JSON  data    用于POST的数据
+     * @param  Array       header  HTTP头请求
+     * @return array  返回数据、状态码
+     */
+    protected static function handle($url, $data, $header)
+    {
         //请求 URL，返回该 URL 的内容
         $ch = curl_init(); // 初始化curl
         curl_setopt($ch, CURLOPT_URL, $url); // 设置访问的 URL
@@ -48,13 +73,18 @@ class CurlRequest
         if (self::$timeout) {
             curl_setopt($ch, CURLOPT_TIMEOUT, self::$timeout);
         }
-        // 模拟重定向
-        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         // gzip 解压
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
-        $content = curl_exec($ch); // 开始访问指定URL
+        $content   = curl_exec($ch); // 开始访问指定URL
+        $http_code = curl_getinfo($ch); // 获取 HTTP 状态码
         curl_close($ch); // 关闭 cURL 释放资源
-        return $content;
+
+        $info = [
+            $content,
+            $http_code,
+        ];
+
+        return $info;
     }
 
     /**

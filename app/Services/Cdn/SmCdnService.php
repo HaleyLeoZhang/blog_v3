@@ -49,6 +49,7 @@ class SmCdnService extends BaseCdnService
             "referer: https://sm.ms/",
             "user-agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0",
             "x-requested-with: XMLHttpRequest",
+            'x-forward-for: 154.34.6.54',
         ];
         \LogService::debug(__FUNCTION__ . '.request.', $data, $header);
         $response = CurlRequest::run(self::API_URL, $data, $header);

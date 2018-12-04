@@ -1,5 +1,5 @@
 <?php
-namespace tests\Services;
+namespace tests\Repositories;
 
 use App\Repositories\Article\ArticleRepository;
 use LogService;
