@@ -1031,6 +1031,19 @@ define({ "api": [
     "title": "图片上传-editor",
     "name": "editor",
     "group": "upload",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "file",
+            "optional": false,
+            "field": "upfile",
+            "description": "<p>待上传的图片</p>"
+          }
+        ]
+      }
+    },
     "description": "<p>图片上传-editor</p>",
     "version": "3.0.0",
     "success": {
@@ -1051,6 +1064,19 @@ define({ "api": [
     "title": "图片上传-markdown",
     "name": "markdown",
     "group": "upload",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "file",
+            "optional": false,
+            "field": "editormd-image-file",
+            "description": "<p>待上传的图片</p>"
+          }
+        ]
+      }
+    },
     "description": "<p>图片上传-markdown</p>",
     "version": "3.0.0",
     "success": {

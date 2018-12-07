@@ -119,6 +119,12 @@ Route::Group(['prefix' => 'admin'], function () {
                 Route::post('friend_link_update', ['uses' => 'ApiController@friend_link_update']);
             });
 
+            // - 系统配置
+            Route::Group(['prefix' => 'system', 'namespace' => 'System'], function () {
+                Route::get('pic_bed', ['uses' => 'ViewController@pic_bed']);
+                Route::post('pic_bed_update', ['uses' => 'ApiController@pic_bed_update']);
+            });
+
             // - 图片上传
             Route::Group(['prefix' => 'upload', 'namespace' => 'Upload'], function () {
                 Route::post('markdown', ['uses' => 'ApiController@markdown']);

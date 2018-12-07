@@ -20,8 +20,15 @@ class YiRenZhiXiaComicLogic
     {
 
         \LogService::debug('《一人之下》.----------------DOING');
+        $problem_page_list = [
+            '211', // 第 211 话不能下载
+        ];
         // 第 x 话
         for ($i = 1;; $i++) {
+            if( in_array($i, [ $problem_page_list ])  ){
+                \LogService::info($i . '话.已被跳过');
+                continue;
+            }
             $path = storage_path('comic/yirenzhixia/' . $i);
             @mkdir($path, 0700, true); // 递归创建文件
             $succes_counter = 0;

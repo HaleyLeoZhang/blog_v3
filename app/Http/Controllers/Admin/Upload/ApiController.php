@@ -17,6 +17,8 @@ class ApiController extends BaseController
      * @apiName markdown
      * @apiGroup upload
      *
+     * @apiParam {file} editormd-image-file 待上传的图片
+     *
      * @apiDescription  图片上传-markdown
      *
      * @apiVersion 3.0.0
@@ -39,6 +41,8 @@ class ApiController extends BaseController
      * @api {post} /admin/upload/editor 图片上传-editor
      * @apiName editor
      * @apiGroup upload
+     *
+     * @apiParam {file} upfile 待上传的图片
      *
      * @apiDescription  图片上传-editor
      *
