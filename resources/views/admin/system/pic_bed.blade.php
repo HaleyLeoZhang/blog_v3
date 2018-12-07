@@ -74,12 +74,15 @@
                                 </div>
                                 <!-- 图片操作 -->
                                 <div class="row">
-                                    <form class="form-inline" role="form">
+                                    <form class="form-inline" role="form" 
+                                        data-id="{{ $render_one->id }}" 
+                                        id="form_{{ $render_one->id }}"
+                                    >
                                         <div class="form-group">
                                             <input class="form-control " value="{{ $render_one->url }}" />
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-danger" title="删除">
+                                            <button type="button" class="btn btn-danger pic_bed_update" title="删除">
                                                 <i class="fa fa-trash-o"></i>
                                         </div>
                                     </form>
@@ -123,32 +126,5 @@
 <script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
 <script src="/static_pc/plugins/laydate/laydate.js"></script>
 <!-- 前端逻辑 -->
-<script>
-(function (jq, window, undefined) {
-    'use strict';
-
-    function PicBed() {}
-    // @action:初始化日期插件
-    PicBed.prototype.user_list_date_plugin = function () {
-        // --- 开始时间
-        laydate.render({
-            elem: '#time_start',
-            type: 'datetime'
-        });
-        // --- 结束时间
-        laydate.render({
-            elem: '#time_end',
-            type: 'datetime'
-        });
-    };
-    // @action：初始化
-    PicBed.prototype.initial = function () {
-        this.user_list_date_plugin();
-    };
-
-    window.pic_bed = new PicBed();
-    pic_bed.initial();
-
-})(jQuery, window);
-</script>
+<script src="/static_pc/admin/js_v3.0/pic_bed.js"></script>
 @endsection

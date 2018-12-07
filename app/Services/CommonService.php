@@ -61,6 +61,7 @@ class CommonService
     const END_USER_LIST_PAGE_SIZE           = 15; // 用户概览
     const END_COMMENT_PAGE_SIZE             = 15; // 评论列表
     const END_VISITOR_ANALYSIS_PAGE_SIZE    = 15; // 访客分析
+    const END_PIC_BED_PAGE_SIZE             = 24; // 图床
 
     /**
      * 前台配置

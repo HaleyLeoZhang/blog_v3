@@ -21,7 +21,7 @@ class SystemModuleAdminLogic
             $chain = $chain->where('created_at', '<=', $params['time_end']);
         }
         $render = $chain->orderBy('id', 'desc')
-            ->paginate(\CommonService::END_INDEX_PAGE_SIZE);
+            ->paginate(\CommonService::END_PIC_BED_PAGE_SIZE);
 
         $render->appends($params);
         \LogService::info('params', $params);
