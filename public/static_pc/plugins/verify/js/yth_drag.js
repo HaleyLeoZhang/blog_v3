@@ -124,6 +124,7 @@
                 async: false,
                 data: post_data,
                 beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept-Language", navigator.language);
                     xhr.setRequestHeader("Passport", localStorage.yth_drag_passsport);
                 },
                 success: function (result) {
@@ -194,6 +195,7 @@
                 data: sub_form_data,
                 dataType: 'json',
                 beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept-Language", navigator.language);
                     xhr.setRequestHeader('Passport', localStorage.yth_drag_passsport);
                 },
                 success: function (msg) {
@@ -252,6 +254,7 @@
                 async: false,
                 beforeSend: function (xhr) {
                     // console.info('init');
+                    xhr.setRequestHeader("Accept-Language", navigator.language);
                     xhr.setRequestHeader("Passport", localStorage.yth_drag_passsport);
                 },
                 success: function (get_html) {

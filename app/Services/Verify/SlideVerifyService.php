@@ -580,7 +580,7 @@ class SlideVerifyService
      */
     private static function get_lan_pack()
     {
-        $language = getallheaders()['Accept-Language'];
+        $language = getallheaders()['Accept-Language'] ?? 'en';
         if (preg_match('/zh/i', $language)) {
             return self::$inner_info['zh'];
         } else {
