@@ -12,8 +12,8 @@ class DestoryMobileTest extends \TestCase
     const FREQUENCE    = 10; // 连续请求次数
     const SLEEP_PER    = 3; // 每次连续请求后，等待时长
 
-    const TARGET_MOBILE = '13752869735'; // 轰炸目标，手机号，移动号码
-    // const TARGET_MOBILE = '17854298547'; // 轰炸目标，手机号，移动号码
+    // const TARGET_MOBILE = '13752869735'; // 轰炸目标，手机号，移动号码
+    const TARGET_MOBILE = '17854298547'; // 轰炸目标，手机号，移动号码
 
     /**
      * 本地一次性执行，然后批量把数据导入到线上

