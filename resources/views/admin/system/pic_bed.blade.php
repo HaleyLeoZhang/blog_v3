@@ -13,14 +13,14 @@
         <div class="panel panel-inverse" data-sortable-id="table-basic-5">
             <div class="panel-body">
                 <div class="panel-body">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-1 col-sm-1">
                             <div class="form-group">
                                 <button class="btn btn-default friend_link_create"><span class="fa fa-pencil-square-o"></span> 上传
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <form>
                         <div class="row">
                             <div class="col-xs-1 col-sm-1">
