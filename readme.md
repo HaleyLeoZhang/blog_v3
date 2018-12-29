@@ -196,9 +196,13 @@
 [点此查看接口文档](http://www.hlzblog.top/doc)  
 
 ## 依赖相关
+初始化项目
+
+    composer install --no-scripts
+
 当你想在 VirtualBox 下开发时  
 
-    composer install
+    
     npm install --no-bin-links
     gulp start
 
