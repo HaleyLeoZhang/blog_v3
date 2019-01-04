@@ -160,7 +160,7 @@
                             <td style="color: #e0e; width:200px;">
                                 {{ $render_one->title }}
                             </td>
-                            <td style="color: #C67171; width:400px;">
+                            <td style="color: #C67171; width:400px; text-indent: 2em;">
                                 {{ $render_one->descript }}
                             </td>
                             <td style="width:70px;">
