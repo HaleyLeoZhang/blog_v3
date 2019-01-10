@@ -33,10 +33,10 @@ class DistributedLock
         ];
         if( $red_lock->setnx($redis_key, self::LOCK_VALUE) ){
             $red_lock->expire($redis_key, self::TTL);
-            \Log::debug('锁住-NO ', $log);
+            // \Log::debug('锁住-NO ', $log);
             return true;
         }else{
-            \Log::debug('锁住-YES ', $log);
+            // \Log::debug('锁住-YES ', $log);
             return false;
         }
     }

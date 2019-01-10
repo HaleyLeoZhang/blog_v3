@@ -20,6 +20,7 @@ class LogService
         'log_name'  => 'laravel', // 日志文件名
         'ttl_day'   => 30, // 日志过期时间，单位天
         'suffix'    => '.log', // 日志文件名后缀
+        'uuid'      => false, // 日志行 UUID 开关。  Boolean  关 => false 开 => true
     ];
 
     /**
@@ -53,6 +54,10 @@ class LogService
      * 日志类型名称，此项不同，日志信息会写入不同文件中
      */
     static $log_type = '';
+
+
+    static $log_uuid = ''; // 获取到的 UUID
+    static $log_date = ''; // 获取当前日志执行时间
 
     /**
      * 依据 $log_info 变量，对外开放的写入日志方法
@@ -112,7 +117,9 @@ class LogService
         // 时区设置
         date_default_timezone_set(self::$_ini['time_zone']);
 
-        $str   = date('Y-m-d H:i:s'); // 输出时间
+        self::$log_date = date('Y-m-d H:i:s');
+
+        $str   = self::$log_date;
         $name  = self::$log_info[$log_function_name]['name'];
         $color = self::$log_info[$log_function_name]['color'];
         // 获取 输出信息内容
@@ -120,7 +127,12 @@ class LogService
         if (count($data)) {
             $data_str = ' '.json_encode($data, JSON_UNESCAPED_UNICODE);
         }
-        $info = $str . $name . $info . $data_str. "\n";
+        // 写入 UUID
+        if( self::$_ini['uuid']  ){
+            $info = $str . ' '. self::get_uuid(). ' ' . $name . $info . $data_str. "\n";
+        }else{
+            $info = $str . $name . $info . $data_str. "\n";
+        }
         $str  = self::getColoredString($info, $color);
         self::write($str);
     }
@@ -137,7 +149,7 @@ class LogService
             mkdir($dir_path, 0777, true);
         }
         // 追加写入文件
-        $date      = date('Y-m-d');
+        $date      = date('Y-m-d', strtotime(self::$log_date));
         $file_path = self::get_log_file_name($date);
         $fp        = fopen($file_path, 'a+');
         fwrite($fp, $str);
@@ -172,6 +184,59 @@ class LogService
             $file_path = $dir_path . '/' . self::$_ini['log_name'] . '-' . $date . self::$_ini['suffix'];
         }
         return $file_path;
+    }
+
+    /**
+     * 生成 UUID
+     * @return string
+     */
+    protected static function get_uuid()
+    {
+        if( '' == self::$log_uuid ){
+            // 8-4-4-4-12
+            $str_arr = [];
+            $str_arr[] = self::rand_str(8);
+            $str_arr[] = self::rand_str(4);
+            $str_arr[] = self::rand_str(4);
+            $str_arr[] = self::rand_str(4);
+            $str_arr[] = self::rand_str(12);
+            $str = implode($str_arr, '-');
+            $str = strtoupper($str);
+            self::$log_uuid = $str;
+            unset($str_arr);
+            unset($str);
+        }
+        return self::$log_uuid;
+    }
+
+    /**
+     * 随机生成固定长度的随机数
+     * @param string  len  截取长度，默认八位
+     * @param Int     type 返回类型 [general=>字母+数字,number=>纯数字,mix=>字母+数字+特殊符号,string=>大小写字母]
+     * @return string
+     */
+    public static function rand_str($len = 8, $type = 'general')
+    {
+        $general = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        $number  = '0123456789';
+        $mix     = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+[],./<>?;';
+        $string  = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+
+        $str = $$type; // 取出目标类型
+
+        // - 长度不够，则拼接类型
+        $str_len = count($str);
+        if ($str_len < $len) {
+            $target   = '';
+            $loop_len = ceil($len / $str_len);
+            for ($i = 0; $i < $loop_len; $i++) {
+                $target .= $str;
+            }
+        } else {
+            $target = $str;
+        }
+
+        return substr(str_shuffle($target), 0, $len);
     }
 
     //+++++++++++++++++++++++++++++++++++

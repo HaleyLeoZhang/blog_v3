@@ -10,7 +10,7 @@ class YiRenZhiXiaComicLogic
 {
     const CURL_PER_SEC = 10; // 每秒爬取次数限制
     const PIC_API      = 'https://m.tohomh.com/action/play/read'; // 漫面接口
-    const PIC_CDN_HOST = 'https://manhua.wzlzs.com'; // 漫画资源域名
+    const IS_UPLOAD_TO_CLOUD = false; // true -> 上传到第三方图床，false 只本地保存
 
     /**
      * 一人之下，爬取站点数据
@@ -51,6 +51,7 @@ class YiRenZhiXiaComicLogic
                 }
 
                 $content = self::request_api($i, $current_pic);
+                \LogService::debug('数据  ' . $content);
                 $res     = json_decode($content);
 
                 $res_code = $res->Code ?? '--';
@@ -60,16 +61,20 @@ class YiRenZhiXiaComicLogic
                 } elseif ('' != $res_code) {
 
                     $pic_local_path = $path . '/' . $current_pic . '.jpg';
-                    $pic            = file_get_contents(self::PIC_CDN_HOST . $res_code);
+                    $pic            = file_get_contents($res_code);
 
                     $fp = fopen($pic_local_path, 'a+');
                     fwrite($fp, $pic);
                     fclose($fp);
-                    // 上传到图床 sm.ms
-                    $cdn_path = SmCdnService::get_instance()->upload($pic_local_path);
-                    // 每四张图片，休息3秒再传，防止被封
-                    if( $j % 4 == 0 ){
-                        sleep(3);
+                    if( self::IS_UPLOAD_TO_CLOUD ){
+                        // 上传到图床 sm.ms
+                        $cdn_path = SmCdnService::get_instance()->upload($pic_local_path);
+                        // 每四张图片，休息3秒再传，防止被封
+                        if( $j % 4 == 0 ){
+                            sleep(3);
+                        }
+                    }else{
+                        $cdn_path = $pic_local_path;
                     }
                     $data     = [
                         'comic_id'   => ComicDownloadLogs::COMMIC_ID_YIRENZHIXIA,
