@@ -41,12 +41,12 @@ class CommonLogic
         $payload = [
             'comic_id_in_third' => $ini_data['comic_id_in_third'],
         ];
-        \LogService::debug($zh . '.ini ', $ini_data);
+        // \LogService::debug($zh . '.ini ', $ini_data);
 
-        list(
-            $last_page, 
-            $last_inner_page
-        ) = self::get_last_index($params);
+        list(  $last_page ) = self::get_last_index($params);
+
+
+        \LogService::debug('info', compact('last_page','last_inner_page'));
 
         foreach ($ini_data['data'] as $one_page) {
             $post_data = [
@@ -66,13 +66,11 @@ class CommonLogic
             // 寻找这话的所有图片
             for ($i = 1; $i <= $one_page[CommonLogic::DATA_INDEX_INNER_PAGE_COUNTER]; $i++) {
 
-                if( $last_inner_page > $i  ){
-                    \LogService::debug($log_name . '第'.$i.'页.skip');
+                $post_data['inner_page'] = $i;
+                if( self::is_exists($post_data) ){
+                    \LogService::debug($log_name . '.exist');
                     continue;
                 }
-
-
-                $post_data['inner_page'] = $i;
 
                 $content = CommonLogic::request_api($post_data);
                 $res     = json_decode($content);
@@ -188,8 +186,8 @@ class CommonLogic
     {
         extract($params); //  comic_id、page、inner_page
         $counter = ComicDownloadLogs::where('comic_id', ComicDownloadLogs::COMMIC_ID_YIRENZHIXIA)
-            ->where('page', $i)
-            ->where('inner_page', $current_pic)
+            ->where('page', $page)
+            ->where('inner_page', $inner_page)
             ->where('status', ComicDownloadLogs::STATUS_VALID)
             ->count();
         return (bool) $counter;
@@ -275,7 +273,6 @@ class CommonLogic
             ->first();
         return [
             $obj->page ?? 1,
-            $obj->inner_page ?? 1,
         ];
     }
 
