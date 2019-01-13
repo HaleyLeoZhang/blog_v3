@@ -68,7 +68,7 @@ class CommonLogic
 
                 $post_data['inner_page'] = $i;
                 if( self::is_exists($post_data) ){
-                    \LogService::debug($log_name . '.exist');
+                    \LogService::debug($log_name . '第'.$i.'页.exist');
                     continue;
                 }
 
