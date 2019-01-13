@@ -43,6 +43,11 @@ class CommonLogic
         ];
         \LogService::debug($zh . '.ini ', $ini_data);
 
+        list(
+            $last_page, 
+            $last_inner_page
+        ) = self::get_last_index($params);
+
         foreach ($ini_data['data'] as $one_page) {
             $post_data = [
                 'comic_id_in_third' => $ini_data['comic_id_in_third'],
@@ -51,8 +56,22 @@ class CommonLogic
                 'inner_page'        => 0,
             ];
             $log_name = $zh . '.第' . $post_data['page'] . '话';
+
+            if( $last_page > $post_data['page']  ){
+                \LogService::debug($log_name . '.skip');
+                continue;
+            }
+
+
             // 寻找这话的所有图片
             for ($i = 1; $i <= $one_page[CommonLogic::DATA_INDEX_INNER_PAGE_COUNTER]; $i++) {
+
+                if( $last_inner_page > $i  ){
+                    \LogService::debug($log_name . '第'.$i.'页.skip');
+                    continue;
+                }
+
+
                 $post_data['inner_page'] = $i;
 
                 $content = CommonLogic::request_api($post_data);
@@ -240,6 +259,24 @@ class CommonLogic
         $content = CurlRequest::run($url, $data, self::$download_header);
 
         return $content;
+    }
+
+    /**
+     * 获取最后一次下载的位置
+     * @param array $params 查询所需参数 comic_id
+     * @return array
+     */
+    public static function get_last_index($params)
+    {
+        extract($params); //  comic_id
+        $obj = ComicDownloadLogs::where('comic_id', $comic_id)
+            ->orderBy('page', 'desc')
+            ->orderBy('inner_page', 'desc')
+            ->first();
+        return [
+            $obj->page ?? 1,
+            $obj->inner_page ?? 1,
+        ];
     }
 
 }
