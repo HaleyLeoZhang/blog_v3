@@ -24,4 +24,12 @@ class ComicDownloadLogs extends Model
 
     // 漫画名称
     const COMMIC_ID_YIRENZHIXIA = 1; // 一人之下
+
+    // 漫画对应详细名称
+    static $comic_info = [
+        self::COMMIC_ID_YIRENZHIXIA => [
+            'en' => 'yirenzhixia',
+            'zh' => '一人之下',
+        ],
+    ];
 }
