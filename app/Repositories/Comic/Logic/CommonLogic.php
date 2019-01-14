@@ -146,7 +146,7 @@ class CommonLogic
 
         // 组装数据
         $fill_data = [];
-        if (preg_match_all('/(\d+)\.html.*?llow.*?\>(.*?)(\d+)P.*?\<a/s', $wait_parse, $matches)) {
+        if (preg_match_all('/(\d+)\.html.*?llow.*?\>(.*?)(\d+)P.*?\<\/a/s', $wait_parse, $matches)) {
             $counter = count($matches[0]); // 总计匹配次数
             for ($i = 0; $i < $counter; $i++) {
                 // $matches 的索引号 1 2 3 分别表示    对应话的页面id；对应话数（解析为整型后>0）； 对应话图片数
