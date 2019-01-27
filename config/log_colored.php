@@ -4,7 +4,7 @@
  */
 return [
     'switch'    => env('LOG_SWITCH', true), // Boolean  关 => false 开 => true
-    'level'     => env('LOG_LEVEL', 1), // 该日志等级及以上，可以写入日志中  1~4 依次为 debug info warn error
+    'level'     => env('LOG_LEAST_LEVEL', 1), // 该日志等级及以上，可以写入日志中  1~4 依次为 debug info warn error
     'time_zone' => env('LOG_TIME_ZONE','Asia/Chongqing'), // 时区
     'path'      => env('LOG_PATH', '/data/logs/app/blog'), // 日志存放路径
     'log_name'  => env('LOG_NAME', 'laravel'),

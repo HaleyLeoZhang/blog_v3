@@ -12,7 +12,7 @@
 
 ## 移动文件
 
-移动当前目录里以　`.conf` 结尾的文件到 `supervisor` 的配置目录下
+移动当前目录里以　`.ini` 结尾的文件到 `supervisor` 的配置目录下
 
     /etc/supervisor/conf.d
 
@@ -37,6 +37,9 @@
     stdout_logfile_backups  = 1
     stdout_logfile          = /data/logs/supervisor/swoole_websocket.log
 
+    ;numprocs    = 5  # 需要多个进程的时候，用这个，常用场景为 消费消息队列
+    ;process_name=%(program_name)s_%(process_num)02d; # 需要多个进程的时候，需要添加这个
+
 #### 参数说明
 
 [program:子进程名] 这个就是咱们要管理的子进程了":"后面的是名字，最好与你编写的 `.conf` 文件保持一致  
@@ -47,6 +50,7 @@
 `stdout_logfile_maxbytes` 日志文件最大大小  
 `stdout_logfile_backups` 日志文件备份数量  
 `stdout_logfile` 日志文件存放路径  
+
 
 [更多参数说明](https://www.cnblogs.com/xuezhigu/p/7660203.html)  
 
