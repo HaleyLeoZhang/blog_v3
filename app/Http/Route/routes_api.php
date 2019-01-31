@@ -18,8 +18,8 @@ Route::Group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']],
 
     // - 微信
     Route::Group(['prefix' => 'wechat'], function () {
-        Route::any('/', 'WechatController@check_signature'); // 验证前，路由指向这个方法
-        // Route::any('/', 'WechatController@entrance'); // 验证后，用于回复用户
+        // Route::any('/', 'WechatController@check_signature'); // 验证前，路由指向这个方法
+        Route::any('/', 'WechatController@entrance'); // 验证后，用于回复用户
     });
 
     // - 游客访问足迹
