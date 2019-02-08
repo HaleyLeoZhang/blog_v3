@@ -14,9 +14,9 @@ class CommonLogic
     const SLEEP_UNIT = 1; // 每多少张，执行一次挂起操作
     const SLEEP_GAP  = 4; // 挂起进程时长，单位秒
 
-    const PIC_API = 'https://m.tohomh.com/action/play/read'; // 漫面接口
+    const PIC_API = 'https://m.tohomh123.com/action/play/read'; // 漫面接口
 
-    const COMIC_INDEX = 'https://www.tohomh.com/'; // 漫画首页的前缀
+    const COMIC_INDEX = 'https://www.tohomh123.com/'; // 漫画首页的前缀
 
     // 初始化的数据，返回的各个索引号的意义
     const DATA_INDEX_PAGE_ID            = 0; // 这一话的页面ID
@@ -41,7 +41,7 @@ class CommonLogic
         $payload = [
             'comic_id_in_third' => $ini_data['comic_id_in_third'],
         ];
-        // \LogService::debug($zh . '.ini ', $ini_data);
+        \LogService::debug($zh . '.ini ', $ini_data);
 
         list(  $last_page ) = self::get_last_index($params);
 
@@ -82,7 +82,7 @@ class CommonLogic
                     \LogService::debug($log_name . '第'.$i.'页.failed');
                 }
             }
-            \LogService::warn($log_name . '.end');
+            \LogService::warn($log_name . '.over');
         }
 
     }
@@ -90,29 +90,24 @@ class CommonLogic
     // ------------------------------------------------------------------------------
 
     protected static $index_header = [
-        'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Encoding:gzip, deflate, sdch, br',
+        'Accept: application/json',
+        'Accept-Encoding: gzip, deflate, br',
         'Accept-Language:zh-CN,zh;q=0.8',
         'Cache-Control:no-cache',
-        'Connection:keep-alive',
-        'Cookie:Hm_lvt_4be6660a7fb279361739554296e9954e=1543279998,1543565488; Hm_lpvt_4be6660a7fb279361739554296e9954e=1543567559',
-        'Host:www.tohomh.com',
+        'Host:www.tohomh123.com',
         'Pragma:no-cache',
         'Upgrade-Insecure-Requests:1',
-        'User-Agent:Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+        'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
     ];
 
     protected static $download_header = [
-        'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Encoding:gzip, deflate, sdch, br',
+        'Accept: application/json',
+        'Accept-Encoding: gzip, deflate, br',
         'Accept-Language:zh-CN,zh;q=0.8',
         'Cache-Control:no-cache',
-        'Connection:keep-alive',
-        'Cookie:Hm_lvt_4be6660a7fb279361739554296e9954e=1543279998,1543565488; Hm_lpvt_4be6660a7fb279361739554296e9954e=1543567559',
-        'Host:m.tohomh.com',
-        'Pragma:no-cache',
-        'Upgrade-Insecure-Requests:1',
-        'User-Agent:Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+        'Host: m.tohomh123.com',
+        'User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+        'X-Requested-With: XMLHttpRequest',
     ];
 
     /**
