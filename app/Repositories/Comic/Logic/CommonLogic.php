@@ -53,6 +53,7 @@ class CommonLogic
                 'comic_id_in_third' => $ini_data['comic_id_in_third'],
                 'comic_id'          => $comic_id,
                 'page'              => $one_page[CommonLogic::DATA_INDEX_CURRENT_PAGE],
+                'api_page'          => $one_page[CommonLogic::DATA_INDEX_PAGE_ID],
                 'inner_page'        => 0,
             ];
             $log_name = $zh . '.第' . $post_data['page'] . '话';
@@ -232,18 +233,18 @@ class CommonLogic
 
     /**
      * 获取动漫网的图片资源地址
-     * @param array $params 查询所需的参数  comic_id_in_third、page、inner_page
+     * @param array $params 查询所需的参数  comic_id_in_third、page、inner_page、api_page
      * @return string
      */
     public static function request_api($params)
     {
-        extract($params); // comic_id_in_third、page、inner_page
+        extract($params); // comic_id_in_third、page、inner_page、api_page
 
         $data = null;
 
         $get = [
             'did' => $comic_id_in_third, // 在资源源站的ID
-            'sid' => $page, // 对应章节.html前的数字
+            'sid' => $api_page, // 对应章节.html前的数字
             'iid' => $inner_page, // 页内第几张，最大为章节话数的最大值
             'tmp' => microtime(true),
         ];
