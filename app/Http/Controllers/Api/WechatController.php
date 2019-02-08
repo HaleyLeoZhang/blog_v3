@@ -59,15 +59,14 @@ class WechatController extends BaseController
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
             the best way is to check the validity of xml by yourself */
             libxml_disable_entity_loader(true);
-            loader(true);
-            $postObj            = simplexml_load_string($wecaht_request_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $postObj = simplexml_load_string($wecaht_request_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $postObj = json_decode( json_encode($postObj) );
+
             $this->fromUsername = $postObj->FromUserName;
             $this->toUsername   = $postObj->ToUserName; // 公众号
             $this->CreateTime   = $postObj->CreateTime; // 发送过来的消息
             $this->MsgType      = $postObj->MsgType; // 消息类型
-            if (isset($postObj->Content)) {
-                $this->Content = $postObj->Content;
-            }
+            $this->Content      = $postObj->Content ?? '-';
             if (isset($postObj->Event)) {
                 $this->Event = $postObj->Event;
                 if (isset($postObj->EventKey)) {
