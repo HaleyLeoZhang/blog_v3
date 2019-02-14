@@ -124,6 +124,7 @@ class CommonLogic
         $url     = self::COMIC_INDEX . $en;
         $content = CurlRequest::run($url, $data, self::$index_header);
 
+
         // 解析资源ID
         $comic_id_in_third = 0;
         if (preg_match('/value="(\d+)" name="dataid"/', $content, $matches)) {
@@ -140,10 +141,12 @@ class CommonLogic
         }
         unset($content);
 
+
         // 组装数据
         $fill_data = [];
-        if (preg_match_all('/(\d+)\.html.*?llow.*?\>(.*?)(\d+)P.*?\<\/a/s', $wait_parse, $matches)) {
+        if (preg_match_all('/(\d+)\.html.*?llow.*?\>.*?(\d+).*?(\d+)P.*?\<\/a/s', $wait_parse, $matches)) {
             $counter = count($matches[0]); // 总计匹配次数
+            // 获取数据
             for ($i = 0; $i < $counter; $i++) {
                 // $matches 的索引号 1 2 3 分别表示    对应话的页面id；对应话数（解析为整型后>0）； 对应话图片数
                 // ---- 为了减少数据存到内存中的量，以下皆为索引顺序
@@ -152,6 +155,7 @@ class CommonLogic
                 $tpl[self::DATA_INDEX_PAGE_ID]            = $matches[1][$i]; // 对应话的页面id；
                 $tpl[self::DATA_INDEX_CURRENT_PAGE]       = intval($matches[2][$i]) ?? 0; // 对应话数（解析为整型后>0），否则舍去
                 $tpl[self::DATA_INDEX_INNER_PAGE_COUNTER] = $matches[3][$i]; // 对应话图片数
+                
                 if (0 == $tpl[1]) {
                     continue;
                 }

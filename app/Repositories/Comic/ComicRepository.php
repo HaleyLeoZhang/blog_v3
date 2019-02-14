@@ -19,10 +19,21 @@ class ComicRepository
      * 漫画 - 一人之下
      * @return void
      */
-    public static function yi_ren_zhi_xia()
+    public static function yirenzhixia()
     {
         CommonLogic::run(ComicDownloadLogs::COMMIC_ID_YIRENZHIXIA);
     }
+
+    /**
+     * 漫画 - 最强农民工
+     * @return void
+     */
+    public static function zuijiangnongmingong()
+    {
+        CommonLogic::run(ComicDownloadLogs::COMMIC_ID_ZUIJIANGNONGMINGONG);
+    }
+
+    // ------------------------------------------------------------
 
     /**
      * 漫画 API
