@@ -185,7 +185,7 @@ class CommonLogic
     public static function is_exists($params): bool
     {
         extract($params); //  comic_id、page、inner_page
-        $counter = ComicDownloadLogs::where('comic_id', ComicDownloadLogs::COMMIC_ID_YIRENZHIXIA)
+        $counter = ComicDownloadLogs::where('comic_id', $comic_id)
             ->where('page', $page)
             ->where('inner_page', $inner_page)
             ->where('status', ComicDownloadLogs::STATUS_VALID)
@@ -268,6 +268,7 @@ class CommonLogic
     {
         extract($params); //  comic_id
         $obj = ComicDownloadLogs::where('comic_id', $comic_id)
+            ->where('status', ComicDownloadLogs::STATUS_VALID)
             ->orderBy('page', 'desc')
             ->orderBy('inner_page', 'desc')
             ->first();

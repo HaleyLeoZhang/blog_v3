@@ -33,6 +33,15 @@ class ComicRepository
         CommonLogic::run(ComicDownloadLogs::COMMIC_ID_ZUIJIANGNONGMINGONG);
     }
 
+    /**
+     * 漫画 - 戒魔人
+     * @return void
+     */
+    public static function jiemoren()
+    {
+        CommonLogic::run(ComicDownloadLogs::COMMIC_ID_JIEMOREN);
+    }
+
     // ------------------------------------------------------------
 
     /**
