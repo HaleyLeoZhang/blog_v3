@@ -5,7 +5,7 @@
 {{-- 页面SEO --}}
 @section('seo_keywords')云天河博客,云天河,hlzblog,在路上的架构师@endsection
 {{-- 页面描述 --}}
-@section('seo_description')云天河Blog(www.hlzblog.top)，致力于全栈开发技术的交流与资源共享。欢迎加入QQ群399073936，一起更进一步。@endsection
+@section('seo_description')云天河Blog(www.hlzblog.top)，致力于全栈开发技术的交流与资源共享。欢迎加入QQ群239734937，一起更进一步。@endsection
 
 {{-- 容器开始 --}}
 @section('content')
