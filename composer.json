@@ -14,7 +14,8 @@
         "predis/predis": "^1.1",
         "earnp/laravel-google-authenticator": "dev-master",
         "maatwebsite/excel": "~2.1.0",
-        "qiniu/php-sdk": "^7.2"
+        "qiniu/php-sdk": "^7.2",
+        "php-amqplib/php-amqplib": "^2.8"
     },
     "require-dev":
     {
