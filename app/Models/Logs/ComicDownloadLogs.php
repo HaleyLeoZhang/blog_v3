@@ -23,13 +23,23 @@ class ComicDownloadLogs extends Model
     const STATUS_VALID   = 1; // 可用
 
     // 漫画名称
-    const COMMIC_ID_YIRENZHIXIA = 1; // 一人之下
+    const COMMIC_ID_YIRENZHIXIA         = 1; // 一人之下
+    const COMMIC_ID_ZUIJIANGNONGMINGONG = 2; // 最强农民工
+    const COMMIC_ID_JIEMOREN            = 3; // 戒魔人
 
     // 漫画对应详细名称
     static $comic_info = [
-        self::COMMIC_ID_YIRENZHIXIA => [
+        self::COMMIC_ID_YIRENZHIXIA         => [
             'en' => 'yirenzhixia',
             'zh' => '一人之下',
+        ],
+        self::COMMIC_ID_ZUIJIANGNONGMINGONG => [
+            'en' => 'zuijiangnongmingong',
+            'zh' => '最强农民工',
+        ],
+        self::COMMIC_ID_JIEMOREN            => [
+            'en' => 'jiemoren',
+            'zh' => '戒魔人',
         ],
     ];
 }

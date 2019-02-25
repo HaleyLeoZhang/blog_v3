@@ -17,7 +17,7 @@
                 <a href="http://hlzblog.top/type/4.html" target="_blank"><img src="{{ static_host() }}/static_pc/img/default/side_bar/ll01.png" width="131" height="49" class="mouseout"><img src="{{ static_host() }}/static_pc/img/default/side_bar/l01.png" width="47" height="49" class="mouseover"></a>
             </li> -->
             <li>
-                <a href="http://shang.qq.com/wpa/qunwpa?idkey=c09cd4c9fbdf5909136208cc93ae2e26b22ec48dbd2583cfdc48d82dde07186b" target="_blank">
+                <a href="http://shang.qq.com/wpa/qunwpa?idkey=e56d51c39f21e0a38b686d70fd44943fb68027d2d4b2eb6606166801f93bade1" target="_blank">
                     <img src="{{ static_host() }}/static_pc/img/default/side_bar/ll03.png" class="mouseout">
                     <img src="{{ static_host() }}/static_pc/img/default/side_bar/l03.png" class="mouseover">
                 </a>
