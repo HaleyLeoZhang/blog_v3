@@ -154,7 +154,12 @@ class IndexLogic
             ->orderByRaw('count(location) desc, id asc')
             ->limit(\CommonService::BLOG_HOST_ARTICLE_PAGE_SIZE)
             ->get();
-        $article_ids = CommonTool::getWhereInArray($look_log, 'location');
+        if( count($look_log) ){
+            $look_log = $look_log->toArray();
+        }else{
+            $look_log = [];
+        }
+        $article_ids = array_column($look_log, 'location');
         $articles    = Article::select('id', 'title')
             ->whereIn('id', $article_ids)
             ->where('is_deleted', Article::IS_DELETED_NO)
