@@ -14,12 +14,16 @@ class ExportService
 
     /**
      * 导出 Execl
+     * 需要下载包支持 https://packagist.org/packages/maatwebsite/excel
+     * - 需要在 config/app.php 配置
+     * --- 配置 providers  Maatwebsite\Excel\ExcelServiceProvider::class,
+     * --- 配置 aliases    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
      * @param string $file_title 文件名
      * @param array $ths 标题部分
      * @param array $tds 每行内容部分（二维数组）
      * @return string
      */
-    public static function execl($file_title, $ths, $tds)
+    public static function excel($file_title, $ths, $tds)
     {
         if (0 == count($tds)) {
             return self::EMPTY_STRING;

@@ -10,32 +10,23 @@ namespace App\Helpers;
 
 class CommonTool
 {
-
     /**
-     * 整理结果对象中的某个值 为 whereIn 可用的数组
-     * @param Set set      查询对象返回的集合
-     * @param string key_name  打算整理的对应表中的字段
+     * 依据一个数组中的键名，整合生成分组数据，以生成二维数组
+     * @param array $array 待处理的数组
+     * @param string|int $key 一个数组数据中的一个键名
+     * @param bool $is_single true->只生成一维数据,false->生成二维数组数据
      * @return array
      */
-    public static function getWhereInArray($set, $key_name)
+    public static function array_group_by_key($array, $key, $is_single = true)
     {
-        $arr = []; // 准备返回的结果
-        for ($i = 0, $len = count($set); $i < $len; $i++) {
-            $arr[] = data_get($set[$i], $key_name, '');
+        $result = []; // 初始化一个数组
+        foreach ($array as $item) {
+            if ($is_single) {
+                $result[$item[$key]] = $item;
+            } else {
+                $result[$item[$key]][] = $item;
+            }
         }
-        return $arr;
-    }
-
-    /**
-     * 金额单位转换，元转分
-     * @param decimal $money 元
-     * @param int 分
-     */
-    public static function decimalToInt($money)
-    {
-        $str   = sprintf('%.2f', $money); // 浮点转字符串
-        $arr   = explode('.', $str); // 整数与小数分开
-        $total = implode('', $arr); // 去掉小数点
-        return intval($total);
+        return $result;
     }
 }

@@ -17,12 +17,13 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\BakSqlCommand::class,
         \App\Console\Commands\RsaFileCommand::class,
         \App\Console\Commands\SwooleCommond::class,
+        \App\Console\Commands\KugouMusicCommand::class,
     ];
 
     /**
      * 定时说明
      * ->everyTenMinutes() // 每10分钟
-     * ->everyFiveMinutes() // 每5分钟
+     * ->everyFiveMinutes() // 每5分钟;h  
      * ->dailyAt('03:00') // 固定时间：  时：分钟
      * ->cron('* * * * *') // 分（0～59） 时（0～23） 日（1～31） 月（1～12） 星期（0～7，0与7表示星期天）
      *
@@ -46,6 +47,10 @@ class Kernel extends ConsoleKernel
         // - 发送备份邮件
         $schedule->command('bak_sql')
             ->dailyAt($daily_clock)
+            ->withoutOverlapping();
+        // - 生成音乐缓存
+        $schedule->command('kugou_music')
+            ->cron('*/5 * * * *')
             ->withoutOverlapping();
 
     }
