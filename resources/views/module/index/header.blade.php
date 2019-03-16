@@ -17,13 +17,13 @@
 	<link rel="shortcut icon" href="{{ static_host() }}/favicon.ico"  />
 	<link rel="stylesheet" href="{{ link_src('global.css') }}">
 	<!-- ICON Compoents -->
-	<link href="//cdn.staticfile.org/font-awesome/4.6.3/css/font-awesome.min.css"      rel="stylesheet">
-	<link href="//cdn.staticfile.org/font-awesome/4.6.3/fonts/fontawesome-webfont.svg" rel="image/svg+xml" >
+	<link href="{{ config('static_source_cdn.font_awesome_css') }}"      rel="stylesheet">
+	<link href="{{ config('static_source_cdn.font_awesome_svg') }}" rel="image/svg+xml" >
 	<!-- Sentry -->
-	<script src="//cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
+	<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
 	<!-- JS Lib -->
-	<script src="//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js"></script>
-	<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="{{ config('static_source_cdn.laod_js') }}"></script>
+	<script src="{{ config('static_source_cdn.jquery') }}"></script>
 	<script src="{{ link_src('global.js') }}"></script>
 </head>
 <body class="global">

@@ -74,8 +74,8 @@
 @endsection 
 <!-- js -->
 @section('script')
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
-<script src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
+<script src="{{ config('static_source_cdn.wang_editor_js') }}"></script>
 <script type="text/javascript">
 // 背景设置
 $(".content-wrapper").css({

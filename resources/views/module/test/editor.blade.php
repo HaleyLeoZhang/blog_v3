@@ -1,6 +1,6 @@
 <!-- 引入布局样式 ，统一为前后台编辑器样式-->
 <link rel="stylesheet" href="/static_pc/plugins/layui/js/css/layui.css">
-<link rel="stylesheet" href="//unpkg.com/wangeditor/release/wangEditor.min.css">
+<link rel="stylesheet" href="{{ config('static_source_cdn.wang_editor_css') }}">
 <!--两层类里面，实例化编辑器内容。-->
 <div class="wangEditor-container" style="width:790px;border:none"><!--第一层，设置宽度-->
     <div class="wangEditor-txt"><!--第二层，存放编辑好的内容-->

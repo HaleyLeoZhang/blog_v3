@@ -67,7 +67,7 @@
 @endsection
 <!-- js -->
 @section('script')
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
 <script src="/static_pc/plugins/laydate/laydate.js"></script>
 <script type="text/javascript">
 // - 时间选择器

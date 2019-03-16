@@ -89,7 +89,7 @@
 </script>
 
 
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
 <script type="text/javascript">
 	loadjs([
         "{{ link_src('modules.js') }}",

@@ -321,7 +321,7 @@
 <%# } %>
 </script>
 @include('admin/article/common_script')
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
 <!-- 初始化文章内容 -->
 <script src="/Umeditor/umeditor.config.js"></script>
 <script src="/Umeditor/umeditor.min.js"></script>

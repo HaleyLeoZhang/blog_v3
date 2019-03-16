@@ -44,8 +44,8 @@
         </script>
     </body>
     <!-- Sentry -->
-    <script src="//cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
-    <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
+    <script src="{{ config('static_source_cdn.jquery') }}"></script>
     <script src="/static_pc/js/global.js"></script>
     <script>
     (function($, window, undefined){

@@ -208,7 +208,7 @@
 
 <!-- All compoents about "lay" do not to load it by async way-->
 <script src="{{ link_plugins('pageinate','laypage.js') }}"></script>
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
 
 <script type="text/javascript">
 	var loadjs_src_arr = [

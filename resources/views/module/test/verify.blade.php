@@ -35,11 +35,11 @@
     <!-- 请不要改此处的id -->
     <div id="yth_captchar"></div>
     
-    <script type="text/javascript" src="//cdn.staticfile.org/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/es6-shim/0.35.3/es6-shim.min.js"></script>
+    <script type="text/javascript" src="{{ config('static_source_cdn.es5') }}"></script>
+    <script type="text/javascript" src="{{ config('static_source_cdn.es6') }}"></script>
     <script type="text/javascript" src="//libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+    <script type="text/javascript" src="{{ config('static_source_cdn.laod_js') }}"></script>
+    <script type="text/javascript" src="{{ config('static_source_cdn.layer') }}"></script>
     <script type="text/javascript" src="/static_pc/js/hlz_rsa.js"></script>
     <script>
     /*

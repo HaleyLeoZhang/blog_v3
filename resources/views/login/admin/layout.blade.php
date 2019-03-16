@@ -119,11 +119,11 @@
             </div>
         </div>
         <!-- Sentry -->
-        <script src="//cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
+        <script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
         <!-- JS -->
-        <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
-        <script type="text/javascript" src="//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js"></script>
+        <script type="text/javascript" src="{{ config('static_source_cdn.jquery') }}"></script>
+        <script type="text/javascript" src="{{ config('static_source_cdn.layer') }}"></script>
+        <script type="text/javascript" src="{{ config('static_source_cdn.laod_js') }}"></script>
         <script type="text/javascript" src="/static_pc/js/global.js"></script>
         <script type="text/javascript" src="/static_pc/js/hlz_rsa.js"></script>
         @yield('js')

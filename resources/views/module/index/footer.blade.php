@@ -33,7 +33,7 @@ var arr_src = [
   // Baidu Statistic
   "https://hm.baidu.com/hm.js?a3e8bb5c7eef342491aa58e9a8539127",
   // jq lazy load
-  "//cdn.staticfile.org/jquery_lazyload/1.9.7/jquery.lazyload.min.js",
+  "{{ config('static_source_cdn.jquery_lazyload') }}",
 ];
 loadjs(arr_src, {
     success: function () {

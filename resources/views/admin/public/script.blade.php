@@ -1,4 +1,4 @@
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="{{ config('static_source_cdn.jquery') }}"></script>
 <!-- -->
 <!-- -->
 <!-- ------------------------- 后台主题需要 ------------------------- -->
@@ -13,14 +13,14 @@
 <!-- -->
 <!-- ------------------------- Blog v3 ------------------------- -->
 <!-- Sentry -->
-<script src="//cdn.ravenjs.com/3.19.1/raven.min.js" crossorigin="anonymous"></script>
+<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
 <!-- ------------------------- Blog v3 ------------------------- -->
 <!-- -->
 <!-- -->
 <!-- ------------------------- Blog v2 ------------------------- -->
 <!-- <script src="{{ cdn_host() }}/static_pc/plugins/layui/js/layui.js"></script>
 <script src="{{ cdn_host() }}/static_pc/plugins/pageinate/js/laypage.js"></script>
-<script src="//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js"></script> -->
+<script src="{{ config('static_source_cdn.laod_js') }}"></script> -->
 <script src="{{ cdn_host() }}/static_pc/js/global.js"></script>
 <script src="{{ cdn_host() }}/static_pc/admin/script.js"></script>
 <!-- ------------------------- Blog v2 ------------------------- -->

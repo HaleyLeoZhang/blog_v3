@@ -11,8 +11,8 @@
         <link href="{{ cdn_host() }}/static_pc/admin/theme/scojs/sco.message.css?v=3.0.0" rel="stylesheet" type="text/css" />
         <!-- Font Awesome Icons -->
         <!-- <link href="{{ cdn_host() }}/static_pc/admin/theme/font-awesome/css/font-awesome.min.css?v=3.0.0" rel="stylesheet" type="text/css" /> -->
-        <link href="//cdn.staticfile.org/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link href="//cdn.staticfile.org/font-awesome/4.6.3/fonts/fontawesome-webfont.svg" rel="image/svg+xml">
+        <link href="{{ config('static_source_cdn.font_awesome_css') }}" rel="stylesheet">
+        <link href="{{ config('static_source_cdn.font_awesome_svg') }}" rel="image/svg+xml">
         <!-- Theme style -->
         <link href="{{ cdn_host() }}/static_pc/admin/theme/admin/admin.css?v=3.0.0" rel="stylesheet" type="text/css" />
         <!-- AdminLTE Skins. Choose a skin from the css/skins

@@ -156,7 +156,7 @@
 @endsection
 <!-- js -->
 @section('script')
-<script src="//cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="{{ config('static_source_cdn.layer') }}"></script>
 <script src="/static_pc/plugins/laydate/laydate.js"></script>
 <!-- 前端逻辑 -->
 <script src="/static_pc/admin/js_v3.0/visitor_analysis.js"></script>

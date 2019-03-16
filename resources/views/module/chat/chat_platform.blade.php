@@ -12,7 +12,7 @@ swoole聊天
 <!-- 页面模板
   <script type="yth/tpl" id="yth_chat_customer_body">
 -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/wangeditor/2.1.20/css/wangEditor.min.css">
+<link rel="stylesheet" href="{{ config('static_source_cdn.wang_editor_css_v2') }}">
 <link rel="stylesheet" href="{{ link_plugins('chat','core.css') }}">
 <div id="yth_chat_sidebar" oncontextmenu="return false;">
     <audio id="yth_bg_music" src="/static_pc/plugins/chat/bg_music.mp3" style="display:none;"></audio>
@@ -177,7 +177,7 @@ swoole聊天
 loadjs([
     "{{ link_plugins('hlz_components','alert.js') }}",
     "{{ link_plugins('chat','core.js') }}",
-    "http://cdn.bootcss.com/wangeditor/2.1.20/js/wangEditor.min.js"
+    "{{ config('static_source_cdn.wang_editor_js_v2') }}"
 ], {
     success: function () {
         // 模板配置
