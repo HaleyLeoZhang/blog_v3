@@ -100,7 +100,7 @@ class KugouMusicApiSerivce
             }
         }
         if ('' == $file_hash) {
-            throw new \ApiException("未找到相关歌手");
+            throw new \Exception("未找到相关歌手");
         }
         return $file_hash;
     }
@@ -137,7 +137,7 @@ class KugouMusicApiSerivce
             $json = $matches[1];
             return json_decode($json);
         } else {
-            throw new \ApiException("获取 jsonp 失败");
+            throw new \Exception("获取 jsonp 失败");
         }
     }
 
