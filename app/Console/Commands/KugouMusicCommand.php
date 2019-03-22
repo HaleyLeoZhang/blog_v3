@@ -2,11 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Caches\MemorabiliaCache;
-use App\Repositories\Common\Logic\CommonLogic;
+use App\Repositories\Common\Logic\CacheLogic;
 use Illuminate\Console\Command;
 use LogService;
-use App\Services\Api\KugouMusicApiSerivce;
 
 class KugouMusicCommand extends Command
 {
@@ -43,11 +41,7 @@ class KugouMusicCommand extends Command
      */
     public function set_memorabilia_bg()
     {
-        $keyword = '刚好遇见你';
-        $singer  = '曲肖冰';
-        $bg_url  = KugouMusicApiSerivce::run($keyword, $singer);
-        $res = MemorabiliaCache::set_cache_info('gang_hao_yu_jian_ni', $bg_url);
-        \LogService::info('res-----', compact('bg_url', 'res'));
+        CacheLogic::ini_memorabilia_cache();
     }
 
 }

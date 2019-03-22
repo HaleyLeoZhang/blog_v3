@@ -2,9 +2,7 @@
 namespace App\Repositories\Common\Logic;
 
 use App\Services\Api\ExpressDeliveryApiService;
-use App\Services\Api\KugouMusicApiSerivce;
 use Illuminate\Support\Facades\Redis;
-use App\Caches\MemorabiliaCache;
 
 class CommonLogic
 {
@@ -15,11 +13,9 @@ class CommonLogic
      */
     public static function memorabilia_bg()
     {
-        $keyword = '刚好遇见你';
-        $singer  = '曲肖冰';
-        $bg_url = MemorabiliaCache::get_cache_info('gang_hao_yu_jian_ni');
-        if( !$bg_url ){
-            $bg_url  = KugouMusicApiSerivce::run($keyword, $singer);
+        $bg_url = CacheLogic::get_memorabilia_cache();
+        if (!$bg_url) {
+            $bg_url = CacheLogic::ini_memorabilia_cache();
         }
         return $bg_url;
     }

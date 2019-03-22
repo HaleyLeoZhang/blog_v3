@@ -18,7 +18,7 @@ class ActionOAuth2Logic
      */
     public static function get_oauth_obj($oauth_type)
     {
-        $user_type = User::$user_type_map[$oauth_type];
+        $user_type = User::$user_type_map[$oauth_type] ?? '-';
         switch ($user_type) {
             case User::USER_TYPE_QQ:
                 $object = new QqOAuth2Service();
@@ -29,9 +29,8 @@ class ActionOAuth2Logic
             case User::USER_TYPE_GITHUB:
                 $object = new GithubOAuth2Service();
                 break;
-                break;
             default:
-                throw new \ApiException("未知的第三方类型");
+                throw new \Exception("未知的第三方类型");
         }
         return $object;
     }

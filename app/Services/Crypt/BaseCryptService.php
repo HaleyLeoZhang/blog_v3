@@ -10,7 +10,7 @@ namespace App\Services\Crypt;
 
 interface BaseCryptService
 {
-    
+
     /**
      * 加密
      * @param String : data 需要加密的数据

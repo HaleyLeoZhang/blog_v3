@@ -60,7 +60,7 @@ class VisitorLogLogic
         $analysis->location = $foot_mark->location;
         // 设备类型：-2->没有相关信息、-1->其他、0->蜘蛛、1->移动端、2->PC
         $agent = 'user-agent';
-        if( !$header->$agent ){
+        if (!$header->$agent) {
             \LogService::error('暂无agent信息');
             return;
         }
@@ -98,7 +98,6 @@ class VisitorLogLogic
         $analysis->save();
     }
 
-
     /**
      * 访客足迹查看
      * @param array $params
@@ -108,7 +107,7 @@ class VisitorLogLogic
     {
         extract($params); // device_type、ip、time_start, time_end
         $chain = VisitorFootMarkAnalysis::selectRaw('*');
-        if( VisitorFootMarkAnalysis::SHOW_ALL != $device_type ){
+        if (VisitorFootMarkAnalysis::SHOW_ALL != $device_type) {
             $chain = $chain->where('device_type', $device_type);
         }
         if ('' != $time_start) {
@@ -117,7 +116,7 @@ class VisitorLogLogic
         if ('' != $time_end) {
             $chain = $chain->where('created_at', '<=', $time_end);
         }
-        if( '' != $ip ){
+        if ('' != $ip) {
             $chain = $chain->where('ip', $ip);
         }
         $page = $chain->orderBy('id', 'desc')

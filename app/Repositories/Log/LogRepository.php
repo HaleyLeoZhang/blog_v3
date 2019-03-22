@@ -47,7 +47,8 @@ class LogRepository
     /**
      * 访客阅读记录
      */
-    public static function visitor_read_log($params){
+    public static function visitor_read_log($params)
+    {
         VisitorLogLogic::visitor_read_log($params);
     }
 
@@ -56,7 +57,8 @@ class LogRepository
      * @param array $params
      * @return Pagnate
      */
-    public static function visitor_foot_analysis_log($params){
+    public static function visitor_foot_analysis_log($params)
+    {
         return VisitorLogLogic::visitor_foot_analysis_log($params);
     }
 }

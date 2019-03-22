@@ -128,14 +128,14 @@ class TranslateApiService
         // ];
 
         $data = [
-            'from'  => $this->language_before,
-            'to'    => $this->language_after,
-            'query' => $this->content,
-            'transtype' => 'translang',
+            'from'              => $this->language_before,
+            'to'                => $this->language_after,
+            'query'             => $this->content,
+            'transtype'         => 'translang',
             'simple_means_flag' => 3,
-            'sign' => '962195.675234',
-            'transtype' => 'translang',
-            'token' => '1f802b5b1c25122b5bd3325b099630a3',
+            'sign'              => '962195.675234',
+            'transtype'         => 'translang',
+            'token'             => '1f802b5b1c25122b5bd3325b099630a3',
         ];
         $header = [
             'Referer:http://fanyi.baidu.com/translate?aldtype=16047&query=asd%0D%0A%0D%0A&keyfrom=baidu&smartresult=dict&lang=auto2zh',

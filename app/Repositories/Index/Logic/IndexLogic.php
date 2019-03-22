@@ -1,10 +1,8 @@
 <?php
 namespace App\Repositories\Index\Logic;
 
-use App\Helpers\CommonTool;
 use App\Helpers\Page;
 use App\Models\Blog\Article;
-use App\Models\Blog\ArticleCategory;
 use App\Models\Blog\Comment;
 use App\Models\Blog\FriendLink;
 use App\Models\Logs\VisitorLookLog;
@@ -34,7 +32,8 @@ class IndexLogic
     /**
      * 公共搜 SQL - for search
      */
-    public static function common_sql($condition_where){
+    public static function common_sql($condition_where)
+    {
         $sql = "
             SELECT
                 a.`id`,
@@ -47,17 +46,17 @@ class IndexLogic
                 a.`created_at`,
                 b.`title` as 'cate_name'
             FROM
-                `articles` as a 
-            INNER JOIN `article_categorys` as b 
+                `articles` as a
+            INNER JOIN `article_categorys` as b
                 On a.cate_id = b.id
             WHERE
         ";
         // 判断是否需要 where 语句
-        if( '' != $condition_where ){
+        if ('' != $condition_where) {
             $sql .= "( ${condition_where} ) AND ";
         }
-        $sql.= " 
-            a.is_deleted = 0 AND a.is_online = 1 
+        $sql .= "
+            a.is_deleted = 0 AND a.is_online = 1
             ORDER BY
                 a.`id` DESC
                 LIMIT ?,?
@@ -73,8 +72,8 @@ class IndexLogic
     public static function search_vague($search)
     {
         $vague      = "%{$search}%";
-        $sql = self::common_sql('a.`title` like ? OR a.`descript` like ?');
-        $pagination = new Page($sql, [$vague, $vague, ]);
+        $sql        = self::common_sql('a.`title` like ? OR a.`descript` like ?');
+        $pagination = new Page($sql, [$vague, $vague]);
         return $pagination;
     }
 
@@ -85,8 +84,8 @@ class IndexLogic
      */
     public static function search_category($cate_id)
     {
-        $sql = self::common_sql('a.`cate_id` = ?');
-        $pagination = new Page($sql, [$cate_id ]);
+        $sql        = self::common_sql('a.`cate_id` = ?');
+        $pagination = new Page($sql, [$cate_id]);
         return $pagination;
     }
 
@@ -96,7 +95,7 @@ class IndexLogic
      */
     public static function general()
     {
-        $sql = self::common_sql('');
+        $sql        = self::common_sql('');
         $pagination = new Page($sql, []);
         return $pagination;
     }
@@ -154,9 +153,9 @@ class IndexLogic
             ->orderByRaw('count(location) desc, id asc')
             ->limit(\CommonService::BLOG_HOST_ARTICLE_PAGE_SIZE)
             ->get();
-        if( count($look_log) ){
+        if (count($look_log)) {
             $look_log = $look_log->toArray();
-        }else{
+        } else {
             $look_log = [];
         }
         $article_ids = array_column($look_log, 'location');

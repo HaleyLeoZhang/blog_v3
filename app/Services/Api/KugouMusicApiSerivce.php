@@ -21,7 +21,7 @@ class KugouMusicApiSerivce
      */
     const API_SEARCH   = 'http://songsearch.kugou.com/song_search_v2';
     const API_PALY_URL = 'http://www.kugou.com/yy/index.php';
-    const TIMER        = 10;
+    const TIMER        = 15;
 
     // 必要 - 模拟头部信息
     public static $common_header = [
@@ -77,7 +77,7 @@ class KugouMusicApiSerivce
 
         $content = CurlRequest::run($reqest_url, null, self::$common_header);
         // - 解析 jsonp
-        $res = self::parse_jsonp( $content);
+        $res = self::parse_jsonp($content);
         // - 获取数据列表
         $list = $res->data->lists ?? [];
         return $list;

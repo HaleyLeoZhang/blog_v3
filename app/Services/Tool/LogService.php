@@ -55,7 +55,6 @@ class LogService
      */
     static $log_type = '';
 
-
     static $log_uuid = ''; // 获取到的 UUID
     static $log_date = ''; // 获取当前日志执行时间
 
@@ -125,15 +124,15 @@ class LogService
         // 获取 输出信息内容
         $data_str = '';
         if (count($data)) {
-            $data_str = ' '.json_encode($data, JSON_UNESCAPED_UNICODE);
+            $data_str = ' ' . json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         // 写入 UUID
-        if( self::$_ini['uuid']  ){
-            $info = $str . ' '. self::get_uuid(). ' ' . $name . $info . $data_str. "\n";
-        }else{
-            $info = $str . $name . $info . $data_str. "\n";
+        if (self::$_ini['uuid']) {
+            $info = $str . ' ' . self::get_uuid() . ' ' . $name . $info . $data_str . "\n";
+        } else {
+            $info = $str . $name . $info . $data_str . "\n";
         }
-        $str  = self::getColoredString($info, $color);
+        $str = self::getColoredString($info, $color);
         self::write($str);
     }
 
@@ -192,16 +191,16 @@ class LogService
      */
     protected static function get_uuid()
     {
-        if( '' == self::$log_uuid ){
+        if ('' == self::$log_uuid) {
             // 8-4-4-4-12
-            $str_arr = [];
-            $str_arr[] = self::rand_str(8);
-            $str_arr[] = self::rand_str(4);
-            $str_arr[] = self::rand_str(4);
-            $str_arr[] = self::rand_str(4);
-            $str_arr[] = self::rand_str(12);
-            $str = implode($str_arr, '-');
-            $str = strtoupper($str);
+            $str_arr        = [];
+            $str_arr[]      = self::rand_str(8);
+            $str_arr[]      = self::rand_str(4);
+            $str_arr[]      = self::rand_str(4);
+            $str_arr[]      = self::rand_str(4);
+            $str_arr[]      = self::rand_str(12);
+            $str            = implode($str_arr, '-');
+            $str            = strtoupper($str);
             self::$log_uuid = $str;
             unset($str_arr);
             unset($str);

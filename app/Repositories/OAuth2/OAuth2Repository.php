@@ -31,10 +31,10 @@ class OAuth2Repository
      */
     public static function callback($params, $oauth_type)
     {
-        $user       = ActionOAuth2Logic::callback($params, $oauth_type);
-        $login_info = ActionOAuth2Logic::user_login($user);
-        $token_info = ActionOAuth2Logic::handle_cookie($login_info);
-        $render     = [];
+        $user                 = ActionOAuth2Logic::callback($params, $oauth_type);
+        $login_info           = ActionOAuth2Logic::user_login($user);
+        $token_info           = ActionOAuth2Logic::handle_cookie($login_info);
+        $render               = [];
         $render['token_info'] = http_build_query($token_info);
         return $render;
     }

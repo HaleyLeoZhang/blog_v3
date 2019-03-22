@@ -40,11 +40,11 @@ class TuringRobotApiService
     protected $api_type;
     protected $private_key;
 
-    static protected $_this = null;
+    protected static $_this = null;
 
     public static function get_instance()
     {
-        if( !self::$_this ){
+        if (!self::$_this) {
             self::$_this              = new self();
             self::$_this->private_key = env('TURNING_PRIVATE_KEY', '');
             CurlRequest::set_timeout_second(self::TIMER);
@@ -107,7 +107,7 @@ class TuringRobotApiService
         $request_data['userid'] = $this->trans_id;
 
         $back_data = CurlRequest::run(self::API_PUBLIC, $request_data);
-        Log::debug('TuringRobotApiService.' . __FUNCTION__ , $request_data);
+        Log::debug('TuringRobotApiService.' . __FUNCTION__, $request_data);
         Log::debug('TuringRobotApiService.' . __FUNCTION__ . '.' . $back_data);
 
         $response = simplexml_load_string($back_data, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -146,7 +146,7 @@ class TuringRobotApiService
         $request_data['key']    = $this->private_key;
         $request_data['info']   = strip_tags($this->sentence);
         $request_data['userid'] = $this->trans_id;
-        Log::debug('TuringRobotApiService.' . __FUNCTION__ , $request_data);
+        Log::debug('TuringRobotApiService.' . __FUNCTION__, $request_data);
 
         // json格式请求，数据形式也得是json格式
         $header = [

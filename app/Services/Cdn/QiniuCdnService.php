@@ -10,8 +10,6 @@ namespace App\Services\Cdn;
 
 use App\Models\Logs\UploadLog;
 use Qiniu\Auth;
-use Qiniu\Config;
-use Qiniu\Storage\BucketManager;
 use Qiniu\Storage\UploadManager;
 
 // 引入文件

@@ -61,7 +61,7 @@ class RsaCryptService implements BaseCryptService
             'public',
             'private',
         ];
-        if( !in_array($key_type, $key_type_list) ){
+        if (!in_array($key_type, $key_type_list)) {
             throw new \ApiException("获取RSA密钥类型错误：public、private");
         }
 

@@ -43,11 +43,8 @@ class SpaRepository
     public static function article_detail($article_id)
     {
         $article = ArticleSpaLogic::article_detail($article_id);
-        $data     = compact('article');
+        $data    = compact('article');
         return $data;
     }
-
-
-
 
 }

@@ -46,7 +46,7 @@ class TencentCdnService extends BaseCdnService
      */
     public function upload($temp_path)
     {
-        $path = '/'. $this->get_pic_path();
+        $path = '/' . $this->get_pic_path();
         // 创建文件夹
         $dst_folder        = substr($path, 0, strripos($path, '/'));
         $create_folder_ret = Cosapi::createFolder($this->bucket_name, $dst_folder);

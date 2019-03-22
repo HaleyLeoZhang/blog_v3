@@ -1,10 +1,9 @@
 <?php
 namespace App\Repositories\Spa\Logic;
 
-use App\Models\Blog\ArticleCategory;
 use App\Helpers\Page;
-use App\Repositories\Index\Logic\IndexLogic;
 use App\Repositories\Article\Logic\ArticleLogic;
+use App\Repositories\Index\Logic\IndexLogic;
 
 class ArticleSpaLogic
 {
@@ -33,16 +32,16 @@ class ArticleSpaLogic
     public static function article_detail($article_id)
     {
         $article_obj = ArticleLogic::get_article($article_id);
-        if( isset($article_obj->raw_content) ){
-            unset( $article_obj->raw_content ); // 线上生数据不外露
+        if (isset($article_obj->raw_content)) {
+            unset($article_obj->raw_content); // 线上生数据不外露
             // 前端不需要的数据
-            unset( $article_obj->sticky );
-            unset( $article_obj->sequence );
-            unset( $article_obj->is_deleted );
-            unset( $article_obj->is_online );
-            unset( $article_obj->descript );
-            unset( $article_obj->cover_url );
-            unset( $article_obj->bg_id );
+            unset($article_obj->sticky);
+            unset($article_obj->sequence);
+            unset($article_obj->is_deleted);
+            unset($article_obj->is_online);
+            unset($article_obj->descript);
+            unset($article_obj->cover_url);
+            unset($article_obj->bg_id);
         }
         // 阅读量记录
         ArticleLogic::statistic_read($article_obj);

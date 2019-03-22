@@ -57,7 +57,7 @@ class ExpressDeliveryApiService
         // 请求接口
         $result = CurlRequest::run($api);
         // 调试接口
-        Log::debug('get_status'. $result);
+        Log::debug('get_status' . $result);
         $info = json_decode($result, true);
         if (count($info['auto'])) {
             return http_build_query([

@@ -43,7 +43,7 @@ abstract class BaseCdnService
         $data = [
             'url'   => $url,
             'crc32' => crc32($url),
-            'type' => $type,
+            'type'  => $type,
         ];
         UploadLog::create($data);
     }
@@ -56,7 +56,7 @@ abstract class BaseCdnService
     public function log_upload_update($url)
     {
         $data = [
-            'is_deleted' => UploadLog::IS_DELETED_YES
+            'is_deleted' => UploadLog::IS_DELETED_YES,
         ];
         $crc32 = crc32($url);
         \Log::info($crc32);

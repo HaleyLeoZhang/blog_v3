@@ -29,8 +29,8 @@ class CommonRepository
      */
     public static function express_delivery($tracking_number)
     {
-        $track_info  = CommonLogic::express_delivery($tracking_number);
-        $data = compact('track_info');
+        $track_info = CommonLogic::express_delivery($tracking_number);
+        $data       = compact('track_info');
         return $data;
     }
 

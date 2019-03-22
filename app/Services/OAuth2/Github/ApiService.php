@@ -59,8 +59,8 @@ class ApiService
      */
     public function user_info($access_token)
     {
-        $params                       = [];
-        $params['access_token']       = $access_token;
+        $params                 = [];
+        $params['access_token'] = $access_token;
 
         $header = [
             "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0",
@@ -101,11 +101,11 @@ class ApiService
         // CSRF 防护，暂不考虑，默认先带上，但是回调的时候不校验
         $this->state = md5(uniqid(rand(), true));
 
-        $params                  = [];
-        $params['client_id']     = $this->app_id;
-        $params['redirect_uri']  = $this->callback;
-        $params['scope']         = 'get_user_info';
-        $params['state']         = '';
+        $params                 = [];
+        $params['client_id']    = $this->app_id;
+        $params['redirect_uri'] = $this->callback;
+        $params['scope']        = 'get_user_info';
+        $params['state']        = '';
 
         $url = 'https://github.com/login/oauth/authorize?' . http_build_query($params);
         return $url;

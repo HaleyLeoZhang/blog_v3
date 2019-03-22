@@ -35,7 +35,7 @@ class IndexController extends BaseController
     }
 
     /**
-     * 站点首页
+     * 留言板
      * @return \Illuminate\View\View
      */
     public function board(Request $request)

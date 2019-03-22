@@ -45,7 +45,7 @@ class CheckAuthService
     }
 
     /**
-     * 区别 ajax 与 页面请求的返回
+     * 区分 ajax 与 页面请求的返回
      * @param  \Illuminate\Http\Request  $request
      */
     public static function error_response($request, $login_type)

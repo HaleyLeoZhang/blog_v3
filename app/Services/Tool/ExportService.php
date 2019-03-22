@@ -78,9 +78,7 @@ class ExportService
         return $csv_row;
     }
 
-    
     protected function __contruct()
     {}
-
 
 }
