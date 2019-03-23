@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Wechat\Logic;
 
+use App\Repositories\Index\IndexLogic;
+
 // 微信回复相关
 
 class ReceiveChatLogic
