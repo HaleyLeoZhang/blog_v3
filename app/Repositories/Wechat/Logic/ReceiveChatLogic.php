@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Wechat\Logic;
 
-use App\Repositories\Index\IndexLogic;
+use App\Repositories\Index\Logic\IndexLogic;
 
 // 微信回复相关
 
