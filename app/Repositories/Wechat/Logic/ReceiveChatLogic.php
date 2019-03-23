@@ -87,8 +87,8 @@ class ReceiveChatLogic
      */
     public static function hot_article()
     {
-        $hot_articles = IndexLogic::hot_articles();
-        $arr          = [];
+        $articles = IndexLogic::hot_articles();
+        $arr      = [];
         for ($i = 0, $len = count($articles); $i < 5 && ($i < $len); $i++) {
             $one = $articles[$i];
             // 第一条
