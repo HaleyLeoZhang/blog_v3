@@ -3,9 +3,9 @@
   <FromUserName><![CDATA[{{$FromUserName}}]]></FromUserName>
   <CreateTime>{{$CreateTime}}</CreateTime>
   <MsgType><![CDATA[news]]></MsgType>
-  <ArticleCount>{{ count($vars['news']) }}</ArticleCount>
+  <ArticleCount>{{ count($news) }}</ArticleCount>
   <Articles>
-  @foreach ($news  as $k => $v)
+  @foreach ($news as $k => $v)
     <item>
     <Title><![CDATA[{{$v['Title']}}]]></Title>
     <Description><![CDATA[{{$v['Description']}}]]></Description>
