@@ -5,6 +5,7 @@ use App\Http\Controllers\BaseController;
 use App\Repositories\Wechat\WechatRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use LogService;
 
 class WechatController extends BaseController
 {
@@ -54,13 +55,14 @@ class WechatController extends BaseController
         // ~~~~~~~~~~~~~~~~~~~~~~~微信请求我们服务器时，的必要操作~~~~~~~~~~~~~~~~~~~~~~~
         //get post data, May be due to the different environments
         $wecaht_request_xml = file_get_contents('php://input'); // 允许读取 POST 的原始数据
+        LogService::debug('Received Wechat Data ', [$wecaht_request_xml]);
         //extract post data
         if (!empty($wecaht_request_xml)) {
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
             the best way is to check the validity of xml by yourself */
             libxml_disable_entity_loader(true);
             $postObj = simplexml_load_string($wecaht_request_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $postObj = json_decode( json_encode($postObj) );
+            $postObj = json_decode(json_encode($postObj));
 
             $this->fromUsername = $postObj->FromUserName;
             $this->toUsername   = $postObj->ToUserName; // 公众号
