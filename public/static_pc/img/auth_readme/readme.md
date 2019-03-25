@@ -43,7 +43,7 @@
     http://localhost/admin/auth_rule
 
 ![图1001](./1001.png)  
-图 1002  
+图 1001  
 
 
 功能开发完成后，找到所需路由，当前以 配置 运营模块-Banner管理模块 为例
