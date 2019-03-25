@@ -7,13 +7,16 @@
 遵循 `PSR` 标准  
 采用了多种设计模式  
 本次版本升级，重构了后端代码  
-目前后台功能尚不完善，处于 `Alpha` 阶段  
+目前后台功能仍在迭代中，处于 `Alpha` 阶段  
 
 ## 目录结构
 
     .
     ├── apidoc.json 生成 api 文档的配置文件，工具文档 http://apidocjs.com/
     ├── app
+    │   ├── Caches
+    │   │   ├── BaseCache.php
+    │   │   └── MemorabiliaCache.php    缓存-大事记背景音乐
     │   ├── Console
     │   │   ├── Commands    各种脚本
     │   │   └── Kernel.php  定时任务
@@ -22,12 +25,14 @@
     │   │   ├── Consts.php       异常状态码对应的含义
     │   │   └── Handler.php      处理异常：API统一异常输出格式、线上错误上报
     │   ├── Helpers 云天河封装的工具库
-    │   │   ├── CommonTool.php   常用工具
-    │   │   ├── CurlRequest.php  cURL 封装
-    │   │   ├── Location.php     获取客户端IP、对应地理位置
-    │   │   ├── Page.php         laypage 分页
-    │   │   ├── Response.php     API 业务类统一响应封装
-    │   │   └── Token.php        获取随机数
+    │   │   ├── CommonTool.php       常用工具
+    │   │   ├── CurlRequest.php      cURL 封装
+    │   │   ├── DistributedLock.php  分布式事务锁
+    │   │   ├── ExpectValue.php      一元线性回归算法
+    │   │   ├── Location.php         获取客户端IP、对应地理位置
+    │   │   ├── Page.php             laypage 分页
+    │   │   ├── Response.php         API 业务类统一响应封装
+    │   │   └── Token.php            获取随机数
     │   ├── helpers.php 全局函数封装，在 composer.json 中的 autoload 封装
     │   ├── Http
     │   │   ├── Controllers
@@ -57,6 +62,7 @@
     │   │   ├── Admin      后台：各种仓储
     │   │   ├── Article    前台：文章仓储
     │   │   ├── Chat       前台：聊天仓储：在线客服（TODO）、图灵机器人聊天
+    │   │   ├── Comic      后台：漫画爬虫仓储
     │   │   ├── Comment    前台：评论仓储
     │   │   ├── Index      前台：首页仓储
     │   │   ├── Log        前台：各种日志仓储
@@ -74,12 +80,12 @@
     │   └── Traits 可复用模块
     │       ├── AdminFooterMarkTrait.php   管理员足迹记录
     │       ├── CheckUserTrait.php         验证用户是否处于登录状态
+    │       ├── LimitIpTrait.php           限制单个IP访问频率
     │       ├── LogLocationTrait.php       用户详细地址
     │       └── UserHitLogTrait.php        用户访问或者操作某些模块的日志
     ├── artisan
     ├── bootstrap
     ├── composer.json
-    ├── composer.lock   保留这个，在没有 vendor 目录的时候，用户可以通过 composer install 直接安装
     ├── config
     │   ├── app.php
     │   ├── cache.php
@@ -95,6 +101,7 @@
     │   ├── queue.php
     │   ├── sentry.php        Sentry 异常收集配置
     │   ├── session.php
+    │   ├── static_source_cdn.php  前端静态资源 CDN 列表
     │   ├── swoole.php        Swoole 初始化服务配置
     │   └── view.php
     ├── database
@@ -105,7 +112,7 @@
     ├── phpunit.xml
     ├── public
     │   ├── 404.html
-    │   ├── books           云天河 js 解析的漫画台动漫资源
+    │   ├── books           云天河 js 解析的`漫画台`动漫资源
     │   ├── doc             apidoc 生成的接口文档     
     │   ├── err             
     │   ├── favicon.ico     站点 icon 小图标
@@ -147,17 +154,18 @@
     │   │   └── vue         移动端 VUE 项目
     │   ├── lang
     │   └── views
-    │       ├── admin
+    │       ├── admin       后台模块视图
     │       ├── auth
-    │       ├── key
-    │       ├── login
-    │       └── module
+    │       ├── key         
+    │       ├── login       后台登录模块视图
+    │       ├── module      前台模块视图
+    │       └── test        测试模块视图
     ├── server.php
     ├── storage
     │   ├── app
-    │   ├── backups 备份目录
-    │   │   ├── yth_blog_avatar.template.sql
-    │   │   └── yth_blog_ext.template.sql
+    │   ├── backups SQL备份目录
+    │   │   ├── yth_blog_avatar.template.sql   主业务库
+    │   │   └── yth_blog_ext.template.sql      日志库
     │   ├── framework
     │   ├── keys    密钥目录
     │   │   ├── rsa_private_key.pem   RSA私钥，更换该密钥对后请执行 php artisan rsa_file 使得前端 RSA 加密功能能正常使用
@@ -181,9 +189,12 @@
  * 登录入口: /admin/login
  * 初始帐号: test@hlzblog.top
  * 初始密码: 123123
+ * 权限系统：[查看更多](public/static_pc/img/auth_readme/readme.md)  
 
 ## 关于博客的开发
-后续有空再写
+
+ * [设计模式篇](http://www.hlzblog.top/article/64.html)
+ * [前端自动化开发](http://www.hlzblog.top/article/45.html)
 
 ## 留言给我
 [点此进入](http://www.hlzblog.top/board)
@@ -198,10 +209,12 @@
 ## 依赖相关
 初始化项目
 
+    # 安装第三方扩展包
     composer install --no-scripts
+    # 生成非对称密钥对
+    php artisan rsa_file
 
 当你想在 VirtualBox 下开发时  
-
     
     npm install --no-bin-links
     gulp start
@@ -212,8 +225,8 @@
  * nginx --- Web服务
  * mysql --- 目前在 5.6 版本 通过测试
  * php   --- 目前语法 在版本 7.1.12 通过测试
- * node  --- If you will develop it with Gulp automation, you will need it
- * supervisor 详见
+ * node  --- 如果你需要使用 Gulp 实现前端自动化
+ * supervisor [详见](./storage/supervisor/readme.md)
 
 ## 单元测试
 
