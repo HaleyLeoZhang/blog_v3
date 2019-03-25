@@ -39,8 +39,8 @@ class WechatController extends BaseController
     //  正式开发，使用的部分
     //+++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    protected $fromUsername; // 发送方帐号
-    protected $toUsername; // 开发者微信号
+    protected $FromUserName; // 发送方帐号
+    protected $ToUserName; // 开发者微信号
     protected $CreateTime; // 消息创建时间
     protected $MsgType; // 消息类型
     protected $Event; // 事件的具体名称 ，选填
@@ -55,24 +55,24 @@ class WechatController extends BaseController
         // ~~~~~~~~~~~~~~~~~~~~~~~微信请求我们服务器时，的必要操作~~~~~~~~~~~~~~~~~~~~~~~
         //get post data, May be due to the different environments
         $wecaht_request_xml = file_get_contents('php://input'); // 允许读取 POST 的原始数据
-        LogService::debug('Received Wechat Data ', [$wecaht_request_xml]);
         //extract post data
         if (!empty($wecaht_request_xml)) {
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
             the best way is to check the validity of xml by yourself */
             libxml_disable_entity_loader(true);
-            $postObj = simplexml_load_string($wecaht_request_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $postObj = json_decode(json_encode($postObj));
+            $xml_string = simplexml_load_string($wecaht_request_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $xml_object = json_decode(json_encode($xml_string));
+            LogService::debug('Received Wechat Data ', [$xml_object]);
 
-            $this->fromUsername = $postObj->FromUserName;
-            $this->toUsername   = $postObj->ToUserName; // 公众号
-            $this->CreateTime   = $postObj->CreateTime; // 发送过来的消息
-            $this->MsgType      = $postObj->MsgType; // 消息类型
-            $this->Content      = $postObj->Content ?? '-';
-            if (isset($postObj->Event)) {
-                $this->Event = $postObj->Event;
-                if (isset($postObj->EventKey)) {
-                    $this->EventKey = $postObj->EventKey;
+            $this->FromUserName = $xml_object->FromUserName;
+            $this->ToUserName   = $xml_object->ToUserName; // 公众号
+            $this->CreateTime   = $xml_object->CreateTime; // 发送过来的消息
+            $this->MsgType      = $xml_object->MsgType; // 消息类型
+            $this->Content      = $xml_object->Content ?? '-';
+            if (isset($xml_object->Event)) {
+                $this->Event = $xml_object->Event;
+                if (isset($xml_object->EventKey)) {
+                    $this->EventKey = $xml_object->EventKey;
                 }
             }
             $this->handle_requset();
@@ -127,21 +127,22 @@ class WechatController extends BaseController
      */
     private function handle_response($event, $vars)
     {
-        $vars['ToUserName']   = $this->fromUsername;
-        $vars['FromUserName'] = $this->toUsername;
+        $vars['ToUserName']   = $this->FromUserName;
+        $vars['FromUserName'] = $this->ToUserName;
         $vars['CreateTime']   = $this->CreateTime;
         // 回复事件
         switch ($event) {
-            case 'text':
-                $xml = view('module.wechat.tpl_reply_text', $vars);
+            case 'text': 
+                $xml = view('module/wechat/tpl_reply_text', $vars);
                 break;
             case 'news':
-                $xml = view('module.wechat.tpl_pic_content', $vars);
+                $xml = view('module/wechat/tpl_pic_content', $vars);
                 break;
             default:
-                # code...
-                break;
+                $xml = '';
         }
+        LogService::debug('Response Wechat Data --- xml  --- '. $xml );
+        LogService::debug('Response Wechat Data --- vars --- ', [ $vars ]);
         echo $xml;
         exit();
     }
