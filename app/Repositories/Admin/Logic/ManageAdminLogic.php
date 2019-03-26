@@ -101,12 +101,12 @@ class ManageAdminLogic
     {
         self::check_super();
         //查询
-        $group_list = Db::select('
+        $group_list = DB::select('
             Select `id`, `title`
             From `hlz_auth_group`
             Where `status` = 1
         ', []);
-        $now_group = Db::select('
+        $now_group = DB::select('
             Select a.`title`,a.`id`
             From `hlz_auth_group` as a
             Inner Join `hlz_auth_group_access` as b
@@ -134,12 +134,12 @@ class ManageAdminLogic
             }
         }
         // 删除原来的
-        Db::delete('
+        DB::delete('
             Delete From `hlz_auth_group_access`
             Where `uid` = ?
         ', [$admin_id]);
         // 录入现在的
-        Db::insert('
+        DB::insert('
             Insert into `hlz_auth_group_access`
             (`uid`,`group_id`)Values ' . $insert_sql . '
         ', []);
@@ -332,8 +332,8 @@ class ManageAdminLogic
             Where `title`=?
         ', [$title]);
         if (count($find)) {
-            $msg['out'] = '该组已存在';
-            trans_json($msg);
+            $msg = '该组已存在';
+            throw new \ApiException($msg);
         }
         //创建
         $result = DB::update('

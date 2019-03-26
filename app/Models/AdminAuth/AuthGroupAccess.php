@@ -9,7 +9,7 @@ class AuthGroupAccess extends Model
     /**
      * 对应表
      */
-    protected $table = 'auth_group_access';
+    protected $table = 'hlz_auth_group_access';
 
     /**
      * 填充字段
