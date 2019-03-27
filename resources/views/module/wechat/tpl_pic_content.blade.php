@@ -1,6 +1,6 @@
 <xml>
   <ToUserName><![CDATA[{!!$ToUserName!!}]]></ToUserName>
-  <FromUserName><![CDATA[!!$FromUserName!!}]]></FromUserName>
+  <FromUserName><![CDATA[{!!$FromUserName!!}]]></FromUserName>
   <CreateTime>{!!$CreateTime!!}</CreateTime>
   <MsgType><![CDATA[news]]></MsgType>
   <ArticleCount>{!! count($news) !!}</ArticleCount>
