@@ -42,7 +42,7 @@ class ReceiveChatLogic
                 $info[]         = "您好，欢迎关注云天河Blog！";
                 $info[]         = "输入1,查看火热文章";
                 $info[]         = "输入2,查看最新文章";
-                $info[]         = "输入3,进入云天河官网";
+                // $info[]         = "输入3,进入云天河官网";
                 $str            = implode("\n", $info);
                 $arr['Content'] = $str;
                 break;
