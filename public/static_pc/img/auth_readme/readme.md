@@ -14,13 +14,13 @@
     # 某一个普通管理员
     `admins`.`id`
     # 查询他拥有的所有管理组
-    -> `xb_auth_group_access`.`uid`
+    -> `hlz_auth_group_access`.`uid`
     # 查询每管理组下有哪些规则
-    -> `xb_auth_group`.id <--> `xb_auth_group_access`.`group_id`
+    -> `hlz_auth_group`.id <--> `hlz_auth_group_access`.`group_id`
     # 合并所有组内的规则id
-    -> `xb_auth_group`.`id` <--> `xb_auth_group_access`.`group_id`
+    -> `hlz_auth_group`.`id` <--> `hlz_auth_group_access`.`group_id`
     # 查询这些确切规则，然后整理成一个数组变量 $rule
-    -> `xb_auth_group`.`rules` <--> `xb_auth_rule`.`id` # 每个规则具体内容
+    -> `hlz_auth_group`.`rules` <--> `hlz_auth_rule`.`id` # 每个规则具体内容
     服务端通过查询当前规则，是否在 $rule 数组中
 
 ## 使用简述
