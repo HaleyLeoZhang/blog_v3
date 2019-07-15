@@ -20,7 +20,7 @@ class KugouMusicApiSerivce
      * @param Int    : TIMER         设置超时时间，单位，秒
      */
     const API_SEARCH   = 'https://songsearch.kugou.com/song_search_v2';
-    const API_PALY_URL = 'https://www.kugou.com/yy/index.php';
+    const API_PALY_URL = 'https://wwwapi.kugou.com/yy/index.php';
     const TIMER        = 15;
 
     // 必要 - 模拟头部信息
@@ -116,12 +116,14 @@ class KugouMusicApiSerivce
         $params         = [];
         $params['r']    = 'play/getdata';
         $params['hash'] = $file_hash;
+        $params['mid']  = '1a7886f1e525b05f874a7663365a0daa'; // 这个值目前我不知道它的有效期是多长
 
         $reqest_url = self::API_PALY_URL . '?' . http_build_query($params);
 
         $content = CurlRequest::run($reqest_url);
         $res     = json_decode($content);
         $bg_url  = $res->data->play_url ?? '';
+        \LogService::debug('刚好遇见你-曲肖冰-----', compact('bg_url', 'params','res'));
         return $bg_url;
     }
 
