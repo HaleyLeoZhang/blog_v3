@@ -116,7 +116,7 @@ class KugouMusicApiSerivce
         $params         = [];
         $params['r']    = 'play/getdata';
         $params['hash'] = $file_hash;
-        $params['mid']  = '1a7886f1e525b05f874a7663365a0daa'; // 这个值目前我不知道它的有效期是多长
+        $params['mid']  = '809186d60c77b4385b5b5246d5f4ec5c03536b1c'; // 这个值目前我不知道它的有效期是多长
 
         $reqest_url = self::API_PALY_URL . '?' . http_build_query($params);
 
