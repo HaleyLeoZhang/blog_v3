@@ -12,7 +12,7 @@ class GeneralController extends BaseController
     /**
      * @api {get} /api/general/memorabilia_bg 大事记 - 背景音乐
      * @apiName kugou_music
-     * @apiGroup Media
+     * @apiGroup General
      *
      * @apiDescription  大事记 - 背景音乐接口，获取酷狗对应音乐的播放地址
      *
@@ -37,7 +37,7 @@ class GeneralController extends BaseController
     /**
      * @api {get} /api/general/express_delivery 快递查询
      * @apiName express_delivery
-     * @apiGroup ExpressDelivery
+     * @apiGroup General
 
      * @apiParam {string}  tracking_number 快递单号
      *
@@ -82,7 +82,34 @@ class GeneralController extends BaseController
     public function express_delivery(Request $request)
     {
         $tracking_number = $request->input('tracking_number', '');
-        $data = CommonRepository::express_delivery($tracking_number);
+        $data            = CommonRepository::express_delivery($tracking_number);
+        return Response::success($data);
+    }
+
+    /**
+     * @api {post} /api/general/short_url 短地址
+     * @apiName short_url
+     * @apiGroup General
+
+     * @apiParam {string}  long_url 长地址
+     *
+     * @apiDescription  长地址转短地址（新浪短地址服务）
+     *
+     * @apiVersion 3.0.0
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": {
+     *         "short_url": "http:\/\/t.cn\/Aije77x4" // 短地址链接
+     *     }
+     * }
+     */
+    public function short_url(Request $request)
+    {
+        $long_url = $request->input('long_url', '');
+        $data     = CommonRepository::short_url($long_url);
         return Response::success($data);
     }
 }

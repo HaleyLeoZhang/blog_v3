@@ -71,21 +71,3 @@ class ExpressDeliveryApiService
     }
 
 }
-
-/* 成功时，输出如下
-
-[
-{
-"time": "2017-03-02 02:21:16",
-"ftime": "2017-03-02 02:21:16",
-"context": "\u6c5f\u95e8\u8f6c\u8fd0\u4e2d\u5fc3 \u5df2\u53d1\u51fa,\u4e0b\u4e00\u7ad9 \u6d4e\u5357\u8f6c\u8fd0\u4e2d\u5fc3",
-"location": null
-}, {
-"time": "2017-03-02 01:41:59",
-"ftime": "2017-03-02 01:41:59",
-"context": "\u6c5f\u95e8\u8f6c\u8fd0\u4e2d\u5fc3 \u5df2\u6536\u5165",
-"location": null
-}
-]
-
- */

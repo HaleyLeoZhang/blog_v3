@@ -40,15 +40,14 @@ Route::Group(['namespace' => 'Common'], function () {
         Route::get('logout', ['uses' => 'OAuth2Controller@logout']);
     });
 
-
-
     // - 测试页面
     Route::Group(['prefix' => 'test'], function () {
         // - 滑动验证码，示例
         Route::get('slide_verify', ['uses' => 'TestController@slide_verify']);
         // - 快递查询，示例
         Route::get('express_delivery', ['uses' => 'TestController@express_delivery']);
+        // - 短地址，示例
+        Route::get('short_url', ['uses' => 'TestController@short_url']);
     });
-
 
 });

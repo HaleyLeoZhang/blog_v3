@@ -34,4 +34,16 @@ class CommonRepository
         return $data;
     }
 
+    /**
+     * 快递查询
+     * @param string long_url 长地址
+     * @return array
+     */
+    public static function short_url($long_url)
+    {
+        $short_url = CommonLogic::short_url($long_url);
+        $data      = compact('short_url');
+        return $data;
+    }
+
 }

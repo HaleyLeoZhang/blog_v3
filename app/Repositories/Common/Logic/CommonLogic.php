@@ -2,6 +2,7 @@
 namespace App\Repositories\Common\Logic;
 
 use App\Services\Api\ExpressDeliveryApiService;
+use App\Services\Api\ShortUrlApiService;
 use Illuminate\Support\Facades\Redis;
 
 class CommonLogic
@@ -37,6 +38,16 @@ class CommonLogic
     {
         $track_info = ExpressDeliveryApiService::run($tracking_number);
         return $track_info;
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function short_url($long_url)
+    {
+        $short_url = ShortUrlApiService::run($long_url);
+        return $short_url;
     }
 
 }

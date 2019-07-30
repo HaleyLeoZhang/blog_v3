@@ -37,6 +37,7 @@ Route::Group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']],
     Route::Group(['prefix' => 'general'], function () {
         Route::get('memorabilia_bg', 'GeneralController@memorabilia_bg');
         Route::get('express_delivery', 'GeneralController@express_delivery'); // 快递查询
+        Route::post('short_url', 'GeneralController@short_url'); // 短地址
     });
 
     // - 移动端 SPA

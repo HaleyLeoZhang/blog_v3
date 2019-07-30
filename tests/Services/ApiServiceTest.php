@@ -4,6 +4,7 @@ namespace tests\Services;
 use App\Services\Api\ExpressDeliveryApiService;
 use App\Services\Api\TuringRobotApiService;
 use App\Services\Api\TranslateApiService;
+use App\Services\Api\ShortUrlApiService;
 use LogService;
 
 
@@ -31,6 +32,13 @@ class ApiServiceTest extends \TestCase
             ->set_sentence($sentence)
             ->request(TuringRobotApiService::API_TYPE_PUBLIC);
         LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.info.API_TYPE_PUBLIC', [$result]);
+    }
+
+    public function test_short_url()
+    {
+        $long_url = 'https://weibo.com/';
+        $short_url   = ShortUrlApiService::run($long_url);
+        LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.info.', [$short_url]);
     }
 
 

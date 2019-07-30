@@ -23,6 +23,8 @@ class KugouMusicApiSerivce
     const API_PALY_URL = 'https://wwwapi.kugou.com/yy/index.php';
     const TIMER        = 15;
 
+    const PARAM_MID = '809186d60c77b4385b5b5246d5f4ec5c03536b1c'; // 必要请求参数
+
     // 必要 - 模拟头部信息
     public static $common_header = [
         'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -73,9 +75,9 @@ class KugouMusicApiSerivce
         $params['privilege_filter'] = 0;
         $params['_']                = time() * 1000; // 时间戳，单位毫秒（其实因为这应该是jsonp通信的，所以是用的js的获取时间戳的结果）
 
-        $reqest_url = self::API_SEARCH . '?' . http_build_query($params);
+        $request_url = self::API_SEARCH . '?' . http_build_query($params);
 
-        $content = CurlRequest::run($reqest_url, null, self::$common_header);
+        $content = CurlRequest::run($request_url, null, self::$common_header);
         // - 解析 jsonp
         $res = self::parse_jsonp($content);
         // - 获取数据列表
@@ -116,14 +118,14 @@ class KugouMusicApiSerivce
         $params         = [];
         $params['r']    = 'play/getdata';
         $params['hash'] = $file_hash;
-        $params['mid']  = '809186d60c77b4385b5b5246d5f4ec5c03536b1c'; // 这个值目前我不知道它的有效期是多长
+        $params['mid']  = self::PARAM_MID; // 这个值目前我不知道它的有效期是多长
 
-        $reqest_url = self::API_PALY_URL . '?' . http_build_query($params);
+        $request_url = self::API_PALY_URL . '?' . http_build_query($params);
 
-        $content = CurlRequest::run($reqest_url);
+        $content = CurlRequest::run($request_url);
         $res     = json_decode($content);
         $bg_url  = $res->data->play_url ?? '';
-        \LogService::debug('刚好遇见你-曲肖冰-----', compact('bg_url', 'params','res'));
+        \LogService::debug(__CLASS__.'-----', compact('bg_url', 'params','res'));
         return $bg_url;
     }
 
@@ -144,9 +146,3 @@ class KugouMusicApiSerivce
     }
 
 }
-
-/* 成功时，输出如下
-
-$objcec =
-
- */

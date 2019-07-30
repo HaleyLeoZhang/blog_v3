@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping();
         // - 生成音乐缓存
         $schedule->command('kugou_music')
-            ->cron('*/5 * * * *')
+            ->cron('0 */3 * * *')
             ->withoutOverlapping();
 
     }

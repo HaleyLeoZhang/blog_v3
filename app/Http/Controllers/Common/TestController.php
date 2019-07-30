@@ -21,4 +21,9 @@ class TestController extends BaseController
         return view('module/test/express_delivery');
     }
 
+    public function short_url(Request $request)
+    {
+        return view('module/test/short_url');
+    }
+
 }
