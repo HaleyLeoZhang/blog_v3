@@ -11,7 +11,7 @@ namespace App\Services\Tool;
 class LogService
 {
 
-    // 初始信息配置
+    // 初始配置
     protected static $_ini = [
         'switch'    => true, // Boolean  关 => false 开 => true
         'level'     => 1, // 该日志等级及以上，可以写入日志中
@@ -50,44 +50,39 @@ class LogService
         ],
     ];
 
-    /**
-     * 日志类型名称，此项不同，日志信息会写入不同文件中
-     */
-    static $log_type = '';
-
-    static $log_uuid = ''; // 获取到的 UUID
-    static $log_date = ''; // 获取当前日志执行时间
+    protected static $log_uuid = ''; // 获取到的 UUID
+    protected static $log_date = ''; // 获取当前日志执行时间
 
     /**
      * 依据 $log_info 变量，对外开放的写入日志方法
      */
-    public static function debug($info, $data = [])
+    public static function debug(string $description, array $data = [])
     {
-        self::run(__FUNCTION__, $info, $data);
+        self::run(__FUNCTION__, $description, $data);
     }
 
     /**
      * 依据 $log_info 变量，对外开放的写入日志方法
      */
-    public static function info($info, $data = [])
+    public static function info(string $description, array $data = [])
     {
-        self::run(__FUNCTION__, $info, $data);
+        self::run(__FUNCTION__, $description, $data);
     }
 
     /**
      * 依据 $log_info 变量，对外开放的写入日志方法
      */
-    public static function warn($info, $data = [])
+    public static function warn(string $description, array $data = [])
     {
-        self::run(__FUNCTION__, $info, $data);
+        self::run(__FUNCTION__, $description, $data);
     }
 
     /**
      * 依据 $log_info 变量，对外开放的写入日志方法
      */
-    public static function error($info, $data = [])
+    public static function error(string $description, array $data = [])
     {
-        self::run(__FUNCTION__, $info, $data);
+        self::run(__FUNCTION__, $description, $data);
     }
 
     //------------------------------------------------------
@@ -97,25 +92,78 @@ class LogService
     /**
      * 输出日志
      * @param string        $log_function_name  调用的函数名称
-     * @param string        $info 日志信息
+     * @param string        $description 日志信息
      * @param string|array  $data 日志信息附带日志
      */
-    protected static function run($log_function_name, $info, $data)
+    protected static function run($log_function_name, $description, $data)
     {
-        // 覆盖配置
-        $get_ini    = config('log_colored') ?? [];
-        self::$_ini = array_merge(self::$_ini, $get_ini);
+        // 合并配置
+        self::merge_config();
+
+        // 日志写入资格判断
+        if (!self::switch_status($log_function_name)) {
+            return;
+        }
+        // 格式化日志
+        $log_str = self::format_log($log_function_name, $description, $data);
+        self::write($log_str);
+    }
+
+
+    /**
+     * 合并配置文件
+     * @return void
+     */
+    protected static function merge_config()
+    {
+        static $merged_conf = false;
+        // 合并配置
+        if( !$merged_conf ){
+            $get_ini    = config('log_colored') ?? [];
+            self::$_ini = array_merge(self::$_ini, $get_ini);
+            // 读取配置操作，只进行一次
+            $merged_conf = true;
+        }
+    }
+
+
+    /**
+     * 日志写入资格判断
+     * @param string       $log_function_name  调用的函数名称
+     * @param string $str  格式化后的日志信息
+     * @return bool
+     */
+    protected static function switch_status($log_function_name)
+    {
         // 日志开关
         if (self::$_ini['switch'] == false) {
-            return;
+            return false;
         }
+
         // 日志写入资格
-        if (self::$log_info[$log_function_name]['level'] < self::$_ini['level']) {
-            return;
+        // --- 获取日志等级
+        if (is_numeric(self::$_ini['level'])) {
+            $log_level = self::$_ini['level'];
+        } else {
+            $log_level = self::$log_info[self::$_ini['level']]['level'] ?? 0;
         }
+        if (self::$log_info[$log_function_name]['level'] < $log_level) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 格式化日志信息
+     * @param string        $log_function_name  调用的函数名称
+     * @param string        $description 日志信息
+     * @param string|array  $data 日志信息附带日志
+     * @param string  格式化后的日志信息
+     */
+    protected static function format_log($log_function_name, $description, $data)
+    {
         // 时区设置
         date_default_timezone_set(self::$_ini['time_zone']);
-
         self::$log_date = date('Y-m-d H:i:s');
 
         $str   = self::$log_date;
@@ -127,20 +175,22 @@ class LogService
             $data_str = ' ' . json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         // 写入 UUID
+        $info = '';
         if (self::$_ini['uuid']) {
-            $info = $str . ' ' . self::get_uuid() . ' ' . $name . $info . $data_str . "\n";
+            $info = $str . ' ' . self::get_uuid() . ' ' . $name . $description . $data_str . "\n";
         } else {
-            $info = $str . $name . $info . $data_str . "\n";
+            $info = $str . $name . $description . $data_str . "\n";
         }
+        // 彩色日志
         $str = self::getColoredString($info, $color);
-        self::write($str);
+        return $str;
     }
 
     /**
      * 追加写入日志
      * @param string $str  格式化后的日志信息
      */
-    private static function write($str)
+    protected static function write($str)
     {
         // 写入目录存在？
         $dir_path = self::$_ini['path'];
@@ -159,7 +209,7 @@ class LogService
     /**
      * 删除过期日志
      */
-    private static function del_ttl_day_log()
+    protected static function del_ttl_day_log()
     {
         $dir_path        = self::$_ini['path'];
         $ttl_day_time    = strtotime('-' . self::$_ini['ttl_day'] . ' day');
@@ -174,7 +224,7 @@ class LogService
      * 获取日志文件名
      * @param string $date 格式：date('Y-m-d')
      */
-    private static function get_log_file_name($date)
+    protected static function get_log_file_name($date)
     {
         $dir_path = self::$_ini['path'];
         if ('' == self::$_ini['log_name']) {
@@ -214,7 +264,7 @@ class LogService
      * @param Int     type 返回类型 [general=>字母+数字,number=>纯数字,mix=>字母+数字+特殊符号,string=>大小写字母]
      * @return string
      */
-    public static function rand_str($len = 8, $type = 'general')
+    protected static function rand_str($len = 8, $type = 'general')
     {
         $general = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
         $number  = '0123456789';
@@ -242,7 +292,7 @@ class LogService
     //      配色方案
     //+++++++++++++++++++++++++++++++++++
 
-    private static $foreground_colors = [
+    protected static $foreground_colors = [
         'black'        => '0;30',
         'dark_gray'    => '1;30',
         'blue'         => '0;34',
@@ -260,7 +310,7 @@ class LogService
         'light_gray'   => '0;37',
         'white'        => '1;37',
     ];
-    private static $background_colors = [
+    protected static $background_colors = [
         'black'      => '40',
         'red'        => '41',
         'green'      => '42',
@@ -278,7 +328,7 @@ class LogService
      * @param string $background_color  背景色
      * @return string
      */
-    private static function getColoredString($string, $foreground_color = null, $background_color = null)
+    protected static function getColoredString($string, $foreground_color = null, $background_color = null)
     {
         $colored_string = "";
         // Check if given foreground color found
@@ -296,11 +346,8 @@ class LogService
 
 }
 
-/*
-示例：命令行下 发送邮箱后的
-use Mine\Log;
 
-LogService::$log_type = 'cli-email';
-LogService::info('Send sql_bak file to the email success');
 
+/**
+ * Log::debug('获取酷狗音乐');
  */
