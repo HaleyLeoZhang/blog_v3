@@ -109,7 +109,6 @@ class LogService
         self::write($log_str);
     }
 
-
     /**
      * 合并配置文件
      * @return void
@@ -118,14 +117,13 @@ class LogService
     {
         static $merged_conf = false;
         // 合并配置
-        if( !$merged_conf ){
+        if (!$merged_conf) {
             $get_ini    = config('log_colored') ?? [];
             self::$_ini = array_merge(self::$_ini, $get_ini);
             // 读取配置操作，只进行一次
             $merged_conf = true;
         }
     }
-
 
     /**
      * 日志写入资格判断
@@ -236,56 +234,55 @@ class LogService
     }
 
     /**
-     * 生成 UUID
+     * 生成UUID
+     * - https://baike.baidu.com/item/UUID 第5版基于名字的UUID（SHA1）
+     * - https://www.php.net/manual/en/function.uniqid.php 官方文档地址
+     * @param string $name 自定义字符
+     * @param string $namespace 命名空间（符合uuid格式的字符串）
      * @return string
+     * - 36字节长度
      */
-    protected static function get_uuid()
+    protected static function get_uuid($name = 'www.hlzblog.top', $namespace = '1546058f-5a25-4334-85ae-e68f2a44bbaf')
     {
-        if ('' == self::$log_uuid) {
-            // 8-4-4-4-12
-            $str_arr        = [];
-            $str_arr[]      = self::rand_str(8);
-            $str_arr[]      = self::rand_str(4);
-            $str_arr[]      = self::rand_str(4);
-            $str_arr[]      = self::rand_str(4);
-            $str_arr[]      = self::rand_str(12);
-            $str            = implode($str_arr, '-');
-            $str            = strtoupper($str);
-            self::$log_uuid = $str;
-            unset($str_arr);
-            unset($str);
-        }
-        return self::$log_uuid;
-    }
-
-    /**
-     * 随机生成固定长度的随机数
-     * @param string  len  截取长度，默认八位
-     * @param Int     type 返回类型 [general=>字母+数字,number=>纯数字,mix=>字母+数字+特殊符号,string=>大小写字母]
-     * @return string
-     */
-    protected static function rand_str($len = 8, $type = 'general')
-    {
-        $general = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-        $number  = '0123456789';
-        $mix     = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()_+[],./<>?;';
-        $string  = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-
-        $str = $$type; // 取出目标类型
-
-        // - 长度不够，则拼接类型
-        $str_len = count($str);
-        if ($str_len < $len) {
-            $target   = '';
-            $loop_len = ceil($len / $str_len);
-            for ($i = 0; $i < $loop_len; $i++) {
-                $target .= $str;
-            }
-        } else {
-            $target = $str;
+        if (!preg_match('/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?' .
+            '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $namespace)) {
+            return false;
         }
 
-        return substr(str_shuffle($target), 0, $len);
+        // Get hexadecimal components of namespace
+        $nhex = str_replace(array('-', '{', '}'), '', $namespace);
+
+        // Binary Value
+        $nstr = '';
+
+        // Convert Namespace UUID to bits
+        for ($i = 0; $i < strlen($nhex); $i += 2) {
+            $nstr .= chr(hexdec($nhex[$i] . $nhex[$i + 1]));
+        }
+
+        // Calculate hash value
+        $hash = sha1($nstr . $name);
+
+        return sprintf('%08s-%04s-%04x-%04x-%12s',
+
+            // 32 bits for "time_low"
+            substr($hash, 0, 8),
+
+            // 16 bits for "time_mid"
+            substr($hash, 8, 4),
+
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 5
+            (hexdec(substr($hash, 12, 4)) & 0x0fff) | 0x5000,
+
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            (hexdec(substr($hash, 16, 4)) & 0x3fff) | 0x8000,
+
+            // 48 bits for "node"
+            substr($hash, 20, 12)
+        );
     }
 
     //+++++++++++++++++++++++++++++++++++
@@ -345,8 +342,6 @@ class LogService
     }
 
 }
-
-
 
 /**
  * Log::debug('获取酷狗音乐');

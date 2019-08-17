@@ -146,7 +146,7 @@ class InfoAuthService
      */
     public static function get_rand_token()
     {
-        return Token::rand_token();
+        return Token::uuid();
     }
 
 }
