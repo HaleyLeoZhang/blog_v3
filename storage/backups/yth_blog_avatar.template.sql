@@ -36,7 +36,7 @@ CREATE TABLE `admins` (
   `email` varchar(50) NOT NULL COMMENT '邮箱号，可对应多个账号',
   `user_pic` varchar(200) NOT NULL COMMENT '用户头像地址',
   `truename` varchar(50) NOT NULL COMMENT '用户真实姓名',
-  `remember_token` char(32) NOT NULL COMMENT '如果一个账号只能登录一次，则每次登录，会删掉上一次记录的登录信息',
+  `remember_token` char(36) NOT NULL COMMENT '如果一个账号只能登录一次，则每次登录，会删掉上一次记录的登录信息',
   `status` smallint(4) NOT NULL COMMENT '用户状态',
   `google_captchar` varchar(100) NOT NULL DEFAULT '' COMMENT '谷歌验证码绑定字段',
   `user_id` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '关联users.id',
