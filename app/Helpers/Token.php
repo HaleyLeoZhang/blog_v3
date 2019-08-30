@@ -37,15 +37,6 @@ class Token
     }
 
     /**
-     * 依据微秒来生成不同字符串
-     * @return string 生成的 token
-     */
-    public static function rand_token()
-    {
-        return md5(microtime(true) . self::rand_str(10, 'mix'));
-    }
-
-    /**
      * 生成UUID
      * - https://baike.baidu.com/item/UUID 第5版基于名字的UUID（SHA1）
      * - https://www.php.net/manual/en/function.uniqid.php 官方文档地址
