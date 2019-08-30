@@ -26,19 +26,14 @@ class Token
 
         $str = $$type; // 取出目标类型
 
-        // - 长度不够，则拼接类型
-        $str_len = count($str);
-        if ($str_len < $len) {
-            $target   = '';
-            $loop_len = ceil($len / $str_len);
-            for ($i = 0; $i < $loop_len; $i++) {
-                $target .= $str;
-            }
-        } else {
-            $target = $str;
+        $target          = '';
+        $rand_last_index = strlen($str) - 1;
+        for ($i = 0; $i < $len; $i++) {
+            $index = mt_rand(0, $rand_last_index);
+            $target .= $str[$index];
         }
 
-        return substr(str_shuffle($target), 0, $len);
+        return $target;
     }
 
     /**
