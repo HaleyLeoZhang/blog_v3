@@ -6,6 +6,7 @@ use App\Models\Blog\Article;
 use App\Models\Blog\Comment;
 use App\Models\Blog\FriendLink;
 use App\Models\Logs\VisitorLookLog;
+use App\Services\Search\ElasticService;
 
 class IndexLogic
 {
@@ -16,7 +17,11 @@ class IndexLogic
     {
         extract($params);
         if (isset($search)) {
-            $pagination = self::search_vague($search);
+            if (ElasticService::is_avaiable()) {
+                $pagination = self::search_vague_es($search);
+            } else {
+                $pagination = self::search_vague($search);
+            }
         } elseif (isset($cate_id)) {
             $pagination = self::search_category($cate_id);
         } else {
@@ -69,11 +74,59 @@ class IndexLogic
      * @param string $search 搜索的关键词
      * @return \App\Helpers\Page
      */
-    public static function search_vague($search)
+    public static function search_vague($keyword)
     {
-        $vague      = "%{$search}%";
+        $vague      = "%{$keyword}%";
         $sql        = self::common_sql('a.`title` like ? OR a.`descript` like ?');
         $pagination = new Page($sql, [$vague, $vague]);
+        return $pagination;
+    }
+
+    /**
+     * 首页：模糊搜索分页：文章名、描述 - 全文索引
+     * @param string $search 搜索的关键词
+     * @return \App\Helpers\Page
+     */
+    public static function search_vague_es($keyword)
+    {
+        $params = [
+            'index' => Article::ES_INDEX_NAME,
+            'type'  => Article::ES_INDEX_TYPE,
+            'body'  => [
+                'query' => [
+                    'bool' => [
+                        'should' => [
+                            'match' => [
+                                'content' => $keyword,
+                            ],
+                            'match' => [
+                                'descript' => $keyword,
+                            ],
+                            'match' => [
+                                'text' => $keyword,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $response = ElasticService::get_client()->search($params);
+
+        // echo '<pre>';
+        // print_r($response);
+
+        if ($response['hits']['total']['value'] > 0) {
+            $ids        = array_column($response['hits']['hits'], '_id');
+            $ids_string = implode(',', $ids);
+
+            $sql        = self::common_sql("a.id in (" . $ids_string . ")");
+            $pagination = new Page($sql, []);
+        } else {
+            $sql        = self::common_sql("a.id in (0)");
+            $pagination = new Page($sql, []);
+        }
+
         return $pagination;
     }
 

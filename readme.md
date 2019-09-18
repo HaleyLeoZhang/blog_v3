@@ -202,22 +202,35 @@
 ## 接口说明
 本博客文档，基于[apidoc](http://apidocjs.com/)标准与生成  
 
-    apidoc -i app/Http/Controllers/ -o public/doc
+~~~bash
+apidoc -i app/Http/Controllers/ -o public/doc
+~~~
 
 [点此查看接口文档](http://www.hlzblog.top/doc)  
 
 ## 依赖相关
-初始化项目
+初始化项目  
 
-    # 安装第三方扩展包
-    composer install --no-scripts
-    # 生成非对称密钥对
-    php artisan rsa_file
+~~~bash
+# 安装第三方扩展包
+composer install --no-scripts
+# 生成非对称密钥对
+php artisan rsa_file
+~~~
+
+如果你安装了`ElasticSearch`  
+可以初始化全文索引  
+
+~~~php
+php artisan es creatae yth_blog_avatar_articles info
+~~~
 
 当你想在 VirtualBox 下开发时  
     
-    npm install --no-bin-links
-    gulp start
+~~~bash
+npm install --no-bin-links
+gulp start
+~~~
 
 此外你可能还需要一些服务
 
@@ -230,4 +243,6 @@
 
 ## 单元测试
 
-    ./phpunit
+~~~bash
+./phpunit
+~~~

@@ -15,7 +15,8 @@
         "earnp/laravel-google-authenticator": "dev-master",
         "maatwebsite/excel": "~2.1.0",
         "qiniu/php-sdk": "^7.2",
-        "php-amqplib/php-amqplib": "^2.8"
+        "php-amqplib/php-amqplib": "^2.8",
+        "elasticsearch/elasticsearch": "^7.2"
     },
     "require-dev":
     {

@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\RsaFileCommand::class,
         \App\Console\Commands\SwooleCommond::class,
         \App\Console\Commands\KugouMusicCommand::class,
+        \App\Console\Commands\ElasticSearchCommond::class,
     ];
 
     /**

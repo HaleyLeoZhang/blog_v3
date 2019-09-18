@@ -29,6 +29,10 @@ class Article extends Model
 
     const DEFAULT_ARTICLE_FOR_CREATE = 0; // 文章ID为0，专门用于创建文章
 
+    // ---- 全文索引配置 ---
+    const ES_INDEX_NAME = 'yth_blog_avatar_articles'; 
+    const ES_INDEX_TYPE = 'info'; 
+
     // ---- 全部类型 ----
     const SHOW_ALL = -200; // 显示全部内容
 
@@ -114,5 +118,12 @@ class Article extends Model
         self::IS_DELETED_NO  => '未删除',
         self::IS_DELETED_YES => '已删除',
     ];
+
+    public function getPureText()
+    {
+        return trim(
+            strip_tags($this->content)
+        );
+    }
 
 }
