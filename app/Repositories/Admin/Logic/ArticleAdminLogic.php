@@ -115,6 +115,10 @@ class ArticleAdminLogic
         }
         if (Article::SHOW_ALL != $sticky) {
             $chain = $chain->where('sticky', $sticky);
+
+            if (Article::IS_STICKY_YES == $sticky) {
+                $chain = $chain->orderBy('sticky', 'desc')->orderBy('sequence', 'asc');
+            }
         }
         if (Article::SHOW_ALL != $online) {
             $chain = $chain->where('is_online', $online);
@@ -138,8 +142,6 @@ class ArticleAdminLogic
         $render = $chain
             ->select('articles.*', 'b.title as cate_name')
             ->join('article_categorys as b ', 'articles.cate_id', '=', 'b.id')
-            ->orderBy('sticky', 'desc')
-            ->orderBy('sequence', 'asc')
             ->orderBy('id', 'desc')
             ->paginate(\CommonService::END_ARTICLE_PAGE_SIZE);
         $render->appends($params);
