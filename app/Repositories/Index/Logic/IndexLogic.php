@@ -16,9 +16,15 @@ class IndexLogic
     public static function dispatcher($params, $is_render = Page::IS_RENDER_YES)
     {
         extract($params);
+        $is_fulltext_search = false;
+
         if (isset($search)) {
             if (ElasticService::is_avaiable()) {
-                $pagination = self::search_vague_es($search);
+                $is_fulltext_search = true;
+
+                $data         = self::search_vague_es($search);
+                $sequence_ids = $data['sequence_ids'];
+                $pagination   = $data['pagination'];
             } else {
                 $pagination = self::search_vague($search);
             }
@@ -31,7 +37,14 @@ class IndexLogic
         $pagination->page_size = \CommonService::BLOG_INDEX_PAGE_SIZE;
         $pagination->is_render = $is_render;
 
-        return $pagination->get_result();
+        $result = $pagination->get_result();
+
+
+        if($is_fulltext_search){
+            $result['info'] = self::handle_search_vague_es($result['info'], $sequence_ids);
+        }
+
+        return $result;
     }
 
     /**
@@ -116,9 +129,13 @@ class IndexLogic
         // echo '<pre>';
         // print_r($response);
 
+        $sequence_ids = [];
+
         if ($response['hits']['total']['value'] > 0) {
             $ids        = array_column($response['hits']['hits'], '_id');
             $ids_string = implode(',', $ids);
+
+            $sequence_ids = $ids;
 
             $sql        = self::common_sql("a.id in (" . $ids_string . ")");
             $pagination = new Page($sql, []);
@@ -127,7 +144,21 @@ class IndexLogic
             $pagination = new Page($sql, []);
         }
 
-        return $pagination;
+        return compact('pagination', 'sequence_ids');
+    }
+
+    protected static function handle_search_vague_es($old_list, $sequence_ids)
+    {
+        $new_list = [];
+        foreach ($sequence_ids as $sequence_id) {
+            foreach ($old_list as $item) {
+                if($sequence_id == $item->id){
+                    $new_list[] = $item;
+                    break;
+                }
+            }
+        }
+        return $new_list;
     }
 
     /**
