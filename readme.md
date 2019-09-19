@@ -7,7 +7,9 @@
 遵循 `PSR` 标准  
 采用了多种设计模式  
 本次版本升级，重构了后端代码  
-目前后台功能仍在迭代中，处于 `Alpha` 阶段  
+
+经过一段时间的线上使用  
+目前功能已达到 `V1.0.0`  
 
 ## 目录结构
 
@@ -204,7 +206,7 @@
 
     apidoc -i app/Http/Controllers/ -o public/doc
 
-[点此查看接口文档](http://www.hlzblog.top/doc)  
+[点此查看接口文档](http://blog.doc.hlzblog.top)  
 
 ## 依赖相关
 初始化项目
