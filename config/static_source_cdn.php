@@ -31,4 +31,7 @@ return [
     // 图片懒加载
     "jquery_lazyload" => "//cdn.staticfile.org/jquery_lazyload/1.9.7/jquery.lazyload.min.js",
 
+    // 百度统计
+    "baidu_statistic" => "https://hm.baidu.com/hm.js?" . env('BAIDU_STATISTIC_HASH', ''),
+
 ];

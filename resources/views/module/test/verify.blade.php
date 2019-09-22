@@ -107,7 +107,7 @@
                + web_inner_site
         return site ;
     }
-    loadjs(["https://hm.baidu.com/hm.js?a3e8bb5c7eef342491aa58e9a8539127"], {
+    loadjs(["{{ config('static_source_cdn.baidu_statistic') }}"], {
         success: function() {
             $.ajax({
                 "url":api("Common_behaviour","user_behaviour_add"),

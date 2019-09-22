@@ -271,7 +271,6 @@
 					</div>
 				</div>
 
-
 				<div class="timeList_item step" data-x="2600" data-y="0" >
 					<div class="circle">09/29</div>
 					<h2 class="timeList_item_title">博客 v3.0</h2>
@@ -287,10 +286,26 @@
 					</div>
 				</div>
 
+				<div class="step year" data-x="2600" data-y="0" data-scale ="0.5" >
+					<div class="year_start">2019</div>
+					<div class="list_show"><!-- 年份不给予文字叙述 --></div>
+				</div>
+
+				<div class="timeList_item step" data-x="3000" data-y="0" >
+					<div class="circle">08/20</div>
+					<h2 class="timeList_item_title">行为类爬虫框架</h2>
+					<div class="list_show show1">
+						<img src="//tencent.cdn.hlzblog.top/blog/upload/img/2019_09_22_xPzWod9Y.jpg" width="500">
+						<h2><a href="https://github.com/HaleyLeoZhang/blog_v3" target="_blank" >行为类爬虫框架</a></h2>
+						<p>
+							使用谷歌无头浏览器puppeteer<br>
+							结合nodeJs+golang书写<br>
+						</p>
+					</div>
+				</div>
 
 
-
-				<div class="timeList_item step refresh" data-x="3000" data-y="0"  yth-end_tag="true">
+				<div class="timeList_item step refresh" data-x="3400" data-y="0"  yth-end_tag="true">
 					<div class="list_show">
 						<a href='javascript:replay();'><img src="/Others/memorabilia/img/refress.png"/></a>
 						<p class="end">遇见更好的自己 ... </p>
@@ -307,7 +322,7 @@
 	<script src="//apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="//apps.bdimg.com/libs/impress.js/0.5.3/impress.min.js"></script>
 	<script src="/Others/memorabilia/js/run.js"></script>
-	<script src="https://hm.baidu.com/hm.js?a3e8bb5c7eef342491aa58e9a8539127"></script>
+	<script src="{{ config('static_source_cdn.baidu_statistic') }}"></script>
 	<script src="/static_pc/js/global.js"></script>
 	<script>
 	footmark();

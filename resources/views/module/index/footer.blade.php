@@ -31,7 +31,7 @@
 var arr_src = [
   "{{ link_plugins('referrer_killer','referrer-killer.js')}}",
   // Baidu Statistic
-  "https://hm.baidu.com/hm.js?a3e8bb5c7eef342491aa58e9a8539127",
+  "{{ config('static_source_cdn.baidu_statistic') }}",
   // jq lazy load
   "{{ config('static_source_cdn.jquery_lazyload') }}",
 ];
