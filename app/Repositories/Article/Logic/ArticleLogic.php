@@ -111,11 +111,12 @@ class ArticleLogic
             FROM
                 `articles`
             WHERE
-                `cate_id` =?
+                `cate_id` = ?
+                AND `status` = ?
             ORDER BY
                 `id` DESC
                 LIMIT ?,?
-        ', [$cate_id]);
+        ', [$cate_id , Article::IS_DELETED_NO]);
         $pagenation->page_size = self::RECOMMAND_PAGE_SIZE;
         $pagenation->is_render = Page::IS_RENDER_NO;
 
