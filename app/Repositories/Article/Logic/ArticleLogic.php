@@ -112,7 +112,7 @@ class ArticleLogic
                 `articles`
             WHERE
                 `cate_id` = ?
-                AND `status` = ?
+                AND `is_deleted` = ?
             ORDER BY
                 `id` DESC
                 LIMIT ?,?
