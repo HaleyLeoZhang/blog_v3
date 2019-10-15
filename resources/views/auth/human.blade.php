@@ -81,6 +81,7 @@
             </div>
             <div class="search-clr"></div>
             <div id="yth_search_tpl"></div>
+            <div id="yth_search_res_tpl"></div>
         </div>
         <!--搜索员工结束-->
     </div>
@@ -90,6 +91,7 @@
     <div class="layui-form">
         <table class="layui-table" lay-even="" lay-skin="nob">
             <colgroup>
+                <col width="50px">
                 <col width="100px">
                 <col width="200px">
                 <col width="100px">
@@ -100,6 +102,7 @@
             </colgroup>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>头像</th>
                     <th>帐号</th>
                     <th>昵称</th>
@@ -112,6 +115,9 @@
             <tbody>
                 <%# for(var i=0;i< d.length;i++){ %>
                     <tr id="tr_<%d[i].id%>">
+                        <td>
+                            <%d[i].id%>
+                        </td>
                         <td ><img src="<%d[i].user_pic%>" alt="头像" width="60"></td>
                         <td>
                             <%d[i].email%>
@@ -123,7 +129,9 @@
                             <%d[i].created_at%>
                         </td>
                         <td>
-                            <button class="layui-btn layui-btn-warm act_edit" yth-data-id="<%d[i].id%>" title="编辑"><i class="layui-icon">&#xe642;</i></button>
+                            <button class="layui-btn layui-btn-warm act_edit" yth-data-id="<%d[i].id%>" title="编辑" >
+                                <i class="layui-icon">&#xe642;</i>
+                            </button>
                         </td>
                         <td>
                             <button class="layui-btn layui-btn-danger act_del" yth-data-id="<%d[i].id%>" title="删除"><i class="layui-icon">&#xe640;</i></button>
@@ -175,28 +183,24 @@
 @section('script')
 @include('auth.pre_script')
 <!-- JS运行脚本 -->
+<script src="/static_pc/plugins/pageinate/js/jq_page.js"></script>
+<script src="/static_pc/admin/auth/js/human.js"></script>
 <script>
-loadjs([
-    "/static_pc/plugins/pageinate/js/jq_page.js",
-    "/static_pc/admin/auth/js/human.js",
-], {
-    success: function () {
         // 选中当前所在模块
-        $("#hr_all").addClass("layui-this");
+        // $("#hr_all").addClass("layui-this");
         // 监听模块切换
-        handle_button_void();
+        // handle_button_void();
         // 解决搜索与直接显示用的冲突
-        remove_conflict();
+        // remove_conflict();
 
-        layui.use(['layer', 'laydate'], function () {
-            yth_hr_init();
-            // 搜索按钮
-            yth_search();
-            // 添加新的
-            yth_activity_sub();
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~LayUI加载模块——结束~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        });
-    }
-});
+        // layui.use(['layer', 'laydate'], function () {
+        //     yth_hr_init();
+        //     // 搜索按钮
+        //     yth_search();
+        //     // 添加新的
+        //     yth_activity_sub();
+        //     //~~~~~~~~~~~~~~~~~~~~~~~~~~LayUI加载模块——结束~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // });
+    // }
 </script>
 @endsection

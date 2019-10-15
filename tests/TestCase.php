@@ -9,8 +9,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
-    protected $host = 'http://avatar.xb.com';
-
     /**
      * Creates the application.
      *

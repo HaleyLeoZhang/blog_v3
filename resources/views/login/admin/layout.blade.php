@@ -123,7 +123,7 @@
         <!-- JS -->
         <script type="text/javascript" src="{{ config('static_source_cdn.jquery') }}"></script>
         <script type="text/javascript" src="{{ config('static_source_cdn.layer') }}"></script>
-        <script type="text/javascript" src="{{ config('static_source_cdn.laod_js') }}"></script>
+        <script type="text/javascript" src="{{ config('static_source_cdn.load_js') }}"></script>
         <script type="text/javascript" src="/static_pc/js/global.js"></script>
         <script type="text/javascript" src="/static_pc/js/hlz_rsa.js"></script>
         @yield('js')

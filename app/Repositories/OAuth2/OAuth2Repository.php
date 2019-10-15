@@ -4,7 +4,7 @@ namespace App\Repositories\OAuth2;
 use App\Repositories\OAuth2\Logic\ActionOAuth2Logic;
 
 // ----------------------------------------------------------------------
-// websocket服务 - 聊天 - 群聊、私聊
+// OAuth2.0服务 - 聊天 - 群聊、私聊
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang

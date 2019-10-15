@@ -22,7 +22,7 @@
 	<!-- Sentry -->
 	<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
 	<!-- JS Lib -->
-	<script src="{{ config('static_source_cdn.laod_js') }}"></script>
+	<script src="{{ config('static_source_cdn.load_js') }}"></script>
 	<script src="{{ config('static_source_cdn.jquery') }}"></script>
 	<script src="{{ link_src('global.js') }}"></script>
 </head>

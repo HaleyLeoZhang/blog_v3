@@ -169,7 +169,7 @@ class ManageAdminLogic
         self::check_super();
         $email = '%' . $_email . '%'; //@post: 职员帐号
         // 查询
-        $result['info'] = Admin::select('id', 'truename', 'user_pic', 'status', 'email', 'created_at', 'updated_at')
+        $result['list'] = Admin::select('id', 'truename', 'user_pic', 'status', 'email', 'created_at', 'updated_at')
             ->whereRaw('`email` like "' . $email . '"')
             ->where('status', '!=', Admin::STATUS_DELETED_USER)
             ->get();

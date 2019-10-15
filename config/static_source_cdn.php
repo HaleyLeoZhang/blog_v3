@@ -14,7 +14,7 @@ return [
     // layer 弹出层
     "layer" => "//cdn.staticfile.org/layer/2.3/layer.js", // 七牛
     // 异步JS资源加载
-    "laod_js" => "//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js", // 七牛
+    "load_js" => "//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js", // 七牛
     // WangEditor
     "wang_editor_js" => "//unpkg.com/wangeditor/release/wangEditor.min.js", // - v3
     "wang_editor_css" => "//unpkg.com/wangeditor/release/wangEditor.min.css",

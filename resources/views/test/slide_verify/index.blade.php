@@ -39,7 +39,7 @@
     <script type="text/javascript" src="{{ config('static_source_cdn.es5') }}"></script>
     <script type="text/javascript" src="{{ config('static_source_cdn.es6') }}"></script>
     <script type="text/javascript" src="//libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-    <script type="text/javascript" src="{{ config('static_source_cdn.laod_js') }}"></script>
+    <script type="text/javascript" src="{{ config('static_source_cdn.load_js') }}"></script>
     <script type="text/javascript" src="{{ config('static_source_cdn.layer') }}"></script>
     <!-- 你可以去看看我js层 rsa 怎么加密，后端怎么解密的 https://github.com/HaleyLeoZhang/rsa-js-php  -->
     <script type="text/javascript" src="/static_pc/js/hlz_rsa.js"></script>
