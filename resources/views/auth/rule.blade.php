@@ -55,12 +55,12 @@
   <div class="layui-form">
     <table class="layui-table" lay-even="" lay-skin="nob" >
       <colgroup>
-        <col width="150">
-        <col width="240">
-        <col width="200">
-        <col width="100">
-        <col width="240">
-        <col >
+        <col width="20%">
+        <col width="20%">
+        <col width="10%">
+        <col width="20%">
+        <col width="20%">
+        <col width="20%">
       </colgroup>
       <thead>
         <tr>
@@ -118,21 +118,5 @@
 @section('script')
 @include('auth.pre_script')
 <!-- JS运行脚本 -->
-<script>
-loadjs([
-  "/static_pc/admin/auth/js/super_rule.js",
-], {
-  success: function() {
-    // 选中当前所在模块
-    $("#super_rule").addClass("layui-this");
-    layui.use(['layer', 'laydate'], function() {
-      handle_button_void();
-      show_rules(); 
-      // 添加新的
-      yth_activity_sub();
-      //~~~~~~~~~~~~~~~~~~~~~~~~~~LayUI加载模块——结束~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    }); 
-  }
-});
-</script>
+<script src="/static_pc/admin/auth/js/super_rule.js"></script>
 @endsection
