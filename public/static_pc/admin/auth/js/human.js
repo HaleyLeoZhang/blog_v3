@@ -194,7 +194,7 @@
                         return;
                     }
                     var _data = res.data;
-                    if(_data.list) {
+                    if(_data.list.length) {
                         render("yth_t1", "yth_search_tpl", _data.list);
                     } else {
                         layer.msg('未查询到帐号', {

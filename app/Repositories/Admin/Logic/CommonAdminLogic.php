@@ -90,6 +90,21 @@ class CommonAdminLogic
         InfoAuthService::delete();
     }
 
+
+    /**
+     * 帮管理员注销
+     * @param string eamil 邮箱
+     * @return void
+     */
+    public static function logout_admin($email)
+    {
+        $admin = Admin::where('email', $email)->first();
+        if(null === $admin){
+            return;
+        }
+        self::logout($admin->remember_token);
+    }
+
     /**
      * 管理员登录逻辑
      * @param \App\Models\AdminAuth\Admin $admin 管理员帐号
@@ -116,6 +131,7 @@ class CommonAdminLogic
 
         // 写入用户 mobile、token、user_id 到缓存信息
         $token      = InfoAuthService::get_rand_token();
+        \Log::debug('token.'. $token);
         $token_info = [
             'id'    => $admin->id,
             'email' => $admin->email,

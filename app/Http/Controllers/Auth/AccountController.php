@@ -163,7 +163,7 @@ class AccountController extends BaseController
      */
     public function set_cookie(Request $request)
     {
-        \LogService::debug('set_cookie.request:' , $request->all() );
+        \LogService::debug('set_cookie.request:', $request->all());
         $filter = [
             'token_name'  => 'required',
             'token_value' => 'required',
@@ -229,13 +229,13 @@ class AccountController extends BaseController
                 $message = '请正确输入手机上google验证码';
             }
         }
-            // 创建谷歌验证码
-            $createSecret = \Google::CreateSecret();
-            $email        = $request->input('email', '-');
-            $message        = $request->input('message', $message);
-            $data         = compact('createSecret', 'email', 'message');
-            // 您自定义的参数，随表单返回
-            return view('login.google.google', $data);
+        // 创建谷歌验证码
+        $createSecret = \Google::CreateSecret();
+        $email        = $request->input('email', '-');
+        $message      = $request->input('message', $message);
+        $data         = compact('createSecret', 'email', 'message');
+        // 您自定义的参数，随表单返回
+        return view('login.google.google', $data);
     }
 
 }

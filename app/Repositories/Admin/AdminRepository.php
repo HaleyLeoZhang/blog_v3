@@ -70,6 +70,7 @@ class AdminRepository
     public static function change_user_status($email, $status)
     {
         ManageAdminLogic::change_user_status($email, $status);
+        CommonAdminLogic::logout_admin($email);
     }
 
     /**
@@ -84,6 +85,7 @@ class AdminRepository
     public static function change_user($password, $email, $user_pic, $truename, $status)
     {
         ManageAdminLogic::change_user($password, $email, $user_pic, $truename, $status);
+        CommonAdminLogic::logout_admin($email);
     }
 
     /**
