@@ -127,7 +127,7 @@ class CommonAdminLogic
             throw new \ApiException($message, \Consts::FAILED);
         }
         // 删除上一次的登录信息
-        InfoAuthService::delete($admin->remember_token);
+        self::logout_admin($account);
 
         // 写入用户 mobile、token、user_id 到缓存信息
         $token      = InfoAuthService::get_rand_token();
