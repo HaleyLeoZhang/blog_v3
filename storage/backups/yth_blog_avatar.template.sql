@@ -77,7 +77,7 @@ CREATE TABLE `articles` (
   `is_deleted` tinyint(4) UNSIGNED NOT NULL DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章内容';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章内容';
 
 
 INSERT INTO `articles` (`id`, `title`, `type`, `sticky`, `sequence`, `original`, `is_online`, `content`, `descript`, `cover_url`, `cate_id`, `bg_id`, `raw_content`, `statistic`, `is_deleted`, `updated_at`, `created_at`) VALUES
@@ -96,7 +96,7 @@ CREATE TABLE `article_categorys` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章分类';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章分类';
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `backgrounds` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='背景图';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='背景图';
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,7 @@ CREATE TABLE `comments` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='博客评论表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='博客评论表';
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ CREATE TABLE `friend_links` (
   `is_deleted` tinyint(4) UNSIGNED NOT NULL DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `friend_links`
@@ -193,7 +193,7 @@ CREATE TABLE `hlz_auth_group` (
   `rules` varchar(3000) DEFAULT NULL COMMENT '组内包含的规则',
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `hlz_auth_group`
@@ -214,7 +214,7 @@ CREATE TABLE `hlz_auth_group_access` (
   `group_id` mediumint(8) UNSIGNED NOT NULL COMMENT '对应分组ID',
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -232,7 +232,7 @@ CREATE TABLE `hlz_auth_rule` (
   `condition` char(100) NOT NULL DEFAULT '' COMMENT '额外条件',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `hlz_auth_rule`
@@ -278,7 +278,7 @@ CREATE TABLE `users` (
   `is_deleted` tinyint(1) UNSIGNED DEFAULT '0' COMMENT '软删除，1->已删除',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间、最后登录时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='第三方登录用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='第三方登录用户表';
 
 --
 -- Indexes for dumped tables
