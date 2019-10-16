@@ -18,7 +18,7 @@
             "success": function (res) {
                 layer.close(load_index);
                 var data = res.data;
-                async_render('yth_t1', 'this_tpl', data.info, function () {});
+                async_render('yth_t1', 'this_tpl', data.list, function () {});
             },
             error: function () {
                 layer.close(load_index);

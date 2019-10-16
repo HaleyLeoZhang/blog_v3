@@ -19,13 +19,7 @@ function request_api(url, json_data, fadeOut_Selector, func) {
         "dataType": "json",
         "success": function (d) {
             layer.close(shadow_index);
-            if(d.out || d.detail) {
-                if(d.detail) {
-                    layer.alert(d.detail);
-                } else {
-                    layer.alert(d.out);
-                }
-            } else if(d.status) {
+            if(200 == d.code) {
                 layer.msg('操作成功', {
                     time: 2000
                 });
@@ -37,14 +31,8 @@ function request_api(url, json_data, fadeOut_Selector, func) {
                 if(func) {
                     func();
                 }
-            } else if(d.Err == 1004) {
-                layer.msg("您还有忘填了的信息哟", {
-                    time: 2000
-                });
             } else {
-                layer.msg("您的内容并无变化", {
-                    time: 2000
-                });
+                layer.msg(d.message);
             }
         }
     });

@@ -4,9 +4,12 @@ namespace App\Repositories\Admin\Logic;
 use App\Helpers\Page;
 use App\Helpers\Token;
 use App\Models\AdminAuth\Admin;
+use App\Models\AdminAuth\AuthGroup;
+use App\Models\AdminAuth\AuthGroupAccess;
+use App\Models\AdminAuth\AuthRule;
 use App\Models\Logs\AdminLoginLog;
-use DB;
 use CommonService;
+use DB;
 
 class ManageAdminLogic
 {
@@ -115,8 +118,8 @@ class ManageAdminLogic
             Where b.`uid` = ?
         ', [$admin_id]);
         $result['info'] = [
-            'group_list' => &$group_list,
-            'now_group'  => &$now_group,
+            'group_list' => $group_list,
+            'now_group'  => $now_group,
             'admin_id'   => $admin_id,
         ];
         return $result;
@@ -126,24 +129,26 @@ class ManageAdminLogic
     {
         self::check_super();
         $group_ids = explode(',', $group_ids_str); //@post: 分组号，形如 1,21,6,10
-        // 组装 过滤sql数据
-        $insert_sql = '';
-        for ($i = 0; $i < count($group_ids); $i++) {
-            $insert_sql .= ' (' . $admin_id . ',' . intval($group_ids[$i]) . ') ';
-            if ($i < count($group_ids) - 1) {
-                $insert_sql .= ', ';
-            }
+
+        $insertion = [];
+        foreach ($group_ids as $group_id) {
+            $insertion[] = [
+                'uid'      => $admin_id,
+                'group_id' => $group_id,
+            ];
         }
-        // 删除原来的
-        DB::delete('
-            Delete From `hlz_auth_group_access`
-            Where `uid` = ?
-        ', [$admin_id]);
-        // 录入现在的
-        DB::insert('
-            Insert into `hlz_auth_group_access`
-            (`uid`,`group_id`)Values ' . $insert_sql . '
-        ', []);
+
+        DB::beginTransaction();
+        try {
+            // 删除原来的
+            AuthGroupAccess::where('uid', $admin_id)->delete();
+            // 录入现在的
+            AuthGroupAccess::insert($insertion);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+        }
+
     }
 
     public static function admin_user_status($admin_id, $status)
@@ -265,11 +270,10 @@ class ManageAdminLogic
     public static function auth_rule_show()
     {
         self::check_super();
-        $result['info'] = DB::select('
-            Select `id`, `name` as rule, `title`,`status`
-            From `hlz_auth_rule`
-            Order By `title` Asc
-        ');
+        $result         = [];
+        $result['list'] = AuthRule::selectRaw('
+            id, name as rule, title, status
+        ')->get();
         return $result;
     }
 
@@ -277,49 +281,32 @@ class ManageAdminLogic
     {
         self::check_super();
         // 防重复
-        $_find = DB::select('
-            Select `title`
-            From `hlz_auth_rule`
-            Where `name`=?
-        ', [$rule]);
-        if (count($_find)) {
-            $msg = '数据已存在，其名为：' . $_find[0]->title;
+        $one_rule = AuthRule::where('name', $rule)->first();
+        if ($one_rule) {
+            $msg = '数据已存在，其名为：' . $one_rule->title;
             throw new \ApiException($msg);
         }
-        DB::insert('
-            Insert into `hlz_auth_rule`
-            (name,title)
-            Values(?,?)
-        ', [$rule, $title]);
-        $id = DB::select('
-            Select `id`
-            From `hlz_auth_rule`
-            Where `name`=?
-        ', [$rule]);
+        AuthRule::insert([
+            'name'  => $rule,
+            'title' => $title,
+        ]);
+        $one_rule = AuthRule::where('name', $rule)->first();
 
-        $data           = [];
-        $data['status'] = true;
-        $data['id']     = $id[0]->id;
+        $data       = [];
+        $data['id'] = $one_rule->id;
         return $data;
     }
 
     public static function auth_rule_del($id)
     {
         self::check_super();
-        $result = DB::update('
-            Delete From `hlz_auth_rule`
-            Where id = ?
-        ', [$id]);
+        AuthRule::where('id', $id)->delete();
     }
 
     public static function auth_rule_status($id, $status)
     {
         self::check_super();
-        $result = DB::update('
-            Update `hlz_auth_rule`
-            Set `status` = ?
-            Where `id` = ?
-        ', [$status, $id]);
+        AuthRule::where('id', $id)->update(['status' => $status]);
     }
 
     // --- 管理组 模块
@@ -327,25 +314,26 @@ class ManageAdminLogic
     public static function auth_group_add($title, $rules)
     {
         // 防重复
-        $find = DB::select('
-            Select `id`
-            From `hlz_auth_group`
-            Where `title`=?
-        ', [$title]);
-        if (count($find)) {
+        $one_group = AuthGroup::where('title', $title)->first();
+        if ($one_group) {
             $msg = '该组已存在';
             throw new \ApiException($msg);
         }
-        //创建
-        $result = DB::update('
-            Insert into `hlz_auth_group`
-            (title,rules)
-            Values(?,?)
-        ', [$title, $rules]);
+        // 创建
+        $insertion = [
+            'title' => $title,
+            'rules' => $rules,
+        ];
+        AuthGroup::insert($insertion);
     }
 
     public static function auth_group_modify($group_id, $value, $option)
     {
+        $one_group = AuthGroup::where('id', $group_id)->first();
+        if (null == $one_group) {
+            $msg = '该组不存在';
+            throw new \ApiException($msg);
+        }
         switch (intval($option)) {
             case 1:
                 $field = 'status';
@@ -359,58 +347,49 @@ class ManageAdminLogic
 
             default:
                 throw new \ApiException("option 值错误");
-
                 break;
         }
         // 更新
-        $result = DB::update('
-            Update `hlz_auth_group`
-            Set `' . $field . '` = ?
-            Where `id` = ?
-        ', [$value, $group_id]);
+        $one_group->$field = $value;
+        $one_group->save();
     }
 
     public static function auth_group_del($group_id)
     {
-        // 删除属于该管理组的群体
-        DB::delete('
-            Delete From `hlz_auth_group_access`
-            Where group_id = ?
-        ', [$group_id]);
-        // 删除该管理组
-        DB::delete('
-            Delete From `hlz_auth_group`
-            Where id = ?
-        ', [$group_id]);
+        DB::beginTransaction();
+        try {
+            // 删除属于该管理组的群体
+            AuthGroupAccess::where('group_id', $group_id)->delete();
+            // 删除该管理组
+            AuthGroup::where('id', $group_id)->delete();
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+        }
     }
 
     public static function auth_group_list()
     {
-        $result['info'] = DB::select('
-            Select id, title, status, rules
-            From `hlz_auth_group`
-            Order by id
-        ', []);
+        $result         = [];
+        $result['list'] = AuthGroup::get();
         return $result;
     }
 
     public static function auth_one_group_rule($id)
     {
-        $rules = DB::select('
-            Select `rules`
-            From `hlz_auth_group`
-            Where `id` =?
-        ', [$id]);
+        $result         = [];
+        $result['list'] = [];
+        $one_group      = AuthGroup::select('rules')->where('id', $id)->first();
 
-        $rule_str = '';
-        if (count($rules)) {
-            $rule_str = $rules[0]->rules;
+        if (null !== $one_group) {
+            $rule_str = $one_group->rules;
+            if ('' != $rule_str) {
+                $ids            = explode(',', $rule_str);
+                $result['list'] = AuthRule::select('id', 'title')
+                    ->whereIn('id', $ids)
+                    ->get();
+            }
         }
-        $result['info'] = DB::select('
-                Select `id`, `title`
-                From `hlz_auth_rule`
-                Where `id` in (' . $rule_str . ')
-            ', []);
         return $result;
     }
 

@@ -22,7 +22,6 @@
         <!--总览-->
         <input type="hidden" id="current_group_rule_ids" placeholder="加载出来的对应管理组的id，都存在这，以逗号隔开">
         <div class="layui-tab-item layui-show" id="activity-show">
-            <blockquote class="layui-elem-quote">新增加的组，刷新一下页面才能看到哟</blockquote>
             <!--这里是编辑区域-->
             <div class="layui-collapse" id="xx_show" lay-accordion></div>
             <!-- 修改区域 -->
@@ -125,53 +124,10 @@
 
 @include('auth.pre_script')
 <!-- JS运行脚本 -->
+<script src="/static_pc/plugins/pageinate/js/jq_page.js"></script>
+<script src="/static_pc/admin/auth/js/super_group.js"></script>
 <script>
-loadjs([
-    "/static_pc/plugins/pageinate/js/jq_page.js",
-    "/static_pc/admin/auth/js/super_group.js"
-], {
-    success: function () {
-        // 选中当前所在模块
-        $("#super_group").addClass("layui-this");
-        layui.use(['layer', 'laydate', 'element'], function () {
-            // 刷新页面
-            remove_conflict();
-            // 状态按钮
-            yth_switch();
-            // 添加新的
-            yth_activity_sub();
-            // 删除按钮
-            yth_activity_del();
-            // 显示规则列表
-            yth_rule_list();
-            // 修改组名
-            yth_edit_group();
-            // 修改规则
-            yth_activity_edit_sub();
-            // 显示某组规则列表
-            yth_listen_show();
-            // 显示修改界面
-            yth_edit_rules_button();
-            // 增量 修改规则
-            yth_group_rule_auto_click();
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~LayUI加载模块——结束~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        });
-    }
-});
-// 分组列表
-function show_list() {
-    $.ajax({
-        "url": '/admin/auth_group_list',
-        "type": "post",
-        "dataType": "json",
-        "async": false,
-        "success": function (_data) {
-            var data = _data.data;
-            render('yth_t2', 'xx_show', data.info, true); // 同步渲染
-        }
-    });
-}
-show_list();
+    layui.use([ 'element'], function () {}); // 初始化手风琴需要
 // 分组列表
 </script>
 @endsection
