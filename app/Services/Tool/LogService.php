@@ -177,13 +177,22 @@ class LogService
         // 写入 UUID
         $info = '';
         if (self::$_ini['uuid']) {
-            $info = $str . ' ' . Token::uuid() . ' ' . $name . $description . $data_str . "\n";
+            $info = $str . ' ' . self::get_uuid() . ' ' . $name . $description . $data_str . "\n";
         } else {
             $info = $str . $name . $description . $data_str . "\n";
         }
         // 彩色日志
         $str = self::getColoredString($info, $color);
         return $str;
+    }
+
+    protected static function get_uuid()
+    {
+        static $uuid = null;
+        if (null === $uuid) {
+            $uuid = Token::uuid();
+        }
+        return $uuid;
     }
 
     /**

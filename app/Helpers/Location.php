@@ -39,7 +39,7 @@ class Location
         } else {
             $ip = "Unknown";
         }
-        // \Log::info('RAW_IP:' . $ip);
+        // \LogService::info('RAW_IP:' . $ip);
         // X-Forwarded-For是用于记录代理信息的，
         // --- 每经过一级代理(匿名代理除外)，代理服务器都会把这次请求的来源IP追加在X-Forwarded-For中
         // --- ---（示例：IP:"124.65.115.234, 192.168.10.107"）的情况：
