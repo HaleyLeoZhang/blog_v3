@@ -26,7 +26,10 @@ class ExpectValue
      */
     public static function compute(&$sample_arr)
     {
-        $ins     = new self();
+        static $ins = null;
+        if(null === $ins){
+            $ins = new self();
+        }
         $avg_x   = $ins->get_avg_x($sample_arr);
         $avg_y   = $ins->get_avg_y($sample_arr);
         $const_b = $ins->get_const_b($avg_x, $avg_y, $sample_arr);
