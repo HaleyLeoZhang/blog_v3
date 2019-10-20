@@ -49,6 +49,7 @@ Route::Group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => ['api']],
 
     // - 用户模块
     Route::Group(['middleware' => 'auth_user'], function () {
+        Route::get('comment/check_login', 'CommentController@check_login');
         Route::post('comment/reply_add', 'CommentController@reply_add');
     });
 

@@ -101,4 +101,25 @@ class CommentController extends BaseController
         return Response::success($data);
     }
 
+    /**
+     * @api {get} /api/comment/check_login 用户登录检测
+     * @apiName check_login
+     * @apiGroup Comment
+     *
+     * @apiDescription  用户评论前,检测是否登录
+     *
+     * @apiVersion 3.0.0
+     * @apiSuccessExample Success-Response:
+     * HTTP/1.1 200 OK
+     * {
+     *     "code": 200,
+     *     "message": "请求成功",
+     *     "data": null
+     * }
+     */
+    public function check_login(Request $request)
+    {
+        return Response::success();
+    }
+
 }

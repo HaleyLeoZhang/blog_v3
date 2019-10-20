@@ -26,7 +26,7 @@ function show_render_container(get_module) {
     function BlogText() {}
     window.blog_text = new BlogText();
 
-    BlogText.prototype.banner_compute = function(){
+    BlogText.prototype.banner_compute = function () {
         /* Compute banner Location */
         var _w = parseInt($("body").width()),
             _mid;
@@ -46,7 +46,8 @@ function show_render_container(get_module) {
     // - 要求窗口大小变化时重新计算
     BlogText.prototype.show_banner = function () {
         var _this = this;
-        _this.banner_compute();console.log(1);
+        _this.banner_compute();
+        console.log(1);
         $(window).resize(_this.banner_compute);
     };
 })(jQuery, window);
@@ -55,9 +56,13 @@ function show_render_container(get_module) {
 (function ($, window, undefined) {
     'use strict';
 
+    var SWITCH_OFF = false;
+    var SWITCH_ON = true;
+
     function Article() {
         this.container_id = "markdown_container";
         this.article_id = $("#markdown_container").attr("yth-article_id");
+        this.loading_index = 0;
     }
     window.article = new Article();
 
@@ -192,36 +197,38 @@ function show_render_container(get_module) {
     // - 回复主楼
     Article.prototype.reply_floor = function (this_obj) {
         var _this = this;
-        layer.prompt({
-            title: "请输入回复内容",
-            formType: 2
-        }, function (content, layer_index) {
-            var page_load_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
-            $.ajax({
-                "url": api("comment", "reply_add"),
-                "type": "post",
-                "dataType": "json",
-                "data": {
-                    "content": content,
-                    "location": _this.article_id,
-                    "parent_id": 0
-                },
-                "success": function (res) {
-                    layer.close(layer_index);
-                    layer.close(page_load_index);
-                    if(res.code == 401) {
-                        hlz_alert.open("请在页面顶部右侧，点击图标登陆");
-                    } else if(res.code == 200) {
-                        _this.get_comments_main();
-                        layer.msg("评论成功！");
-                    } else {
-                        layer.msg(res.message);
+        _this.check_login(function () {
+            layer.prompt({
+                title: "请输入回复内容",
+                formType: 2
+            }, function (content, layer_index) {
+                var page_load_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
+                $.ajax({
+                    "url": api("comment", "reply_add"),
+                    "type": "post",
+                    "dataType": "json",
+                    "data": {
+                        "content": content,
+                        "location": _this.article_id,
+                        "parent_id": 0
+                    },
+                    "success": function (res) {
+                        layer.close(layer_index);
+                        layer.close(page_load_index);
+                        if(res.code == 401) {
+                            hlz_alert.open("请在页面顶部右侧，点击图标登陆");
+                        } else if(res.code == 200) {
+                            _this.get_comments_main();
+                            layer.msg("评论成功！");
+                        } else {
+                            layer.msg(res.message);
+                        }
+                    },
+                    "error": function () {
+                        layer.close(layer_index);
+                        layer.close(page_load_index);
                     }
-                },
-                "error": function () {
-                    layer.close(layer_index);
-                    layer.close(page_load_index);
-                }
+                });
             });
         });
     };
@@ -230,45 +237,73 @@ function show_render_container(get_module) {
         var _this = this;
         var id = $(this_obj).attr("yth_main_floor"),
             name = $(this_obj).attr("yth_name");
-        layer.prompt({
-            title: '请输入回复 <span style="color: #ba55d3;">@' + name + '</span> 的内容',
-            formType: 2
-        }, function (content, layer_index) {
-            $.ajax({
-                "url": api("comment", "reply_add"),
-                "type": "post",
-                "dataType": "json",
-                "data": {
-                    "content": content,
-                    "location": _this.article_id,
-                    "parent_id": id
-                },
-                "success": function (res) {
-                    layer.close(layer_index);
-                    if(res.code == 401) {
-                        hlz_alert.open("请在页面顶部右侧，点击图标登陆");
-                    } else if(res.code == 200) {
-                        // Get this floor's list
-                        yth_pageination({
-                            "api": api("comment", "info"),
-                            "send_other_data": { "location": _this.article_id, "parent_id": id }, // 发送其他 Get 数据
-                            "render_tpl": "article_comment_reply_tpl",
-                            "render_html": "floor_id_" + id,
-                            "pageination_id": "reply_his_pagination_" + id,
-                            "loading_switch": false
-                        });
-                        layer.msg("回复成功！");
-                    } else {
-                        hlz_alert.open(res.message);
+        _this.check_login(function () {
+            layer.prompt({
+                title: '请输入回复 <span style="color: #ba55d3;">@' + name + '</span> 的内容',
+                formType: 2
+            }, function (content, layer_index) {
+                $.ajax({
+                    "url": api("comment", "reply_add"),
+                    "type": "post",
+                    "dataType": "json",
+                    "data": {
+                        "content": content,
+                        "location": _this.article_id,
+                        "parent_id": id
+                    },
+                    "success": function (res) {
+                        layer.close(layer_index);
+                        if(res.code == 401) {
+                            hlz_alert.open("请在页面顶部右侧，点击图标登陆");
+                        } else if(res.code == 200) {
+                            // Get this floor's list
+                            yth_pageination({
+                                "api": api("comment", "info"),
+                                "send_other_data": { "location": _this.article_id, "parent_id": id }, // 发送其他 Get 数据
+                                "render_tpl": "article_comment_reply_tpl",
+                                "render_html": "floor_id_" + id,
+                                "pageination_id": "reply_his_pagination_" + id,
+                                "loading_switch": false
+                            });
+                            layer.msg("回复成功！");
+                        } else {
+                            hlz_alert.open(res.message);
+                        }
+                    },
+                    "error": function () {
+                        layer.close(layer_index);
                     }
-                },
-                "error": function () {
-                    layer.close(layer_index);
-                }
+                });
             });
         });
     };
-
+    Article.prototype.check_login = function (callback) {
+        var _this = this
+        _this.loading(SWITCH_ON)
+        $.ajax({
+            "url": api("comment", "check_login"),
+            "dataType": "json",
+            "success": function (res) {
+                _this.loading(SWITCH_OFF)
+                if(res.code == 401) {
+                    layer.alert('请在页面顶部右侧，点击图标登陆')
+                } else if(res.code == 200) {
+                    callback();
+                }
+            },
+            "error": function () {
+                _this.loading(SWITCH_OFF)
+            }
+        });
+    };
+    Article.prototype.loading = function (_switch) {
+        var _this = this;
+        if(SWITCH_ON === _switch) {
+            _this.loading_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
+        } else {
+            layer.close(_this.loading_index)
+        }
+    };
 
 })(jQuery, window);
 
@@ -276,20 +311,23 @@ function show_render_container(get_module) {
 (function ($, window, undefined) {
     'use strict';
 
+    var SWITCH_OFF = false;
+    var SWITCH_ON = true;
+
     function Board() {
         this.message_list_lock = false; // 请求成功后解锁，防止快速重复请求
+        this.loading_index = 0;
     }
-
     window.board = new Board();
     Board.prototype.message_list = function () {
-        var _this = this; 
+        var _this = this;
         // Judge By page_count 
         var page_count = parseInt($("#message_list").attr("yth_page_count")),
             total = parseInt($("#message_list").attr("yth_total")),
             to_page = parseInt($("#message_list").attr("yth_to_page"));
         if(to_page < page_count) {
             // console.log(to_page);
-            if( _this.message_list_lock ){
+            if(_this.message_list_lock) {
                 return;
             }
             to_page++;
@@ -320,35 +358,66 @@ function show_render_container(get_module) {
         }
     };
     Board.prototype.reply_floor = function () {
-        layer.prompt({
-            title: "请留言内容",
-            formType: 2
-        }, function (content, layer_index) {
-            var page_load_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
-            $.ajax({
-                "url": api("comment", "reply_add"),
-                "type": "post",
-                "dataType": "json",
-                "data": {
-                    "content": content,
-                    "location": 0,
-                    "parent_id": 0
-                },
-                "success": function (res) {
-                    layer.close(page_load_index);
-                    layer.close(layer_index);
-                    if(res.code == 401) {
-                        hlz_alert.open("请在页面顶部右侧，点击图标登陆");
-                    } else if(res.code == 200) {
-                        hlz_alert.open("评论成功~！您的评论将会在页面刷新时显示！");
+        var _this = this
+        _this.check_login(function () {
+            layer.prompt({
+                title: "请留言内容",
+                formType: 2
+            }, function (content, layer_index) {
+                _this.loading(SWITCH_ON)
+                $.ajax({
+                    "url": api("comment", "reply_add"),
+                    "type": "post",
+                    "dataType": "json",
+                    "data": {
+                        "content": content,
+                        "location": 0,
+                        "parent_id": 0
+                    },
+                    "success": function (res) {
+                        _this.loading(SWITCH_OFF)
+                        layer.close(layer_index);
+                        if(res.code == 401) {
+                            layer.alert('请在页面顶部右侧，点击图标登陆')
+                        } else if(res.code == 200) {
+                            layer.alert('评论成功~！')
+                            location.reload()
+                        }
+                    },
+                    "error": function () {
+                        _this.loading(SWITCH_OFF)
+                        layer.close(layer_index);
                     }
-                },
-                "error": function () {
-                    layer.close(page_load_index);
-                    layer.close(layer_index);
-                }
+                });
             });
         });
+    };
+    Board.prototype.check_login = function (callback) {
+        var _this = this
+        _this.loading(SWITCH_ON)
+        $.ajax({
+            "url": api("comment", "check_login"),
+            "dataType": "json",
+            "success": function (res) {
+                _this.loading(SWITCH_OFF)
+                if(res.code == 401) {
+                    layer.alert('请在页面顶部右侧，点击图标登陆')
+                } else if(res.code == 200) {
+                    callback();
+                }
+            },
+            "error": function () {
+                _this.loading(SWITCH_OFF)
+            }
+        });
+    };
+    Board.prototype.loading = function (_switch) {
+        var _this = this;
+        if(SWITCH_ON === _switch) {
+            _this.loading_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
+        } else {
+            layer.close(_this.loading_index)
+        }
     };
     // - 如果到页面底部了
     Board.prototype.is_page_bottom = function () {
