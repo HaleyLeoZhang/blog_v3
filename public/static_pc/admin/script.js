@@ -373,7 +373,6 @@ function confirm_ajax(init) {
     }
     AdminCommonLogic.prototype.render_sidebar_toggle = function () {
         var status = this.get_sidebar_status()
-        console.log('status', status)
         if(STATUS_HIDE == status) {
             console.log('render_sidebar_toggle')
             $("body").addClass("sidebar-collapse");
