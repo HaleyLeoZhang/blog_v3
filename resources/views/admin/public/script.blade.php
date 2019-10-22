@@ -22,7 +22,7 @@
 <script src="{{ cdn_host() }}/static_pc/plugins/pageinate/js/laypage.js"></script>
 <script src="{{ config('static_source_cdn.laod_js') }}"></script> -->
 <script src="{{ cdn_host() }}/static_pc/js/global.js"></script>
-<script src="{{ cdn_host() }}/static_pc/admin/script.js"></script>
+<script src="{{ cdn_host() }}/static_pc/admin/script.js?v=beta_20191022_1438"></script>
 <!-- ------------------------- Blog v2 ------------------------- -->
 <!-- -->
 <!-- -->
