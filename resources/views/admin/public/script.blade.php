@@ -28,6 +28,5 @@
 <!-- -->
 <!-- 自动选中侧边栏 -->
 <script>
-$('.sidebar a[href="' + location.pathname + '"]').eq(0).parent().parent().parent().addClass('active');
-$('.sidebar a[href="' + location.pathname + '"]').eq(0).attr("style", "color:white;");
+admin_common_logic.initial();
 </script>

@@ -84,7 +84,7 @@ function yth_del(url, obj, selector_prefix, func) {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++ UMEditor Link : http://ueditor.baidu.com/website/
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-/** 富文本编辑器相关 
+/** 富文本编辑器相关
  * Boolean  false=>实例化编译器 true=>获取编译内容结果
  * Boolean  false=>设置默认id为Editor实例化 true=>设置对应id为Editor实例化
  * Array    设置菜单显示列表
@@ -99,8 +99,6 @@ function editor(if_get_content, set_container_id, set_menu) {
         UM.getEditor(set_container_id);
     }
 }
-
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Editor.md Link: https://github.com/pandao/editor.md/
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -163,7 +161,7 @@ function yth_check_box_click(this_obj) {
 
 /**
  * 滑动开关，初始化
- * Boolean  true => 开启  false => 状态为关闭  
+ * Boolean  true => 开启  false => 状态为关闭
  * String   input 字段名
  * String   按钮名字
  */
@@ -186,8 +184,8 @@ function yth_check_box_html(status, input_name, btn_name, func) {
     // 预留切换数据
     str = `
         <div class="layui-unselect layui-form-switch ${switch_div[status]}"
-            lay-skin="switch" yth-check_box="${btn_name}" 
-            onclick="yth_check_box_click(this);${func}"> 
+            lay-skin="switch" yth-check_box="${btn_name}"
+            onclick="yth_check_box_click(this);${func}">
             <input type="hidden" id="${input_name}" value="${status}">
             <em>${btn[status]}</em> <i></i>
         </div>`;
@@ -219,14 +217,14 @@ function yth_radio_logic(this_obj, id_name) {
  * - 请求方式固定：POST
  */
 function confirm_ajax(init) {
-    var need_confirm = init.need_confirm === undefined ? true: init.need_confirm; // true->需要确认，false->不需要确认
+    var need_confirm = init.need_confirm === undefined ? true : init.need_confirm; // true->需要确认，false->不需要确认
     var title = init.title || '';
-    var need_load = init.need_load === undefined ?  true : init.need_load;
+    var need_load = init.need_load === undefined ? true : init.need_load;
     var api_url = init.api_url; // 必填，请求地址 string
     var api_data = init.data; // 必填，请求数据 array
     var res_text = init.res_text; // 必填， 成功时，弹出的文案
 
-    var do_request = function(){
+    var do_request = function () {
         layer.close(confirm_index);
         var shadow_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
         $.ajax({
@@ -249,18 +247,150 @@ function confirm_ajax(init) {
         });
     };
 
-    if( need_confirm ){
+    if(need_confirm) {
         var confirm_index = layer.confirm(title, {
             btn: ['是的', '不了'] // 按钮
         }, function () {
             do_request();
         });
-    }else{
+    } else {
         do_request();
     }
-
-
-
-
-
 }
+
+// ----------------------------------------------------
+// 公用逻辑
+// ----------------------------------------------------
+(function ($, window, undefined) {
+    'use strict';
+
+    function CommonCache() {
+        this.storage_engine = 'session'; // local || session
+    }
+    /**
+     * 设置存储引擎对象
+     */
+    CommonCache.prototype.set_engine = function (storage_engine) {
+        this.storage_engine = storage_engine
+    };
+    /**
+     * 返回存储引擎对象
+     * @return localStorage || sessionStorage
+     */
+    CommonCache.prototype.get_engine = function () {
+        switch(this.storage_engine) {
+        case 'local':
+            return window.localStorage
+        case 'session':
+            return window.sessionStorage
+        default:
+            throw new Error('存储引擎输入错误')
+        }
+    };
+    /**
+     * 本地数据缓存-注意 2.5M 存储上限
+     * @return bool
+     */
+    CommonCache.prototype.data_set = function (name, data, ttl) {
+        var engine = this.get_engine()
+        try {
+            if(engine) {
+                // Set
+                var time = parseInt(
+                    (new Date().getTime()) / 1000
+                );
+                var expire_at = time + ttl;
+                var new_data = {
+                    data,
+                    expire_at
+                }
+                engine.setItem(name, JSON.stringify(new_data));
+                return true;
+            } else {
+                throw new Error("不支持当前存储方案")
+            }
+        } catch(e) {
+            if(e.name === 'QuotaExceededError') {
+                console.warn('缓存存储失败信息:', '超出本地存储限额,即将清空本地所有此种缓存');
+                engine.clear();
+            } else {
+                console.warn('缓存存储失败信息:', e.message)
+            }
+            return false
+        }
+    };
+    /**
+     * 本地数据缓存-注意 2.5M 存储上限
+     * @return Object
+     */
+    CommonCache.prototype.data_get = function (name) {
+        var engine = this.get_engine()
+        try {
+            if(engine) {
+
+                var old_data = engine.getItem(name);
+                if(!old_data) {
+                    throw new Error("缓存失效")
+                }
+                old_data = JSON.parse(old_data);
+
+                var current_time = parseInt(
+                    (new Date().getTime()) / 1000
+                );
+                if(current_time > old_data.expire_at) {
+                    engine.removeItem(name);
+                    throw new Error("缓存过期")
+                }
+                return old_data.data
+            } else {
+                throw new Error("不支持当前存储方案")
+            }
+        } catch(e) {
+            console.warn('错误信息:', e.message)
+            return null
+        }
+    };
+    window.common_cache = new CommonCache();
+
+    var STATUS_HIDE = false
+    var STATUS_SHOW = true
+
+    function AdminCommonLogic() {
+        this.toggle_status = 'sidebar_status';
+        this.cache_ttl = 9999
+    }
+    AdminCommonLogic.prototype.unfold_sidebar = function () {
+        $('.sidebar a[href="' + location.pathname + '"]').eq(0).parent().parent().parent().addClass('active');
+        $('.sidebar a[href="' + location.pathname + '"]').eq(0).attr("style", "color:white;");
+    }
+    AdminCommonLogic.prototype.get_sidebar_status = function () {
+        var status = common_cache.data_get(this.toggle_status)
+        if(null === status) {
+            status = STATUS_SHOW
+            common_cache.data_set(this.toggle_status, status, this.cache_ttl)
+        }
+        return status
+    }
+    AdminCommonLogic.prototype.render_sidebar_toggle = function () {
+        var status = this.get_sidebar_status()
+        console.log('status', status)
+        if(STATUS_HIDE == status) {
+            console.log('render_sidebar_toggle')
+            $("body").addClass("sidebar-collapse");
+        }
+    }
+    AdminCommonLogic.prototype.listener_revert_sidebar = function () {
+        var _this = this
+        var status = _this.get_sidebar_status()
+        $(".wrapper").delegate(".sidebar-toggle", "click", function () {
+            common_cache.data_set(_this.toggle_status, !status, _this.cache_ttl)
+        });
+    }
+    AdminCommonLogic.prototype.initial = function () {
+        this.unfold_sidebar();
+        this.render_sidebar_toggle();
+        this.listener_revert_sidebar();
+    }
+    window.admin_common_logic = new AdminCommonLogic();
+
+})(jQuery, window);
