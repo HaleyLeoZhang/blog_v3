@@ -26,7 +26,7 @@
                                         <tr height="62">
                                             <td>
                                                 <p style="font-family: '微软雅黑', 'Microsoft Yahei', '宋体', 'simsun', '黑体', Arial, sans-serif !important;">
-                                                    <a href="{:config('now_host')}" style="font-weight:bolder;color:#4d82dc;text-decoration:none;" target="_blank"><span style="color:#ad91e1;">来自</span> {{ $hostname }}</a>
+                                                    <a href="http://www.hlzblog.top" style="font-weight:bolder;color:#4d82dc;text-decoration:none;" target="_blank"><span style="color:#ad91e1;">来自</span> www.hlzblog.top </a>
                                                 </p>
                                             </td>
                                         </tr>
