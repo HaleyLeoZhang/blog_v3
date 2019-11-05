@@ -11,27 +11,37 @@ use App\Services\OAuth2\SinaOAuth2Service;
 class ActionOAuth2Logic
 {
 
+    static $name_to_oauth2_map = [
+        "qq"     => User::USER_TYPE_QQ,
+        "sina"   => User::USER_TYPE_SINA,
+        "github" => User::USER_TYPE_GITHUB,
+    ];
+
+    static $allow_oauth2_type_list = [
+        User::USER_TYPE_QQ,
+        User::USER_TYPE_SINA,
+        User::USER_TYPE_GITHUB,
+    ];
+
+    static $oauth2_class_map = [
+        User::USER_TYPE_QQ     => QqOAuth2Service::class,
+        User::USER_TYPE_SINA   => SinaOAuth2Service::class,
+        User::USER_TYPE_GITHUB => GithubOAuth2Service::class,
+    ];
+
+
     /**
      * 获取 Oauth 对象
-     * @param string $oauth_type
+     * @param string $oauth_name
      * @return App\Services\OAuth2\...
      */
-    public static function get_oauth_obj($oauth_type)
+    public static function get_oauth_obj($oauth_name)
     {
-        $user_type = User::$user_type_map[$oauth_type] ?? '-';
-        switch ($user_type) {
-            case User::USER_TYPE_QQ:
-                $object = new QqOAuth2Service();
-                break;
-            case User::USER_TYPE_SINA:
-                $object = new SinaOAuth2Service();
-                break;
-            case User::USER_TYPE_GITHUB:
-                $object = new GithubOAuth2Service();
-                break;
-            default:
-                throw new \Exception("未知的第三方类型");
+        if (!array_key_exists($oauth_name, self::$name_to_oauth2_map)) {
+            throw new \Exception("未知的第三方类型");
         }
+        $oauth_type = self::$name_to_oauth2_map[$oauth_name];
+        $object = new self::$oauth2_class_map[$oauth_type];
         return $object;
     }
 
@@ -39,9 +49,9 @@ class ActionOAuth2Logic
      * 获取跳转到第三方的地址链接
      * @return string
      */
-    public static function get_third_login_url($oauth_type): string
+    public static function get_third_login_url($oauth_name): string
     {
-        $object = self::get_oauth_obj($oauth_type);
+        $object = self::get_oauth_obj($oauth_name);
         $url    = $object->get_third_login_url();
         return $url;
     }
@@ -49,10 +59,10 @@ class ActionOAuth2Logic
     /**
      * @return \App\Models\User
      */
-    public static function callback($params, $oauth_type): User
+    public static function callback($params, $oauth_name): User
     {
-        $object    = self::get_oauth_obj($oauth_type);
-        $user_type = User::$user_type_map[$oauth_type];
+        $object    = self::get_oauth_obj($oauth_name);
+        $user_type = self::$name_to_oauth2_map[$oauth_name];
         // 获取用户基本信息  oauth_key、name、pic
 
         $user_info = $object->get_third_user_info();
