@@ -4,6 +4,7 @@ namespace App\Repositories\Common\Logic;
 use App\Services\Api\ExpressDeliveryApiService;
 use App\Services\Api\ShortUrlApiService;
 use Illuminate\Support\Facades\Redis;
+use Log;
 
 class CommonLogic
 {
@@ -40,13 +41,13 @@ class CommonLogic
         return $track_info;
     }
 
-
     /**
      * @return array
      */
-    public static function short_url($long_url)
+    public static function short_url($long_url, $channel)
     {
-        $short_url = ShortUrlApiService::run($long_url);
+        $short_url = ShortUrlApiService::run($long_url, $channel);
+        Log::info('channel---' . $channel . ' long_url ' . $long_url . ' short_url ' . $short_url); // 后期记录入库
         return $short_url;
     }
 

@@ -13,28 +13,37 @@
 (function ($, window, undefined) {
     'use strict';
 
+    var SWITCH_OFF = false;
+    var SWITCH_ON = true;
+
     function ShortUrl() {
         this.long_url = ''; // 用户输入的长地址
+        this.result_container_id = '#short_url';
     }
     // 获取短地址
     ShortUrl.prototype.request_api = function () {
         var _this = this;
+
+        _this.loading(SWITCH_ON)
         $.ajax({
             "url": "/api/general/short_url",
             "type": "post",
             "data": {
                 "long_url": _this.long_url,
+                "channel": "third",
             },
             "dataType": "json",
             "success": function (d) {
+                _this.loading(SWITCH_OFF);
                 if(d.code != 200) {
                     layer.alert(d.message);
                 } else {
-                    $("#short_url").val(d.data.short_url);
+                    $(_this.result_container_id).val(d.data.short_url);
                     layer.msg('短地址已生成');
                 }
             },
             "error": function () {
+                _this.loading(SWITCH_OFF);
                 layer.message('网络错误');
             }
         });
@@ -48,6 +57,16 @@
         }
         return true;
     };
+
+    ShortUrl.prototype.loading = function (_switch) {
+        var _this = this;
+        if(SWITCH_ON === _switch) {
+            _this.loading_index = layer.load(0, { shade: [0.5, '#fff'] }); // 加载层 开启
+        } else {
+            layer.close(_this.loading_index)
+        }
+    };
+
     // 监听按钮
     ShortUrl.prototype.listener_btn = function () {
         var _this = this;

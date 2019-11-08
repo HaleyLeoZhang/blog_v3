@@ -92,6 +92,7 @@ class GeneralController extends BaseController
      * @apiGroup General
 
      * @apiParam {string}  long_url 长地址
+     * @apiParam {string}  channel 获取渠道.枚举值: third 对应 t.cn ; bitly 对应 bit.ly
      *
      * @apiDescription  长地址转短地址（新浪短地址服务）
      *
@@ -108,8 +109,14 @@ class GeneralController extends BaseController
      */
     public function short_url(Request $request)
     {
+        $filter = [
+            'long_url' => 'required',
+        ];
+        $this->validate($request, $filter);
         $long_url = $request->input('long_url', '');
-        $data     = CommonRepository::short_url($long_url);
+        $channel  = $request->input('channel', 'third');
+
+        $data = CommonRepository::short_url($long_url, $channel);
         return Response::success($data);
     }
 }

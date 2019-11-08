@@ -6,7 +6,7 @@ use App\Services\OAuth2\Wechat\ApiService;
 // ----------------------------------------------------------------------
 // OAuth2 - Wechat
 // ----------------------------------------------------------------------
-// 接口文档  https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842
+// 接口文档  https://developers.weixin.qq.com/doc/oplatform/Website_App/WeChat_Login/Wechat_Login.html
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang

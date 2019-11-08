@@ -39,9 +39,9 @@ class CommonRepository
      * @param string long_url 长地址
      * @return array
      */
-    public static function short_url($long_url)
+    public static function short_url($long_url, $channel)
     {
-        $short_url = CommonLogic::short_url($long_url);
+        $short_url = CommonLogic::short_url($long_url, $channel);
         $data      = compact('short_url');
         return $data;
     }
