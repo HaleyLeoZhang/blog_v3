@@ -12,9 +12,12 @@ namespace App\Helpers;
 
 class CurlRequest
 {
+    const IS_FOLLOW_YES = true;
+    const IS_FOLLOW_NO  = false;
 
     // 配置项
-    protected static $timeout = 0; // 设置默认超时秒数，0 => 不需要设置
+    protected static $timeout   = 0; // 设置默认超时秒数，0 => 不需要设置
+    protected static $is_follow = self::IS_FOLLOW_NO; // 设置是否跟随重定向
 
     /**
      * POST或GET请求，并返回数据
@@ -73,6 +76,10 @@ class CurlRequest
         if (self::$timeout) {
             curl_setopt($ch, CURLOPT_TIMEOUT, self::$timeout);
         }
+        // Follow
+        if (self::$is_follow) {
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        }
         // gzip 解压
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
         $content   = curl_exec($ch); // 开始访问指定URL
@@ -95,6 +102,16 @@ class CurlRequest
     {
         self::$timeout = $second;
     }
+
+    /**
+     * 设置当前工具全局 Curl 跟随页面状态
+     * @param bool $follow 设置的curl请求，超时的秒数
+     */
+    public static function set_follow($follow)
+    {
+        self::$is_follow = $follow;
+    }
+
 }
 
 // // 示例爬取 酷狗音乐，'刚好遇见你' 的链接地址

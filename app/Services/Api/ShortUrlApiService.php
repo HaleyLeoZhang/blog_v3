@@ -15,30 +15,29 @@ use Log;
 
 class ShortUrlApiService
 {
-    const SINA_SOURCE_ID = '3271760578'; // 新浪API对应令牌地址
-    const TIMER          = 3; // 设置超时时间,单位,秒
+    const TIMER = 3; // 设置超时时间,单位,秒
 
     /**
      * @var 渠道名
      */
-    const CHANNEL_SINA  = 'sina';
-    const CHANNEL_THIRD = 'third';
-    const CHANNEL_BITLY = 'bitly';
+    const CHANNEL_SINA    = 'sina';
+    const CHANNEL_BITLY   = 'bitly';
+    const CHANNEL_TENCENT = 'tencent';
 
     /**
      * @var 渠道API
      */
-    const API_THIRD = 'http://qvni.cn/t.cn/ajax.php';
-    const API_SINA  = 'http://api.t.sina.com.cn/short_url/shorten.json';
-    const API_BITLY = 'https://bitly.com/data/shorten';
+    const API_SINA    = 'https://i.alapi.cn/url';
+    const API_BITLY   = 'https://bitly.com/data/shorten';
+    const API_TENCENT = 'http://sa.sogou.com/gettiny';
 
     /**
      * @var 渠道API关系
      */
     static $channel_list = [
-        self::CHANNEL_THIRD => self::API_THIRD,
-        // self::CHANNEL_SINA  => self::API_SINA, // 暂时用第三方替代
-        self::CHANNEL_BITLY => self::API_BITLY,
+        self::CHANNEL_SINA    => self::API_SINA,
+        self::CHANNEL_BITLY   => self::API_BITLY,
+        self::CHANNEL_TENCENT => self::API_TENCENT,
     ];
 
     /**
@@ -49,7 +48,7 @@ class ShortUrlApiService
      *     "url_short" => "",
      * ];
      */
-    public static function run($long_url, $channel = self::CHANNEL_BITLY)
+    public static function run($long_url, $channel = self::API_TENCENT)
     {
         if (!array_key_exists($channel, self::$channel_list)) {
             throw new \Exception("未知渠道类型");
@@ -70,52 +69,23 @@ class ShortUrlApiService
     }
 
     /**
-     * 直连新浪---因 source_id 失效, 目前暂停使用
+     * 新浪短地址 t.cn
+     * - 原理: 微博分享页拿到短地址
      *
      * @param string $long_url 长地址
      * @return array
      */
     private static function channel_sina($long_url)
     {
-        $param             = [];
-        $param['source']   = self::SINA_SOURCE_ID;
-        $param['url_long'] = $long_url;
-        $api               = self::API_SINA . '?' . http_build_query($param);
+        $param        = [];
+        $param['url'] = $long_url;
+
+        $api = self::API_SINA . '?' . http_build_query($param);
         // 发出请求
+        CurlRequest::set_follow(CurlRequest::IS_FOLLOW_YES);
         $content   = CurlRequest::run($api);
-        $info      = json_decode($content, true);
-        $url_info  = $info[0] ?? null;
-        $url_short = $url_info['url_short'] ?? '';
-        return compact('content', 'url_short');
-    }
-
-    /**
-     * 生成新浪短地址的第三方渠道 http://qvni.cn/t.cn/
-     *
-     * @param string $long_url 长地址
-     * @return array
-     */
-    private static function channel_third($long_url)
-    {
-        $header = [
-            "Accept: */*",
-            "Accept-Encoding: gzip, deflate",
-            "Accept-Language: zh-CN,zh;q=0.9,en;q=0.8",
-            "Connection: keep-alive",
-            "Content-Type: application/x-www-form-urlencoded; charset=UTF-8",
-            "Host: qvni.cn",
-            "Origin: http://qvni.cn",
-            "Referer: http://qvni.cn/t.cn/",
-            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36",
-            "X-Requested-With: XMLHttpRequest",
-        ];
-        $param            = [];
-        $param['longurl'] = $long_url;
-
-        $api = self::API_THIRD;
-        // 发出请求
-        $content   = CurlRequest::run($api, http_build_query($param));
-        $short_url = $content;
+        $res = json_decode($content, true);
+        $short_url = $res['shortUrl'] ?? '';
         return compact('content', 'short_url');
     }
 
@@ -144,10 +114,29 @@ class ShortUrlApiService
         $param['url'] = $long_url;
         $api          = self::API_BITLY;
         // 发出请求
-        $content   = CurlRequest::run($api, http_build_query($param), $header);
+        $content = CurlRequest::run($api, http_build_query($param), $header);
 
-        $response = json_decode($content, true);
+        $response  = json_decode($content, true);
         $short_url = $response['data']['anon_shorten']['aggregate_link'] ?? '';
+
+        $short_url = str_replace('bit.ly', 'j.mp', $short_url);
+        return compact('content', 'short_url');
+    }
+
+    /**
+     * 腾讯的 URl.CN
+     *
+     * @param string $long_url 长地址
+     * @return array
+     */
+    private static function channel_tencent($long_url)
+    {
+        $param        = [];
+        $param['url'] = $long_url;
+        $api          = self::API_TENCENT . '?' . http_build_query($param);
+        // 发出请求
+        $content   = CurlRequest::run($api);
+        $short_url = $content;
         return compact('content', 'short_url');
     }
 
