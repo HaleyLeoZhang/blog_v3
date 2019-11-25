@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Article;
 
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\ArticleRepository;
+use App\Bussiness\Admin\ArticleBussiness;
 use Illuminate\Http\Request;
 
 // use App\Models\Blog\Article;
@@ -50,7 +50,7 @@ class ApiController extends BaseController
     public function category_info(Request $request)
     {
         $data         = [];
-        $data['info'] = ArticleRepository::category_info();
+        $data['info'] = ArticleBussiness::category_info();
         return Response::success($data);
     }
 
@@ -82,7 +82,7 @@ class ApiController extends BaseController
         $this->validate($request, $filter);
         $id    = $request->input('id');
         $title = $request->input('title');
-        ArticleRepository::category_edit($id, $title);
+        ArticleBussiness::category_edit($id, $title);
         return Response::success();
     }
 
@@ -111,7 +111,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $id = $request->input('id');
-        ArticleRepository::category_del($id);
+        ArticleBussiness::category_del($id);
         return Response::success();
     }
 
@@ -140,7 +140,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $title = $request->input('title');
-        ArticleRepository::category_add($title);
+        ArticleBussiness::category_add($title);
         return Response::success();
     }
 
@@ -190,7 +190,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        ArticleRepository::detail_create($params);
+        ArticleBussiness::detail_create($params);
         return Response::success();
     }
 
@@ -241,7 +241,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        ArticleRepository::detail_edit($params);
+        ArticleBussiness::detail_edit($params);
         return Response::success();
 
     }
@@ -271,7 +271,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $id = $request->input('id');
-        ArticleRepository::detail_del($id);
+        ArticleBussiness::detail_del($id);
         return Response::success();
     }
 
@@ -300,7 +300,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $id = $request->input('id');
-        ArticleRepository::article_check_line($id);
+        ArticleBussiness::article_check_line($id);
         return Response::success();
     }
 
@@ -331,7 +331,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $url = $request->input('url');
-        ArticleRepository::background_add($url);
+        ArticleBussiness::background_add($url);
         return Response::success();
     }
 
@@ -374,7 +374,7 @@ class ApiController extends BaseController
      */
     public function background_info(Request $request)
     {
-        $data = ArticleRepository::background_info();
+        $data = ArticleBussiness::background_info();
         return Response::success($data);
     }
 
@@ -406,7 +406,7 @@ class ApiController extends BaseController
         $this->validate($request, $filter);
         $id  = $request->input('id');
         $url = $request->input('url');
-        ArticleRepository::background_edit($id, $url);
+        ArticleBussiness::background_edit($id, $url);
         return Response::success();
     }
 
@@ -435,7 +435,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $id = $request->input('id');
-        ArticleRepository::background_del($id);
+        ArticleBussiness::background_del($id);
         return Response::success();
     }
 

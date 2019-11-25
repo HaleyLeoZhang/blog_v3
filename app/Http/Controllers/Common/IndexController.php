@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Common;
  * 各种用户账号管理操作相关
  */
 use App\Http\Controllers\BaseController;
-use App\Repositories\Article\ArticleRepository;
-use App\Repositories\Index\IndexRepository;
+use App\Bussiness\Article\ArticleBussiness;
+use App\Bussiness\Index\IndexBussiness;
 use Illuminate\Http\Request;
 
 class IndexController extends BaseController
@@ -19,7 +19,7 @@ class IndexController extends BaseController
     public function render(Request $request)
     {
         $params = $request->all();
-        $render = IndexRepository::dispatcher($params);
+        $render = IndexBussiness::dispatcher($params);
         return view('module/index/index', $render);
     }
 
@@ -30,7 +30,7 @@ class IndexController extends BaseController
      */
     public function detail($article_id)
     {
-        $render = ArticleRepository::detail($article_id);
+        $render = ArticleBussiness::detail($article_id);
         return view('module/article/index', $render);
     }
 
@@ -41,7 +41,7 @@ class IndexController extends BaseController
     public function board(Request $request)
     {
         $params = $request->all();
-        $render = IndexRepository::board($params);
+        $render = IndexBussiness::board($params);
         return view('module/board/index', $render);
     }
 }

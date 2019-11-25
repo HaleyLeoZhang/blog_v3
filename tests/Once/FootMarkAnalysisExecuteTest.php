@@ -2,7 +2,7 @@
 namespace tests\Once;
 
 use App\Models\Logs\VisitorFootMark;
-use App\Repositories\Log\Logic\VisitorLogLogic;
+use App\Bussiness\Log\Logic\VisitorLogLogic;
 use LogService;
 
 class FootMarkAnalysisExecuteTest extends \TestCase

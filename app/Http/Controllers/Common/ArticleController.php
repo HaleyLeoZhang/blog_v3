@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Common;
  */
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
-use App\Repositories\Article\ArticleRepository;
+use App\Bussiness\Article\ArticleBussiness;
 
 class ArticleController extends BaseController
 {
@@ -19,7 +19,7 @@ class ArticleController extends BaseController
      */
     public function detail($article_id)
     {
-        $data = ArticleRepository::detail($article_id);
+        $data = ArticleBussiness::detail($article_id);
         return view('module/article/index', $data);
     }
 

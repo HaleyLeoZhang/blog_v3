@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Article;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Blog\Article;
-use App\Repositories\Admin\ArticleRepository;
+use App\Bussiness\Admin\ArticleBussiness;
 use Illuminate\Http\Request;
 
 class ViewController extends BaseController
@@ -42,7 +42,7 @@ class ViewController extends BaseController
             'original', 'edit_type', 'sticky', 'online',
             'time_start', 'time_end', 'vague'
         );
-        $render           = ArticleRepository::detail_info($params);
+        $render           = ArticleBussiness::detail_info($params);
         $params['render'] = $render;
         return view('admin.article.detail_info', $params);
     }
@@ -57,7 +57,7 @@ class ViewController extends BaseController
         // - 状态搜索
         $article_id = Article::DEFAULT_ARTICLE_FOR_CREATE; // 文章ID为0，表示使用默认配置
 
-        list($render, $category) = ArticleRepository::detail_edit_view($article_id);
+        list($render, $category) = ArticleBussiness::detail_edit_view($article_id);
         // - 初始化列表数据
         $list_edit_type = Article::$list_edit_type;
         array_shift($list_edit_type);
@@ -95,7 +95,7 @@ class ViewController extends BaseController
         // - 状态搜索
         $article_id = $request->input('id'); // 文章ID
 
-        list($render, $category) = ArticleRepository::detail_edit_view($article_id);
+        list($render, $category) = ArticleBussiness::detail_edit_view($article_id);
         // - 初始化列表数据
         $list_edit_type = Article::$list_edit_type;
         array_shift($list_edit_type);

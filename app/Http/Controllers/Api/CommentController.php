@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Comment\CommentRepository;
+use App\Bussiness\Comment\CommentBussiness;
 use Illuminate\Http\Request;
 
 class CommentController extends BaseController
@@ -56,7 +56,7 @@ class CommentController extends BaseController
         $this->validate($request, $filter);
         $parent_id = $request->input('parent_id', \CommonService::COMMENT_CHILD_NO);
         $location  = $request->input('location');
-        $data      = CommentRepository::info($parent_id, $location);
+        $data      = CommentBussiness::info($parent_id, $location);
         return Response::success($data);
     }
 
@@ -97,7 +97,7 @@ class CommentController extends BaseController
             'content',
             'location'
         );
-        $data = CommentRepository::reply_add($params);
+        $data = CommentBussiness::reply_add($params);
         return Response::success($data);
     }
 

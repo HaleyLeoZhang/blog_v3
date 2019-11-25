@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin\Visitor;
  */
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\VisitorRepository;
+use App\Bussiness\Admin\VisitorBussiness;
 use Illuminate\Http\Request;
 
 class ApiController extends BaseController

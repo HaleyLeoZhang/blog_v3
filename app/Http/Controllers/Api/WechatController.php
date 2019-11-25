@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
-use App\Repositories\Wechat\WechatRepository;
+use App\Bussiness\Wechat\WechatBussiness;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use LogService;
@@ -89,7 +89,7 @@ class WechatController extends BaseController
         switch ($this->MsgType) {
             // 接收普通消息
             case 'text': // 文本消息
-                $result = WechatRepository::text(trim($this->Content));
+                $result = WechatBussiness::text(trim($this->Content));
                 break;
             case 'image': // 图片消息
                 break;
@@ -108,12 +108,12 @@ class WechatController extends BaseController
                 if ($this->Event == 'CLICK') {
                     // 关于我们
                     if ($this->EventKey == 'About_button') {
-                        $result = WechatRepository::text('About_button');
+                        $result = WechatBussiness::text('About_button');
                     }
                 }
                 break;
             default: // 默认回复
-                $result = WechatRepository::text('');
+                $result = WechatBussiness::text('');
                 break;
         }
         return $this->handle_response($result['event'], $result['arr']);

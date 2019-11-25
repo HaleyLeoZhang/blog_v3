@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Common\CommonRepository;
+use App\Bussiness\Common\CommonBussiness;
 use Illuminate\Http\Request;
 
 class GeneralController extends BaseController
@@ -30,7 +30,7 @@ class GeneralController extends BaseController
      */
     public function memorabilia_bg()
     {
-        $data = CommonRepository::memorabilia_bg();
+        $data = CommonBussiness::memorabilia_bg();
         return Response::success($data);
     }
 
@@ -82,7 +82,7 @@ class GeneralController extends BaseController
     public function express_delivery(Request $request)
     {
         $tracking_number = $request->input('tracking_number', '');
-        $data            = CommonRepository::express_delivery($tracking_number);
+        $data            = CommonBussiness::express_delivery($tracking_number);
         return Response::success($data);
     }
 
@@ -116,7 +116,7 @@ class GeneralController extends BaseController
         $long_url = $request->input('long_url', '');
         $channel  = $request->input('channel', 'third');
 
-        $data = CommonRepository::short_url($long_url, $channel);
+        $data = CommonBussiness::short_url($long_url, $channel);
         return Response::success($data);
     }
 }

@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Spa\SpaRepository;
+use App\Bussiness\Spa\SpaBussiness;
 use Illuminate\Http\Request;
 
 class SpaController extends BaseController
@@ -45,7 +45,7 @@ class SpaController extends BaseController
      */
     public function category_list(Request $request)
     {
-        $data = SpaRepository::category_list();
+        $data = SpaBussiness::category_list();
         return Response::success($data);
     }
 
@@ -102,7 +102,7 @@ class SpaController extends BaseController
     public function article_list(Request $request)
     {
         $params = $request->all();
-        $data   = SpaRepository::article_list($params);
+        $data   = SpaBussiness::article_list($params);
         return Response::success($data);
     }
 
@@ -147,7 +147,7 @@ class SpaController extends BaseController
         ];
         $this->validate($request, $filter);
         $article_id = $request->input('article_id');
-        $data       = SpaRepository::article_detail($article_id);
+        $data       = SpaBussiness::article_detail($article_id);
         return Response::success($data);
     }
 

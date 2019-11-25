@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin\Common;
  * 公共模块
  */
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\CommonRepository;
+use App\Bussiness\Admin\CommonBussiness;
 use Illuminate\Http\Request;
 
 class ViewController extends BaseController
@@ -18,7 +18,7 @@ class ViewController extends BaseController
      */
     public function friend_link(Request $request)
     {
-        $render = CommonRepository::friend_link();
+        $render = CommonBussiness::friend_link();
         $data        = compact('render');
         return view('admin/common/friend_link', $data);
     }

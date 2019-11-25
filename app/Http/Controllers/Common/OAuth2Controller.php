@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Common;
 
-use App\Http\Controllers\BaseController;
+use App\Bussiness\OAuth2\OAuth2Bussiness;
 
 /**
  * 第三方登录统一处理
  */
-use App\Repositories\OAuth2\OAuth2Repository;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class OAuth2Controller extends BaseController
@@ -22,9 +22,9 @@ class OAuth2Controller extends BaseController
         ];
         $this->validate($request, $filter);
         $oauth_type = $request->input('gateway');
-        $redirect   = OAuth2Repository::get_third_login_url($oauth_type);
+        $redirect   = OAuth2Bussiness::get_third_login_url($oauth_type);
 
-        $redirect_after_login   = $_SERVER['HTTP_REFERER'] ?? '/';
+        $redirect_after_login = $_SERVER['HTTP_REFERER'] ?? '/';
 
         $render = compact('redirect', 'redirect_after_login');
 
@@ -38,8 +38,7 @@ class OAuth2Controller extends BaseController
     {
         $params     = $request->all();
         $oauth_type = 'qq';
-        $render     = OAuth2Repository::callback($params, $oauth_type);
-        return view('login/oauth2/callback', $render);
+        return $this->callback($params, $oauth_type);
     }
 
     /**
@@ -49,8 +48,7 @@ class OAuth2Controller extends BaseController
     {
         $params     = $request->all();
         $oauth_type = 'sina';
-        $render     = OAuth2Repository::callback($params, $oauth_type);
-        return view('login/oauth2/callback', $render);
+        return $this->callback($params, $oauth_type);
     }
 
     /**
@@ -60,8 +58,7 @@ class OAuth2Controller extends BaseController
     {
         $params     = $request->all();
         $oauth_type = 'github';
-        $render     = OAuth2Repository::callback($params, $oauth_type);
-        return view('login/oauth2/callback', $render);
+        return $this->callback($params, $oauth_type);
     }
 
     /**
@@ -71,7 +68,15 @@ class OAuth2Controller extends BaseController
     {
         $params     = $request->all();
         $oauth_type = 'wechat';
-        $render     = OAuth2Repository::callback($params, $oauth_type);
+        return $this->callback($params, $oauth_type);
+    }
+
+    /**
+     * Wechat 回调
+     */
+    protected function callback($params, $oauth_type)
+    {
+        $render = OAuth2Bussiness::callback($params, $oauth_type);
         return view('login/oauth2/callback', $render);
     }
 
@@ -106,7 +111,7 @@ class OAuth2Controller extends BaseController
             'redirect' => 'required',
         ];
         $this->validate($request, $filter);
-        $redirect  = $request->input('redirect');
+        $redirect = $request->input('redirect');
         return redirect(urldecode($redirect));
     }
 
@@ -115,11 +120,10 @@ class OAuth2Controller extends BaseController
      */
     public function logout(Request $request)
     {
-        $render     = OAuth2Repository::logout();
+        $render = OAuth2Bussiness::logout();
         // --- Browser端数据清洗
-        $redirect   = $_SERVER['HTTP_REFERER'] ?? '/';
+        $redirect = $_SERVER['HTTP_REFERER'] ?? '/';
         return redirect($redirect);
     }
-
 
 }

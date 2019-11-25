@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin\Upload;
  */
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\UploadRepository;
+use App\Bussiness\Admin\UploadBussiness;
 
 class ApiController extends BaseController
 {
@@ -33,7 +33,7 @@ class ApiController extends BaseController
     {
         list($path, $type, $size) = $this->check_has_file('editormd-image-file');
         $file_info = compact('path', 'type', 'size');
-        $data      = UploadRepository::markdown($file_info);
+        $data      = UploadBussiness::markdown($file_info);
         return json_encode($data);
     }
 
@@ -60,7 +60,7 @@ class ApiController extends BaseController
     {
         list($path, $type, $size) = $this->check_has_file('upfile');
         $file_info = compact('path', 'type', 'size');
-        $data      = UploadRepository::editor($file_info);
+        $data      = UploadBussiness::editor($file_info);
         return json_encode($data);
     }
 

@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin\User;
  */
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\UserRepository;
+use App\Bussiness\Admin\UserBussiness;
 use Illuminate\Http\Request;
 
 class ApiController extends BaseController
@@ -35,7 +35,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        UserRepository::user_list_handle($params);
+        UserBussiness::user_list_handle($params);
         return Response::success();
     }
 
@@ -62,7 +62,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        UserRepository::hanld_bind_relation($params);
+        UserBussiness::hanld_bind_relation($params);
         return Response::success();
     }
 
@@ -89,7 +89,7 @@ class ApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        UserRepository::comments_update($params);
+        UserBussiness::comments_update($params);
         return Response::success();
     }
 

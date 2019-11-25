@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin\System;
  * 公共模块
  */
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\SystemRepository;
+use App\Bussiness\Admin\SystemBussiness;
 use App\Models\Logs\UploadLog;
 use Illuminate\Http\Request;
 
@@ -25,7 +25,7 @@ class ViewController extends BaseController
         $params['time_end']   = $request->input('time_end', '');
         \LogService::debug('params ' , $params);
 
-        $render = SystemRepository::pic_bed($params);
+        $render = SystemBussiness::pic_bed($params);
         $data   = compact(
             'render',
             'params'

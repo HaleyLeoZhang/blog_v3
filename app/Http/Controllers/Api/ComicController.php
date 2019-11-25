@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Comic\ComicRepository;
+use App\Bussiness\Comic\ComicBussiness;
 use Illuminate\Http\Request;
 
 class ComicController extends BaseController
@@ -62,7 +62,7 @@ class ComicController extends BaseController
             'page'
         );
 
-        $pic_list = ComicRepository::pic_list($params);
+        $pic_list = ComicBussiness::pic_list($params);
 
         $data = compact('pic_list');
 

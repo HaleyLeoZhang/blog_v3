@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Auth;
 use App\Helpers\Response;
 use App\Helpers\Token;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\AdminRepository;
+use App\Bussiness\Admin\AdminBussiness;
 use Illuminate\Http\Request;
 
 class AccountController extends BaseController
@@ -76,7 +76,7 @@ class AccountController extends BaseController
         $account  = $request->input('account');
         $password = $request->input('password');
         // - 身份认证
-        $result = AdminRepository::login_slide_verify($account, $password);
+        $result = AdminBussiness::login_slide_verify($account, $password);
         $info   = $this->login_common_handle($result);
         return Response::success($info);
     }
@@ -137,7 +137,7 @@ class AccountController extends BaseController
         $password        = $request->input('password');
         $google_captchar = $request->input('google_captchar');
         // - 身份认证
-        $result = AdminRepository::login_google($account, $password, $google_captchar);
+        $result = AdminBussiness::login_google($account, $password, $google_captchar);
         // 公共身份写入
         $info = $this->login_common_handle($result);
         return Response::success($info);
@@ -196,7 +196,7 @@ class AccountController extends BaseController
         // - 清空身份
         // --- 服务端数据清洗
         $token = $_COOKIE[$this->passport_info['token_name']] ?? '';
-        AdminRepository::logout($token);
+        AdminBussiness::logout($token);
         // --- Browser端数据清洗
         setcookie($this->passport_info['token_name'], '', -1, '/');
         return redirect($this->passport_info['redirect_url']);
@@ -221,7 +221,7 @@ class AccountController extends BaseController
             // 验证验证码和密钥是否相同
             if (\Google::CheckCode($google, $bind_secret)) {
                 // 绑定场景：绑定成功，向数据库插入google参数，跳转到登录界面让用户登录
-                AdminRepository::register_google_captchar($email, $google);
+                AdminBussiness::register_google_captchar($email, $google);
                 // 登录认证场景：认证成功，执行认证操作
                 return redirect($this->passport_info['redirect_url']);
             } else {

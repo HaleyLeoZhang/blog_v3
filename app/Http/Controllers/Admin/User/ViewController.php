@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\BaseController;
 use App\Models\Blog\Comment;
 use App\Models\User;
-use App\Repositories\Admin\UserRepository;
+use App\Bussiness\Admin\UserBussiness;
 use Illuminate\Http\Request;
 
 class ViewController extends BaseController
@@ -27,7 +27,7 @@ class ViewController extends BaseController
         $params['user_type']  = $request->input('user_type', User::SHOW_ALL);
         $params['user_name']  = $request->input('user_name', '');
 
-        $render        = UserRepository::user_list($params);
+        $render        = UserBussiness::user_list($params);
         $user_status   = User::$message_status;
         $user_type     = User::$message_user_type;
         $src_user_type = User::$src_user_type;
@@ -54,7 +54,7 @@ class ViewController extends BaseController
         $params['time_end']   = $request->input('time_end', '');
         $params['vague']      = $request->input('vague', '');
 
-        $render         = UserRepository::comments($params);
+        $render         = UserBussiness::comments($params);
         $comment_status = Comment::$message_status;
 
         $data = compact(

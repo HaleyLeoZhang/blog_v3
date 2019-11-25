@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin\Visitor;
  */
 use App\Http\Controllers\BaseController;
 use App\Models\Logs\VisitorFootMarkAnalysis;
-use App\Repositories\Admin\VisitorRepository;
+use App\Bussiness\Admin\VisitorBussiness;
 use Illuminate\Http\Request;
 
 class ViewController extends BaseController
@@ -25,7 +25,7 @@ class ViewController extends BaseController
         $params['time_start']  = $request->input('time_start', '');
         $params['time_end']    = $request->input('time_end', '');
 
-        $render = VisitorRepository::foot_mark_analysis($params);
+        $render = VisitorBussiness::foot_mark_analysis($params);
 
         $device_type_list = VisitorFootMarkAnalysis::$device_type_list;
         $device_type_text = VisitorFootMarkAnalysis::$device_type_text;

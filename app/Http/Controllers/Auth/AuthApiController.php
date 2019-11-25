@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Auth;
  */
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\AdminRepository;
+use App\Bussiness\Admin\AdminBussiness;
 use Illuminate\Http\Request;
 use Log;
 
@@ -25,7 +25,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $status = $request->input('status');
         $email  = $request->input('email');
-        AdminRepository::change_user_status($email, $status);
+        AdminBussiness::change_user_status($email, $status);
         return Response::success();
     }
 
@@ -47,7 +47,7 @@ class AuthApiController extends BaseController
         $user_pic = $request->input('user_pic');
         $truename = $request->input('truename');
         $status   = $request->input('status');
-        AdminRepository::change_user($password, $email, $user_pic, $truename, $status);
+        AdminBussiness::change_user($password, $email, $user_pic, $truename, $status);
         return Response::success();
     }
 
@@ -59,7 +59,7 @@ class AuthApiController extends BaseController
     {
         Log::info('params', $request->all());
         $result = [];
-        $result = AdminRepository::admin_user_show();
+        $result = AdminBussiness::admin_user_show();
         return Response::success($result);
     }
 
@@ -73,7 +73,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $admin_id = $request->input('admin_id');
-        $result   = AdminRepository::group_list($admin_id);
+        $result   = AdminBussiness::group_list($admin_id);
         return Response::success($result);
     }
 
@@ -89,7 +89,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $admin_id      = $request->input('admin_id');
         $group_ids_str = $request->input('group_id');
-        $result        = AdminRepository::group_edit($admin_id, $group_ids_str);
+        $result        = AdminBussiness::group_edit($admin_id, $group_ids_str);
         return Response::success($result);
     }
 
@@ -105,7 +105,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $admin_id = $request->input('admin_id', 0);
         $status   = $request->input('status', 0);
-        $result   = AdminRepository::admin_user_status($admin_id, $status);
+        $result   = AdminBussiness::admin_user_status($admin_id, $status);
         return Response::success($result);
     }
 
@@ -119,7 +119,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $admin_id = $request->input('admin_id', 0);
-        $result   = AdminRepository::admin_user_del($admin_id);
+        $result   = AdminBussiness::admin_user_del($admin_id);
         return Response::success($result);
     }
 
@@ -133,7 +133,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $email  = $request->input('email');
-        $result = AdminRepository::find_account($email);
+        $result = AdminBussiness::find_account($email);
         return Response::success($result);
     }
 
@@ -150,7 +150,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $params = $request->all();
-        $result = AdminRepository::auth_user_register($params);
+        $result = AdminBussiness::auth_user_register($params);
         return Response::success($result);
     }
 
@@ -165,7 +165,7 @@ class AuthApiController extends BaseController
      */
     public function auth_rule_show(Request $request)
     {
-        $result = AdminRepository::auth_rule_show();
+        $result = AdminBussiness::auth_rule_show();
         return Response::success($result);
     }
 
@@ -183,7 +183,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $title = $request->input('title');
         $rule  = $request->input('rule');
-        $data  = AdminRepository::auth_rule_add($title, $rule);
+        $data  = AdminBussiness::auth_rule_add($title, $rule);
         return Response::success($data);
     }
 
@@ -199,7 +199,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $id = $request->input('id');
-        AdminRepository::auth_rule_del($id);
+        AdminBussiness::auth_rule_del($id);
         return Response::success();
     }
 
@@ -217,7 +217,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $id     = $request->input('id'); // @post: 规则号
         $status = $request->input('status'); // @post: 规则开启状态
-        AdminRepository::auth_rule_status($id, $status);
+        AdminBussiness::auth_rule_status($id, $status);
         return Response::success();
     }
 
@@ -241,7 +241,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $title = $request->input('title');
         $rules = $request->input('rules');
-        AdminRepository::auth_group_add($title, $rules);
+        AdminBussiness::auth_group_add($title, $rules);
         return Response::success();
     }
 
@@ -261,7 +261,7 @@ class AuthApiController extends BaseController
         $group_id = $request->input('id');
         $value    = $request->input('value');
         $option   = $request->input('option');
-        AdminRepository::auth_group_modify($group_id, $value, $option);
+        AdminBussiness::auth_group_modify($group_id, $value, $option);
         return Response::success();
     }
 
@@ -277,7 +277,7 @@ class AuthApiController extends BaseController
         ];
         $this->validate($request, $filter);
         $group_id = $request->input('group_id'); // 组号
-        AdminRepository::auth_group_del($group_id);
+        AdminBussiness::auth_group_del($group_id);
         return Response::success();
     }
 
@@ -288,7 +288,7 @@ class AuthApiController extends BaseController
      */
     public function auth_group_list(Request $request)
     {
-        $result = AdminRepository::auth_group_list();
+        $result = AdminBussiness::auth_group_list();
         return Response::success($result);
     }
 
@@ -305,7 +305,7 @@ class AuthApiController extends BaseController
         $this->validate($request, $filter);
         $id = $request->input('id'); // 组号
 
-        $result = AdminRepository::auth_one_group_rule($id);
+        $result = AdminBussiness::auth_one_group_rule($id);
         return Response::success($result);
     }
 

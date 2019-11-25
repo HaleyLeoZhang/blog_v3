@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin\Index;
  * 用户账号管理操作相关
  */
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\IndexRepository;
+use App\Bussiness\Admin\IndexBussiness;
 use Illuminate\Http\Request;
 
 class ViewController extends BaseController
@@ -18,7 +18,7 @@ class ViewController extends BaseController
      */
     public function hall(Request $request)
     {
-        $system_info = IndexRepository::hall();
+        $system_info = IndexBussiness::hall();
         $data        = compact('system_info');
         return view('admin.index.hall', $data);
     }
@@ -31,7 +31,7 @@ class ViewController extends BaseController
     public function login_log(Request $request)
     {
         $params =  $request->all();
-        $data = IndexRepository::login_log($params);
+        $data = IndexBussiness::login_log($params);
         return view('admin.index.login_log', $data);
     }
 

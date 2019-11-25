@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Admin\Common;
  */
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Repositories\Admin\CommonRepository;
+use App\Bussiness\Admin\CommonBussiness;
 use Illuminate\Http\Request;
 
 class ApiController extends BaseController
@@ -15,7 +15,7 @@ class ApiController extends BaseController
     public function friend_link_update(Request $request)
     {
         $params = $request->all();
-        CommonRepository::friend_link_update($params);
+        CommonBussiness::friend_link_update($params);
         return Response::success();
     }
 }

@@ -3,7 +3,7 @@ namespace tests\Services;
 
 use App\Helpers\CurlRequest;
 use App\Models\User;
-use App\Repositories\OAuth2\Logic\ActionOAuth2Logic;
+use App\Bussiness\OAuth2\Logic\ActionOAuth2Logic;
 use App\Services\OAuth2\QqOAuth2Service;
 use LogService;
 
