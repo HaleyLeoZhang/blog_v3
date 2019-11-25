@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\Chat\ChatRepository;
+use App\Bussiness\Chat\ChatBussiness;
 use Illuminate\Console\Command;
 use LogService;
 
@@ -54,7 +54,7 @@ class SwooleCommond extends Command
      */
     public function websocket()
     {
-        ChatRepository::init_chat_server();
+        ChatBussiness::init_chat_server();
         // 创建websocket服务器对象，监听 0.0.0.0:9502
         $server_conf = config('swoole.server.websocket');
 
@@ -63,7 +63,7 @@ class SwooleCommond extends Command
 
         // 监听 WebSocket 连接打开事件
         $ws->on('open', function ($ws, $request) {
-            $data = ChatRepository::client_open($request->fd);
+            $data = ChatBussiness::client_open($request->fd);
             // 返回初始配置信息给客户端
             $ws->push($request->fd, json_encode($data['response']));
         });
@@ -74,7 +74,7 @@ class SwooleCommond extends Command
             $sender_data = json_decode($frame->data, true);
             $sender_fd   = $frame->fd; // 发送对象，请求者
             // - DOING
-            list($receiver_fds, $response) = ChatRepository::handle_message($sender_fd, $sender_data);
+            list($receiver_fds, $response) = ChatBussiness::handle_message($sender_fd, $sender_data);
             // 发送数据到指定客户端
             foreach ($receiver_fds as $key => $fd) {
                 $ws->push(intval($fd), json_encode($response));
@@ -83,7 +83,7 @@ class SwooleCommond extends Command
 
         // 监听WebSocket连接关闭事件
         $ws->on('close', function ($ws, $fd) {
-            $data = ChatRepository::client_close($fd);
+            $data = ChatBussiness::client_close($fd);
             $ws->push($fd, json_encode($data));
 
         });

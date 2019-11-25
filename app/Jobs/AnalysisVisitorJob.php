@@ -10,7 +10,7 @@ namespace App\Jobs;
 // ----------------------------------------------------------------------
 
 use App\Helpers\Location;
-use App\Repositories\Log\Logic\VisitorLogLogic;
+use App\Bussiness\Log\Logic\VisitorLogLogic;
 use App\Models\Logs\VisitorFootMark;
 use App\Models\Logs\VisitorLookLog;
 use Illuminate\Contracts\Queue\ShouldQueue;

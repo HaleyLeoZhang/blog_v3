@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\Common\Logic\CacheLogic;
+use App\Bussiness\Common\Logic\CacheLogic;
 use Illuminate\Console\Command;
 use LogService;
 
