@@ -1,8 +1,7 @@
-## timer task
-run daily task by crontab 
+## 说明
 
-    crontab -e 
+每分钟跑一次框架自带的定时任务管理器  
 
-add code like the following list
-
-    50 2 * * * /usr/src/shells/blog.sh
+~~~bash
+* * * * * /usr/local/bin/php /data/www/site/www.hlzblog.top/artisan schedule:run 1>> /dev/null 2>&1
+~~~

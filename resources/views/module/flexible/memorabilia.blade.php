@@ -296,7 +296,7 @@
 					<h2 class="timeList_item_title">行为类爬虫框架</h2>
 					<div class="list_show show1">
 						<img src="//tencent.cdn.hlzblog.top/blog/upload/img/2019_09_22_xPzWod9Y.jpg" width="500">
-						<h2><a href="https://github.com/HaleyLeoZhang/blog_v3" target="_blank" >行为类爬虫框架</a></h2>
+						<h2><a href="https://github.com/HaleyLeoZhang/node_puppeteer_framework" target="_blank" >行为类爬虫框架</a></h2>
 						<p>
 							使用谷歌无头浏览器puppeteer<br>
 							结合nodeJs+golang书写<br>
