@@ -87,7 +87,7 @@
                 <section class="sidebar">
                     <ul class="sidebar-menu" id="root_menu">
                         <li class="header">管理菜单</li>
-                        {!! \App\Repositories\Admin\MenuRepository::show_menu() !!}
+                        {!! \App\Bussiness\Admin\MenuBussiness::show_menu() !!}
                     </ul>
                 </section>
             </aside>
