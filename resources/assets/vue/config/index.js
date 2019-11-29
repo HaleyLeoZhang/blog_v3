@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       // 接口跨域代理
       '/api': {
-        target: 'http://web.test.com/',
+        target: 'http://web.blog.com/',
         changeOrigin: true,
       }
     },

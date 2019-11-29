@@ -58,23 +58,34 @@ class BakSqlCommand extends Command
     private function backups()
     {
         // 发送附件前，配置
-        $last_day      = $this->get_last_day();
-        $set_file_name = $last_day . self::FILE_SUFFIX;
-        $to            = env('BAKUPS_SQL_TO_EMAIL', '');
-        $title         = 'blog v3 - 数据备份';
-        $view_data     = [
+        $last_day  = $this->get_last_day();
+        $file_name = $last_day . self::FILE_SUFFIX;
+        $receivers = [
+            [
+                'addr' => env('BAKUPS_SQL_TO_EMAIL', ''),
+                'name' => '',
+            ],
+        ];
+        $title     = 'blog v3 - 数据备份';
+        $view_data = [
             'logo'      => self::LOGO_SRC,
-            'file_name' => $set_file_name,
+            'file_name' => $file_name,
             'hostname'  => config('app.hostname'),
         ];
         $html_content = view('module.email.bak_sql', $view_data);
         $content      = htmlspecialchars($html_content); // HTML转义为字符串
 
         // - 获取附件，并投递邮件任务
-        $path = $this->get_file_real_path($set_file_name);
+        $path  = $this->get_file_real_path($file_name);
+        $files = [
+            [
+                'path' => $path,
+                'name' => $file_name,
+            ],
+        ];
         if (is_file($path)) {
             // - 发送文件
-            $data    = compact('to', 'title', 'content', 'path', 'set_file_name');
+            $data    = compact('receivers', 'title', 'content', 'files');
             $job_obj = new EmailJob(EmailJob::TYPE_SEND_HTML, json_encode($data));
             $job     = $job_obj->onQueue(EmailJob::QUEUE_NAME);
             dispatch($job);

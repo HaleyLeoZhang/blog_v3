@@ -34,7 +34,7 @@ class EmailJob extends Job implements ShouldQueue
     const TYPE_SEND_HTML = 2; // 发送HTML内容
 
     protected $type;
-    protected $object;
+    protected $info;
 
     /**
      * 数据注入
@@ -44,8 +44,8 @@ class EmailJob extends Job implements ShouldQueue
      */
     public function __construct($type, $json_str = null)
     {
-        $this->type   = $type;
-        $this->object = json_decode($json_str);
+        $this->type = $type;
+        $this->info = json_decode($json_str, true);
     }
 
     /**
@@ -75,7 +75,7 @@ class EmailJob extends Job implements ShouldQueue
      */
     public function send_html_content()
     {
-        $this->object->content = htmlspecialchars_decode($this->object->content);
+        $this->info['content'] = htmlspecialchars_decode($this->info['content']);
         $this->send_to_one();
     }
 
@@ -84,14 +84,13 @@ class EmailJob extends Job implements ShouldQueue
      */
     public function send_to_one()
     {
-        $to            = $this->object->to;
-        $title         = $this->object->title;
-        $content       = $this->object->content;
-        $path          = $this->object->path ?? '';
-        $set_file_name = $this->object->set_file_name ?? '';
-        $send_status   = SmtpService::run($to, $title, $content, $path, $set_file_name);
+        $receivers     = $this->info['receivers'];
+        $title         = $this->info['title'];
+        $content       = $this->info['content'];
+        $files         = $this->info['files'] ?? [];
+        $send_status   = SmtpService::run($receivers, $title, $content, $files);
         LogService::info('EmailJob.result.', [
-            // 'data'        => $this->object,
+            // 'data'        => $this->info,
             'send_status' => $send_status,
         ]);
     }

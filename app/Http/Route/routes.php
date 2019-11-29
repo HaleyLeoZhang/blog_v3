@@ -50,4 +50,6 @@ Route::Group(['namespace' => 'Common'], function () {
         Route::get('short_url', ['uses' => 'TestController@short_url']);
     });
 
+    // - 移动端
+    Route::get('slide_verify', ['uses' => 'TestController@slide_verify']);
 });
