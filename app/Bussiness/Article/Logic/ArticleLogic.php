@@ -98,6 +98,7 @@ class ArticleLogic
     {
         // - 同类文章数统计
         $similar_counter = Article::where('is_deleted', Article::IS_DELETED_NO)
+            ->where('is_online', Article::IS_ONLINE_YES)
             ->where('cate_id', $cate_id)
             ->count();
         // --- 计算可随机的总长度
@@ -113,10 +114,11 @@ class ArticleLogic
             WHERE
                 `cate_id` = ?
                 AND `is_deleted` = ?
+                AND `is_online` = ?
             ORDER BY
                 `id` DESC
                 LIMIT ?,?
-        ', [$cate_id , Article::IS_DELETED_NO]);
+        ', [$cate_id , Article::IS_DELETED_NO, Article::IS_ONLINE_YES]);
         $pagenation->page_size = self::RECOMMAND_PAGE_SIZE;
         $pagenation->is_render = Page::IS_RENDER_NO;
 
