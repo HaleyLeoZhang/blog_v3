@@ -51,18 +51,18 @@
         this.channel = ''; // 用户选择的渠道
         this.result_container_id = '#short_url';
         this.channel_list = [
-            {
-                "value": "sina",
-                "content": "新浪 t.cn"
-            },
+            // {
+            //     "value": "sina",
+            //     "content": "新浪 t.cn"
+            // },
             {
                 "value": "bitly",
                 "content": "国外 j.mp"
             },
-            {
-                "value": "tencent",
-                "content": "腾讯 url.cn"
-            },
+            // {
+            //     "value": "tencent",
+            //     "content": "腾讯 url.cn"
+            // },
         ];
     }
     // 获取短地址

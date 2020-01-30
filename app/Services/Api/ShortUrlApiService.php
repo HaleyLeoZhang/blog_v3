@@ -35,9 +35,9 @@ class ShortUrlApiService
      * @var 渠道API关系
      */
     static $channel_list = [
-        self::CHANNEL_SINA    => self::API_SINA,
+        // self::CHANNEL_SINA    => self::API_SINA,
         self::CHANNEL_BITLY   => self::API_BITLY,
-        self::CHANNEL_TENCENT => self::API_TENCENT,
+        // self::CHANNEL_TENCENT => self::API_TENCENT,
     ];
 
     /**
