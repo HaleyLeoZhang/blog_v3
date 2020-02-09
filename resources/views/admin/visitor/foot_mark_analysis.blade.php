@@ -128,11 +128,11 @@
                                 <td >
                                     {{ $render_one->device_name }}
                                 </td>
-                                <td style="width:280px;">
-                                    {{ $render_one->target }}
+                                <td title="{{ rawurldecode($render_one->target) }}">
+                                    {{ rawurldecode($render_one->target) }}
                                 </td>
-                                <td style="width:280px;">
-                                    {{ $render_one->referer }}
+                                <td title="{{ rawurldecode($render_one->referer) }}">
+                                    {{ rawurldecode($render_one->referer) }}
                                 </td>
                                 <td >
                                     {{ $render_one->created_at }}
