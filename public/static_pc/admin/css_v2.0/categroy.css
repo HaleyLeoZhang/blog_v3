@@ -36,3 +36,8 @@
   .categroy_bar_button{
     float: left;
   }
+  .clear{
+    height: 0;
+    width: 100%;
+    clear: both;
+  }

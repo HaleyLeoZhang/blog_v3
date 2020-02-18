@@ -18,6 +18,7 @@
         <div class="layui-tab-item layui-show">
             <button class="layui-btn layui-btn-normal act_add" yth-data-fid="0" title="添加一级分类"><i class="layui-icon">&#xe654;</i>&nbsp;新分类</button>
             <div id="yth_show_list" style="padding-bottom:100px;width:1000px;"></div>
+            <div class="clear"></div>
         </div>
     </div>
 </div>
