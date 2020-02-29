@@ -1,7 +1,7 @@
 <?php
 namespace App\Bussiness\Admin\Logic;
 
-require_once app_path('Libs/Michelf/MarkdownExtra.inc.php');
+use Michelf\Markdown;
 use App\Helpers\Page;
 use App\Models\AdminAuth\Admin;
 use App\Models\Blog\Article;
@@ -289,7 +289,7 @@ class ArticleAdminLogic
      */
     protected static function parse_markdown($html)
     {
-        $html = \Michelf\MarkdownExtra::defaultTransform($html);
+        $html = Markdown::defaultTransform($html);
         // 图片延迟属性设为 data-original
         return self::lazy_pic($html);
     }
