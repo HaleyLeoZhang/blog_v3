@@ -7,9 +7,13 @@ namespace App\Services\Tool;
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
+// composer require phpmailer/phpmailer
+// ----------------------------------------------------------------------
 
 // 引入自动加载函数
-require_once app_path('Libs/Smtp/PHPMailerAutoload.php');
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class SmtpService
 {
@@ -42,27 +46,30 @@ class SmtpService
     {
         // 实例化PHPMailer核心类
         $mail = self::get_mail_obj();
+        try {
 
-        // 设置收件人邮箱地址 该方法有两个参数 第一个参数为收件人邮箱地址 第二参数为给该地址设置的昵称 不同的邮箱系统会自动进行处理变动 这里第二个参数的意义不大
-        // 添加多个收件人 则多次调用方法即可
-        // $mail->addAddress('xxx@163.com','lsgo在线通知');
-        foreach ($receivers as $one) {
-            $receiver_email = $one['addr'];
-            $receiver_name = $one['name'];
-            $mail->addAddress($receiver_email, $receiver_name);
+            // 设置收件人邮箱地址 该方法有两个参数 第一个参数为收件人邮箱地址 第二参数为给该地址设置的昵称 不同的邮箱系统会自动进行处理变动 这里第二个参数的意义不大
+            // 添加多个收件人 则多次调用方法即可
+            // $mail->addAddress('xxx@163.com','lsgo在线通知');
+            foreach ($receivers as $one) {
+                $receiver_email = $one['addr'];
+                $receiver_name  = $one['name'];
+                $mail->addAddress($receiver_email, $receiver_name);
+            }
+            // 邮件名
+            $mail->Subject = $title;
+            // 邮件HTML内容
+            $mail->Body = $content;
+            // 为该邮件添加附件 该方法也有两个参数 第一个参数为附件存放的目录（相对目录、或绝对目录均可） 第二参数为在邮件附件中该附件的名称
+            foreach ($files as $one) {
+                $file_path = $one['path'];
+                $file_name = $one['name'];
+                $mail->addAttachment($file_path, $file_name);
+            }
+            $status = $mail->send(); // 错误日志的输出在 supervisor 对应日志中
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        $mail->addAddress($receiver_email, $receiver_name);
-        // 邮件名
-        $mail->Subject = $title;
-        // 邮件HTML内容
-        $mail->Body = $content;
-        // 为该邮件添加附件 该方法也有两个参数 第一个参数为附件存放的目录（相对目录、或绝对目录均可） 第二参数为在邮件附件中该附件的名称
-        foreach ($files as $one) {
-            $file_path = $one['path'];
-            $file_name = $one['name'];
-            $mail->addAttachment($file_path, $file_name);
-        }
-        $status = $mail->send(); // 错误日志的输出在 supervisor 对应日志中
         return $status;
     }
 
@@ -92,7 +99,7 @@ class SmtpService
 
     /**
      * 返回实例化对象
-     * @return \PHPMailer
+     * @return PHPMailer\PHPMailer\PHPMailer
      */
     protected static function get_mail_obj()
     {
@@ -100,9 +107,9 @@ class SmtpService
         if (null === $ins) {
             $config = self::get_conf();
 
-            $ins = new \PHPMailer();
+            $ins = new PHPMailer();
             // 是否启用smtp的debug进行调试 开发环境建议开启 生产环境注释掉即可 默认关闭debug调试模式
-            $ins->SMTPDebug = 0; // 0-> 关闭  1-> errors and messages  2-> messages only
+            $ins->SMTPDebug = SMTP::DEBUG_OFF;; // 0-> 关闭  1-> errors and messages  2-> messages only
             // 使用smtp鉴权方式发送邮件
             $ins->isSMTP();
             // smtp需要鉴权 这个必须是true
@@ -115,16 +122,15 @@ class SmtpService
             $ins->Port = $config['Port'];
             // 设置发件人的主机域 可有可无 默认为localhost 内容任意，建议使用你的域名
             $ins->Hostname = $config['Hostname'] ?? 'localhost';
-            // 设置发送的邮件的编码 可选GB2312 我喜欢utf-8 据说utf8在某些客户端收信下会乱码
-            $ins->CharSet = 'UTF-8';
-            // 设置发件人姓名（昵称） 任意内容，显示在收件人邮件的发件人邮箱地址前的发件人姓名
-            $ins->FromName = $config['FromName'];
+            // 设置发送的邮件的编码
+            $ins->CharSet = PHPMailer::CHARSET_UTF8;
+            // 设置发件人a.邮箱 b.昵称
+            $ins->setFrom($config['From'], $config['FromName']);
             // smtp登录的账号 这里填入字符串格式的qq号即可
             $ins->Username = $config['Username'];
             // smtp登录的密码 使用生成的授权码（就刚才叫你保存的最新的授权码）
             $ins->Password = $config['Password'];
             // 设置发件人邮箱地址 这里填入上述提到的“发件人邮箱”
-            $ins->From = $config['From'];
             // 邮件正文是否为html编码 注意此处是一个方法 不再是属性 true或false
             $ins->isHTML(true);
         }
