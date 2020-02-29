@@ -70,8 +70,8 @@ return [
             ],
             'port'      => env('DB_PORT', 3306),
             'database'  => env('AVATAR_DB_READ_DATABASE', 'yth_blog'),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'strict'    => false,
         ],
         // - 日志库
@@ -93,8 +93,8 @@ return [
             ],
             'port'      => env('DB_PORT', 3306),
             'database'  => env('EXT_DB_READ_DATABASE', 'yth_blog'),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'strict'    => false,
         ],
 
