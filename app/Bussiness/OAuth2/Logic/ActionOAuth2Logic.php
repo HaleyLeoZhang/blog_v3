@@ -98,6 +98,7 @@ class ActionOAuth2Logic
             throw new \ApiException('您的帐号异常，请联系管理员重试');
         }
         // 删除上一次的登录信息
+        InfoAuthService::set_token(\CommonService::LOGIN_TYPE_FRONT_SYSTEM);
         InfoAuthService::delete($user->remember_token);
 
         // 写入用户 mobile、token、user_id 到缓存信息
