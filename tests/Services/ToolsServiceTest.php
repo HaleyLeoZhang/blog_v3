@@ -2,12 +2,13 @@
 namespace tests\Services;
 
 use App\Jobs\EmailJob;
+use App\Services\Tool\FilterService;
 use LogService;
 
 class ToolsServiceTest extends \TestCase
 {
 
-    public function test_email()
+    public function email()
     {
         $receivers = [
             [
@@ -22,6 +23,13 @@ class ToolsServiceTest extends \TestCase
         $job     = $job_obj->onQueue(EmailJob::QUEUE_NAME);
         dispatch($job);
         LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.info');
+    }
+
+
+    public function test_email()
+    {
+        $after_text = FilterService::xss("adaljdasldja");
+        LogService::debug(__CLASS__ . '@' . __FUNCTION__ . '.info', compact('after_text'));
     }
 
 }

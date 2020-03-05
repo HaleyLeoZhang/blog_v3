@@ -8,8 +8,6 @@ namespace App\Services\Tool;
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
 
-require_once app_path('Libs/HTMLPurifier/HTMLPurifier.auto.php');
-
 class FilterService
 {
 
@@ -18,6 +16,7 @@ class FilterService
 
     /**
      * 过滤富文本中的XSS注入信息
+     * - 安装 composer require ezyang/htmlpurifier
      * @param string  $dirty_html 待过滤的HTML
      * @return string
      */
