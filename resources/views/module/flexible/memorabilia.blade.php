@@ -58,7 +58,7 @@
 						<img src="http://img.cdn.hlzblog.top/17-6-3/3123029.jpg" width="500">
 							<!-- href String -->
 							<!-- p    String -->
-						<h2><a href="#">MVC原生博客上线</a></h2>
+						<h2><a href="javascript:;">MVC原生博客上线</a></h2>
 						<p>
 							四月初购买域名<br>
 							服务器选择的腾讯云<br>
@@ -119,7 +119,7 @@
 							自己再做一个电商平台吧<br>
 							我喜欢说走就的旅行<br>
 							于是整个六月<br>
-							我一个人在孵化机默默的写啊写<br>
+							我一个人在创业孵化基地默默的写啊写<br>
 							在六月底，算是完成了<br>
 							很遗憾，我当时备份做得不好<br>
 							目前只有一个当时做了一半时，备份下来的作品了
@@ -132,7 +132,7 @@
 					<h2 class="timeList_item_title">Redis微博上线</h2>
 					<div class="list_show show4">
 						<img src="http://img.cdn.hlzblog.top/17-6-3/65544929.jpg" width="500">
-						<h2><a href="#">Redis微博上线</a></h2>
+						<h2><a href="javascript:;">Redis微博上线</a></h2>
 						<p><img src="http://img.cdn.hlzblog.top/17-6-3/39890711.jpg" /></p>
 					</div>
 				</div>
@@ -142,7 +142,7 @@
 					<h2 class="timeList_item_title">博客移动端上线</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/17-6-3/82124843.jpg" width="500">
-						<h2><a href="#">博客移动端上线</a></h2>
+						<h2><a href="javascript:;">博客移动端上线</a></h2>
 						<p>
 							这次主要是为了实现响应式<br>
 							让移动端界面更好看一点<br>
@@ -155,7 +155,7 @@
 					<h2 class="timeList_item_title">第一笔私单</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/17-6-3/17361783.jpg" width="500">
-						<h2><a href="#">微信订阅号开发</a></h2>
+						<h2><a href="javascript:;">微信订阅号开发</a></h2>
 						<p>
 							全干(栈)工程师之第一次投入生产<br>
 							仔细分析了她的客户的圈子与基本需求<br>
@@ -191,7 +191,7 @@
 					<h2 class="timeList_item_title">博客 v2.0</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/17-6-3/66986340.jpg" width="500">
-						<h2><a href="/" target="_blank" >新版博客</a></h2>
+						<h2><a href="javascript:;" >新版博客</a></h2>
 						<p>
 							管理员后台全套API实现<br>
 							注重用户体验与安全
@@ -205,7 +205,7 @@
 					<h2 class="timeList_item_title">品质生活-微信用户端</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/17-7-29/47782114.jpg" width="500">
-						<h2><a href="/" target="_blank" >第一次产品公司工作</a></h2>
+						<h2><a href="javascript:;">第一次产品公司工作</a></h2>
 						<p>
 							历时5个工作日开发<br>
 							独立完成全站开发<br>
@@ -228,7 +228,7 @@
 					<h2 class="timeList_item_title">品质生活-用户端APP</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/18-1-13/87487623.jpg" width="500">
-						<h2><a href="#" target="_blank" >第一款上线APP</a></h2>
+						<h2><a href="javascript:void;">第一款上线APP</a></h2>
 						<p>
 							云天河负责了react-native的学习<br>
 							对APP进行了两次架构<br>
@@ -246,7 +246,7 @@
 					<h2 class="timeList_item_title">Vue全家桶上线</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/18-5-19/94950714.jpg" width="500">
-						<h2><a href="#" target="_blank" >第一款SPA博客</a></h2>
+						<h2><a href="http://www.hlzblog.top/mobile/" target="_blank" >第一款SPA博客</a></h2>
 						<p>
 							云天河尝试将早前准备好的Vue零碎知识点<br>
 							融合到v2版本的博客中去<br>
@@ -261,7 +261,7 @@
 					<h2 class="timeList_item_title">开源物联网之API</h2>
 					<div class="list_show show1">
 						<img src="http://img.cdn.hlzblog.top/18-5-19/74614871.jpg" width="500">
-						<h2><a href="#" target="_blank" >物联网API项目</a></h2>
+						<h2><a href="javascript:;">物联网API项目</a></h2>
 						<p>
 							这是打算送给我姐的新婚礼物<br>
 							我打算在今年我姐结婚前，送他们一套物联网产品<br>
@@ -304,8 +304,27 @@
 					</div>
 				</div>
 
+                <div class="step year" data-x="3000" data-y="0" data-scale ="0.5" >
+                    <div class="year_start">2020</div>
+                    <div class="list_show"><!-- 年份不给予文字叙述 --></div>
+                </div>
 
-				<div class="timeList_item step refresh" data-x="3400" data-y="0"  yth-end_tag="true">
+                <div class="timeList_item step" data-x="3400" data-y="0" >
+                    <div class="circle">03/02</div>
+                    <h2 class="timeList_item_title">邮件通知服务</h2>
+                    <div class="list_show show1">
+                        <img src="//tencent.cdn.hlzblog.top/blog/upload/img/2020_03_08_F3ttasb0.jpg" width="400">
+                        <h2><a href="https://github.com/HaleyLeoZhang/email_server" target="_blank" >邮件通知服务</a></h2>
+                        <p>
+                            单独的邮件发送服务<br>
+                            只因目前很多公司对此都是单机部署<br>
+                            若带附件,目前只完成了单机实现方案<br>
+                            RabbitMQ/Kafka 与 golang 实现<br>
+                        </p>
+                    </div>
+                </div>
+
+				<div class="timeList_item step refresh" data-x="3800" data-y="0"  yth-end_tag="true">
 					<div class="list_show">
 						<a href='javascript:replay();'><img src="/Others/memorabilia/img/refress.png"/></a>
 						<p class="end">遇见更好的自己 ... </p>

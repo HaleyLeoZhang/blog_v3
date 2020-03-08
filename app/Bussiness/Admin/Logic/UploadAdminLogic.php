@@ -1,7 +1,6 @@
 <?php
 namespace App\Bussiness\Admin\Logic;
 
-require_once app_path('Libs/Michelf/MarkdownExtra.inc.php');
 use App\Models\AdminAuth\Admin;
 use App\Services\Cdn\QiniuCdnService;
 use App\Services\Cdn\SmCdnService;
