@@ -62,6 +62,10 @@ class SitemapRefreshCommand extends Command
     private $sitemap_xml;
     private $host;
 
+    private $changefreq; // "always"、 "hourly"、 "daily"、 "weekly"、 "monthly"、 "yearly"、 "never"
+    private $lastmod; // 年月日 YYYY-MM-DD
+    private $date; // 年月日 YYYY-MM-DD
+
     // [每天闲时（凌晨3点）] 生成sitemap.xml
     public function task_sitemap()
     {
@@ -71,8 +75,8 @@ class SitemapRefreshCommand extends Command
         $this->sitemap_tpl = '
             <url>
                 <loc>%s</loc>
-                <lastmod>' . $date . '</lastmod>
-                <changefreq>daily</changefreq>
+                <lastmod>%s</lastmod>
+                <changefreq>%s</changefreq>
                 <priority>%s</priority>
             </url>
         ';
@@ -80,19 +84,26 @@ class SitemapRefreshCommand extends Command
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        $this->changefreq = "weekly";
+        $this->lastmod    = date("Y-m-d");
         // 首页
         $this->sitemap_render('/', self::INNER_WEBSITE_WEGITH_INDEX);
+        // 留言
+        $this->sitemap_render('/board', self::INNER_WEBSITE_WEGITH_MIDDLE);
+
+        $this->changefreq = "monthly";
+        $this->lastmod    = date("Y-m");
         // 大事记
         $this->sitemap_render('/memorabilia.html', self::INNER_WEBSITE_WEGITH_MIDDLE);
         // 关于我
         $this->sitemap_render('/about', self::INNER_WEBSITE_WEGITH_MIDDLE);
-        // 留言
-        $this->sitemap_render('/board', self::INNER_WEBSITE_WEGITH_MIDDLE);
         // 法律声明
         $this->sitemap_render('/Info/law.html', self::INNER_WEBSITE_WEGITH_MIDDLE);
 
+        $this->changefreq = "weekly";
+        $this->lastmod    = date("Y-m-d");
         // 文章 List
-        $blog_text = Article::select('id')
+        $blog_text = Article::select('id', 'updated_at')
             ->where('is_deleted', '=', Article::IS_DELETED_NO)
             ->where('is_online', '=', Article::IS_ONLINE_YES)
             ->get();
@@ -138,7 +149,8 @@ class SitemapRefreshCommand extends Command
         }
         // 资讯详情页面
         foreach ($list as $article) {
-            $url = $url_show . '/' . $article->id . '.html'; // SEO用
+            $url           = $url_show . '/' . $article->id . '.html'; // SEO用
+            $this->lastmod = mb_substr($article->updated_at, 0, 10);
             $this->sitemap_render($url, self::INNER_WEBSITE_WEGITH_SMALL);
         }
     }
@@ -151,7 +163,7 @@ class SitemapRefreshCommand extends Command
     private function sitemap_render($absolute_url, $priority = 0.8)
     {
         $url = $this->host . $absolute_url;
-        $this->sitemap_xml .= sprintf($this->sitemap_tpl, $url, $priority);
+        $this->sitemap_xml .= sprintf($this->sitemap_tpl, $url, $this->lastmod, $this->changefreq, $priority);
     }
 
     /**
