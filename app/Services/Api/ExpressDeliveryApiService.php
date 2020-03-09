@@ -29,7 +29,6 @@ class ExpressDeliveryApiService
             'Accept-Encoding: gzip, deflate, br',
             'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8',
             'Connection: keep-alive',
-            'Cookie: csrftoken=fQ5FekNEZb0xkvLtf94JqxbLzWJJpMNeuQ0XA3PkXmk; WWWID=WWW1126533CFD851F571E0F064225EB0E28; Hm_lvt_22ea01af58ba2be0fec7c11b25e88e6c=1583731986; Hm_lpvt_22ea01af58ba2be0fec7c11b25e88e6c=1583733200',
             'Host: www.kuaidi100.com',
             'Referer: https://www.kuaidi100.com/?from=openv',
             'Sec-Fetch-Mode: cors',
