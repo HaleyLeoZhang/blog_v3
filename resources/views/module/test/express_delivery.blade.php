@@ -70,13 +70,13 @@
             return get_par;
         };
         // 异步显示信息
-        Express.prototype.show_express_info = function (tracking_number) {
+        Express.prototype.show_express_info = function (no) {
             var _this = this;
             $.ajax({
                 "url": api("general", "express_delivery"),
                 "type": "get",
                 "data": {
-                    "tracking_number": tracking_number,
+                    "no": no,
                 },
                 "dataType": "json",
                 "success": function (d) {
@@ -90,8 +90,8 @@
         };
         Express.prototype.run = function(){
             var _this = this;
-            var tracking_number = _this.get_tracking_number("tracking_number");
-            _this.show_express_info(tracking_number);
+            var no = _this.get_tracking_number("no");
+            _this.show_express_info(no);
         };
 
         var express_delivery = new Express();

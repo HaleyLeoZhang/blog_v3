@@ -35,9 +35,9 @@ class CommonLogic
     /**
      * @return array
      */
-    public static function express_delivery($tracking_number)
+    public static function express_delivery($no)
     {
-        $track_info = ExpressDeliveryApiService::run($tracking_number);
+        $track_info = ExpressDeliveryApiService::run($no);
         return $track_info;
     }
 

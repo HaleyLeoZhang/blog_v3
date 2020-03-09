@@ -24,12 +24,12 @@ class CommonBussiness
 
     /**
      * 快递查询
-     * @param string tracking_number 快递单号
+     * @param string no 快递单号
      * @return array
      */
-    public static function express_delivery($tracking_number)
+    public static function express_delivery($no)
     {
-        $track_info = CommonLogic::express_delivery($tracking_number);
+        $track_info = CommonLogic::express_delivery($no);
         $data       = compact('track_info');
         return $data;
     }

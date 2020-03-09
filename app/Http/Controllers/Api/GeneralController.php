@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use App\Bussiness\Common\CommonBussiness;
 use App\Helpers\Response;
 use App\Http\Controllers\BaseController;
-use App\Bussiness\Common\CommonBussiness;
 use Illuminate\Http\Request;
 
 class GeneralController extends BaseController
@@ -39,7 +39,7 @@ class GeneralController extends BaseController
      * @apiName express_delivery
      * @apiGroup General
 
-     * @apiParam {string}  tracking_number 快递单号
+     * @apiParam {string} no 快递单号
      *
      * @apiDescription  快递查询
      *
@@ -81,8 +81,8 @@ class GeneralController extends BaseController
      */
     public function express_delivery(Request $request)
     {
-        $tracking_number = $request->input('tracking_number', '');
-        $data            = CommonBussiness::express_delivery($tracking_number);
+        $no   = $request->input('no', '');
+        $data = CommonBussiness::express_delivery($no);
         return Response::success($data);
     }
 
