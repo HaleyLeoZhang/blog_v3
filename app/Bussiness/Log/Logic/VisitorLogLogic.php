@@ -69,11 +69,11 @@ class VisitorLogLogic
                 $device_type = VisitorFootMarkAnalysis::DEVICE_TYPE_MOBILE;
                 $device_name = $match[0];
                 break;
-            case preg_match('/Safari|MSIE|Firefox|Chrome|Maxthon|MetaSr|360SE/', $header->$agent, $match):
+            case preg_match('/Safari|MSIE|Firefox|Chrome|Maxthon|MetaSr|360SE/i', $header->$agent, $match):
                 $device_type = VisitorFootMarkAnalysis::DEVICE_TYPE_PC;
                 $device_name = $match[0];
                 break;
-            case preg_match('/Baiduspider|360spider|Googlebot|bingbot/', $header->$agent, $match):
+            case preg_match('/spider|bot|/i', $header->$agent, $match):
                 $device_type = VisitorFootMarkAnalysis::DEVICE_TYPE_SPIDER;
                 $device_name = $match[0];
                 break;
