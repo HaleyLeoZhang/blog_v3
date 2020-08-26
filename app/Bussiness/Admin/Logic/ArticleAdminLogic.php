@@ -289,7 +289,10 @@ class ArticleAdminLogic
      */
     protected static function parse_markdown($html)
     {
-        $html = Markdown::defaultTransform($html);
+        // $html = Markdown::defaultTransform($html);
+        $markdown = new \Parsedown();
+        $html = $markdown->text($html); # prints: <p>Hello <em>Parsedown</em>!</p>
+
         // 图片延迟属性设为 data-original
         return self::lazy_pic($html);
     }

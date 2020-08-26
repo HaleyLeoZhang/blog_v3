@@ -18,7 +18,8 @@
         "php-amqplib/php-amqplib": "^2.8",
         "phpmailer/phpmailer": "^6.1",
         "michelf/php-markdown": "^1.9",
-        "ezyang/htmlpurifier": "^4.12"
+        "ezyang/htmlpurifier": "^4.12",
+        "erusev/parsedown": "^1.7"
     },
     "require-dev":
     {
@@ -61,13 +62,16 @@
         ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "php artisan key:generate"
         ]
     },
     "config":
     {
         "preferred-install": "dist"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
     }
 }
