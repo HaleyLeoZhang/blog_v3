@@ -23,7 +23,7 @@ class KugouMusicApiSerivce
     const API_PALY_URL = 'https://wwwapi.kugou.com/yy/index.php';
     const TIMER        = 15;
 
-    const PARAM_MID = '809186d60c77b4385b5b5246d5f4ec5c03536b1c'; // 必要请求参数
+    const PARAM_MID = '215cd01496ba3d668e52405b9cc7f513'; // 必要请求参数
 
     // 必要 - 模拟头部信息
     public static $common_header = [
@@ -47,8 +47,8 @@ class KugouMusicApiSerivce
     public static function run($keyword, $singer)
     {
         $list      = self::get_music_list($keyword);
-        $file_hash = self::get_singer_song($list, $singer);
-        $play_url  = self::get_paly_url_by_hash($file_hash);
+        $song_info = self::get_singer_song($list, $singer);
+        $play_url  = self::get_paly_url_by_hash($song_info);
         return $play_url;
     }
 
@@ -94,37 +94,42 @@ class KugouMusicApiSerivce
     public static function get_singer_song($list, $singer)
     {
         $file_hash = '';
+        $album_id = '';
         foreach ($list as $item) {
             $file_name = $item->FileName ?? '';
             if (preg_match('/' . $singer . '/', $file_name, $matches)) {
                 $file_hash = $item->FileHash ?? '';
+                $album_id = $item->AlbumID ?? '';
                 break;
             }
         }
         if ('' == $file_hash) {
             throw new \Exception("未找到相关歌手");
         }
-        return $file_hash;
+        return compact('file_hash', 'album_id');
     }
 
     /**
      * 依据文件 hash 搜索酷狗的音乐播放地址
      * @return string
      */
-    public static function get_paly_url_by_hash($file_hash)
+    public static function get_paly_url_by_hash($song_info)
     {
+        $file_hash = $song_info['file_hash'] ?? '';
+        $album_id = $song_info['album_id'] ?? '';
         CurlRequest::set_timeout_second(self::TIMER);
 
         $params         = [];
         $params['r']    = 'play/getdata';
         $params['hash'] = $file_hash;
         $params['mid']  = self::PARAM_MID; // 这个值目前我不知道它的有效期是多长
+        $params['album_id'] = $album_id; // 本次 2021-1-17 起必需
 
         $request_url = self::API_PALY_URL . '?' . http_build_query($params);
 
         $content = CurlRequest::run($request_url);
         $res     = json_decode($content);
-        $bg_url  = $res->data->play_url ?? '';
+        $bg_url  = $res->data->play_backup_url ?? '';
         \LogService::debug(__CLASS__.'-----', compact('bg_url', 'params','res'));
         return $bg_url;
     }
