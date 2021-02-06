@@ -20,28 +20,28 @@ var yth_memorabilia_init = {
 		*/
 		{
 			// [冬] 源：http://img.cdn.hlzblog.top/17-6-2/4658560.jpg
-			"bg": "https://i.loli.net/2018/09/28/5bad07a7ecbb9.jpg",
+			"bg": "http://img.cdn.hlzblog.top/17-6-2/4658560.jpg",
 			"header_bg":"rgba(255,255,255,0.2)",
 			"title_color":"#0D0D0D",
 			"content_color":"#213e44"
 		},
 		{
 			// [春] 源：http://img.cdn.hlzblog.top/17-6-2/69738894.jpg
-			"bg":"https://i.loli.net/2018/09/28/5bad07f364add.jpg",
+			"bg":"http://img.cdn.hlzblog.top/17-6-2/69738894.jpg",
 			"header_bg":"rgba(255,106,106, 0.2)",
 			"title_color":"#CAC7C7",
 			"content_color":"#fff"
 		},
 		{
 			// [夏] 源：  https://i.loli.net/2018/09/28/5bad085aa74a5.jpg
-			"bg": "http://img.cdn.hlzblog.top/17-6-2/56649681.jpg",
+			"bg": "https://i.loli.net/2018/09/28/5bad085aa74a5.jpg",
 			"header_bg":"rgba(17,178,255,0.2)",
 			"title_color":"#11b2e2",
 			"content_color":""
 		},
 		{
 			// [秋] 源：http://img.cdn.hlzblog.top/17-6-2/31164195.jpg
-			"bg": "https://i.loli.net/2018/09/28/5bad087e2b3a7.jpg",
+			"bg": "http://img.cdn.hlzblog.top/17-6-2/31164195.jpg",
 			"header_bg":"rgba(239, 104, 104, 0.2)",
 			"title_color":"#efd264",
 			"content_color":""
