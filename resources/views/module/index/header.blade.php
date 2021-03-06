@@ -46,9 +46,6 @@
                 <a href="https://github.com/HaleyLeoZhang/books" target="_blank" rel="nofollow">
                     书架
                 </a>
-				<a href="http://comic.pre.hlzblog.top/" target="_blank" rel="nofollow">
-					漫画
-				</a>
 				<a href="/memorabilia.html" target="_blank">
 					大事记
 				</a>
