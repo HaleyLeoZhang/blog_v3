@@ -37,6 +37,12 @@
 						{{ $article_obj->statistic }}
 						<font></font>
 					</span>
+					<span title="总评论数">
+						<a href="#nav">
+						<i class="fa fa-commenting-o" aria-hidden="true"></i>
+						{{ $comments_counter }}
+						</a>
+					</span>
 					<div class="clr"></div>
 				</div>
 			</div>
@@ -57,6 +63,8 @@
 
 	<div class="comments_logo" id="nav">
 		<h4>
+			<i class="fa fa-comments-o"></i> 评论列表<span class="comment_main" title="点此评论"
+			 onclick="article.reply_floor(this)" yth-article_id="{{ $article_obj->id }}">点此评论</span>
 
 			 <div class="bdsharebuttonbox"  style="display:inline-block;height:30px;float: right;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
 			 
@@ -65,6 +73,11 @@
 	</div>
 	
 	<!-- Comments List -->
+	<div class="article_comment" id="article_comment">
+		<!-- 一会儿取出来作为模板 -->
+		<!-- pic_test_src: http://tva1.sinaimg.cn/crop.0.0.640.640.180/65c897f9jw8faclt19le1j20hs0hsdgl.jpg -->
+	</div>
+	<div id="article_comment_pagenation"></div>
 </div>
 
 <div class="right">
