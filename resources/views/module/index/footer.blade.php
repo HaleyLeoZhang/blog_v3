@@ -21,7 +21,7 @@
             Copyright&nbsp;&copy; 2015-{{ date('Y') }} HaleyLeoZhang All Rights Reserved
         </p>
         <p>
-            版权所有&copy; 2015-{{ date('Y') }} HaleyLeoZhang <a style="color:#437373;" target="_blank" rel="nofollow" href="http://beian.miit.gov.cn/">鲁ICP备16014994号</a>
+            版权所有&copy; 2015-{{ date('Y') }} HaleyLeoZhang <a style="color:#437373;" target="_blank" rel="nofollow" href="http://beian.miit.gov.cn/">鲁ICP备16014994号-1</a>
         </p>
     </div>
 </div>
