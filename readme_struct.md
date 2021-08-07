@@ -48,7 +48,7 @@
 │   ├── Providers
 │   │   ├── AppServiceProvider.php
 │   │   ├── RouteServiceProvider.php
-│   ├── Bussiness
+│   ├── Business
 │   │   ├── Admin      后台：各种仓储
 │   │   ├── Article    前台：文章仓储
 │   │   ├── Chat       前台：聊天仓储：在线客服（TODO）、图灵机器人聊天
