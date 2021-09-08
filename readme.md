@@ -74,10 +74,18 @@
 
 ~~~bash
 # 安装第三方扩展包
+# - 请使用 1.9.3 的 composer 版本安装，具体下载方式，可参见 Makefile
 composer install --no-scripts
 # 生成非对称密钥对
 php artisan rsa_file
 ~~~
+
+或者使用 `Makefile` 初始化项目  
+
+~~~bash
+make php
+~~~
+
 
 当你想在 VirtualBox 下开发时  
 
@@ -90,8 +98,8 @@ gulp start
 
  * redis --- 缓存、队列服务
  * nginx --- Web服务
- * mysql --- 目前在 5.6 版本 通过测试
- * php   --- 目前语法 在版本 7.1.12 通过测试
+ * mysql --- 目前在 5.7 版本 通过测试
+ * php   --- 目前语法 在版本 7.4.3 通过测试
  * node  --- 如果你需要使用 Gulp 实现前端自动化
  * supervisor [详见](./storage/supervisor/readme.md)
 
