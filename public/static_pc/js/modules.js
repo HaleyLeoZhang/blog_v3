@@ -33,8 +33,6 @@ function show_render_container(get_module) {
         _mid = Math.abs((_w - 1920) / 2);
         if(_w < 1920) {
             _mid = '-' + _mid;
-        } else {
-            _mid = '';
         }
         $("#hide_box img").attr({ "style": "left:" + _mid + "px" });
         // Show Banner
