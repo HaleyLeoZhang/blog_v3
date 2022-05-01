@@ -60,10 +60,11 @@ class ApiService
     public function user_info($access_token)
     {
         $params                 = [];
-        $params['access_token'] = $access_token;
+        //$params['access_token'] = $access_token;
 
         $header = [
             "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0",
+	    "Authorization: token {$access_token}",
         ];
 
         $url     = 'https://api.github.com/user?' . http_build_query($params);
