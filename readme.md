@@ -70,12 +70,15 @@
 [点此查看接口文档](http://blog.doc.hlzblog.top)  
 
 ## 依赖相关
-初始化项目
+初始化项目  
 
 ~~~bash
+#### 2022年5月1日
+#### 因为该项目已存档，时间久远，有些第三方包仓库可能失效  
+#### 当前 `vendor` 包已上传，不需要再通过`composer`下载
 # 安装第三方扩展包
 # - 请使用 1.9.3 的 composer 版本安装，具体下载方式，可参见 Makefile
-composer install --no-scripts
+#composer install --no-scripts
 # 生成非对称密钥对
 php artisan rsa_file
 ~~~
