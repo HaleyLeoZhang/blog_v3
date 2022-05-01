@@ -1,0 +1,48 @@
+language: php
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+
+env:
+  matrix:
+  - LARAVEL=5.0.* TESTBENCH=3.0.* PHPUNIT=4.8.*
+  - LARAVEL=5.1.* TESTBENCH=3.1.* PHPUNIT=5.7.*
+  - LARAVEL=5.2.* TESTBENCH=3.2.* PHPUNIT=5.7.*
+  - LARAVEL=5.3.* TESTBENCH=3.3.* PHPUNIT=5.7.*
+  - LARAVEL=5.4.* TESTBENCH=3.4.* PHPUNIT=5.7.*
+  - LARAVEL=5.5.* TESTBENCH=3.5.* PHPUNIT=6.5.*
+  - LARAVEL=5.6.* TESTBENCH=3.6.* PHPUNIT=7.0.*
+
+matrix:
+  exclude:
+    - php: 5.6
+      env: LARAVEL=5.5.* TESTBENCH=3.5.* PHPUNIT=6.5.*
+    - php: 5.6
+      env: LARAVEL=5.6.* TESTBENCH=3.6.* PHPUNIT=7.0.*
+    - php: 7.0
+      env: LARAVEL=5.6.* TESTBENCH=3.6.* PHPUNIT=7.0.*
+    - php: 7.2
+      env: LARAVEL=5.0.* TESTBENCH=3.0.* PHPUNIT=4.8.*
+
+before_install:
+  - composer self-update --stable --no-interaction
+  - composer remove friendsofphp/php-cs-fixer --dev --no-update
+  - composer require laravel/framework:$LARAVEL illuminate/support:$LARAVEL orchestra/testbench:$TESTBENCH phpunit/phpunit:$PHPUNIT --no-update --no-interaction --dev
+
+install:
+  - travis_retry composer install --no-suggest --no-interaction
+  - composer info
+
+script:
+  - composer tests-travis
+  - composer require friendsofphp/php-cs-fixer ^2.2 --dev
+  - composer phpcs
