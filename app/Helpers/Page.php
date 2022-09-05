@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 // ----------------------------------------------------------------------
@@ -31,7 +32,7 @@ class Page
     protected $to_page;
 
     const IS_RENDER_YES = true;
-    const IS_RENDER_NO  = false;
+    const IS_RENDER_NO = false;
 
     /**
      * 构造函数
@@ -41,11 +42,12 @@ class Page
      */
     public function __construct($sql_tpl, $data, $page_name = 'to_page')
     {
-        $this->to_page   = $_REQUEST[$page_name] ?? 1;
-        $this->sql_tpl   = $sql_tpl;
-        $this->data      = $data;
+        $this->to_page = $_REQUEST[$page_name] ?? 1;
+        $this->sql_tpl = $sql_tpl;
+        $this->data = $data;
         $this->is_render = self::IS_RENDER_YES;
     }
+
     /**
      * 依据 is_render ，传出结果
      */
@@ -53,14 +55,14 @@ class Page
     {
         if ($this->is_render) {
             return [
-                "info"   => $this->select(),
+                "info" => $this->select(),
                 "render" => $this->js(),
             ];
         } else {
             return [
-                "info"       => $this->select(),
+                "info" => $this->select(),
                 "page_count" => $this->page_count,
-                "total"      => $this->total,
+                "total" => $this->total,
             ];
         }
 
@@ -72,9 +74,9 @@ class Page
     private function count()
     {
         if (preg_match('/Select(.*?)(From.*?)Limit/is', $this->sql_tpl, $matches)) {
-            $count_sql        = 'Select count(*) as total ' . $matches[2];
-            $result           = DB::select($count_sql, $this->data);
-            $this->total      = $result[0]->total;
+            $count_sql = 'Select count(*) as total ' . $matches[2];
+            $result = DB::select($count_sql, $this->data);
+            $this->total = $result[0]->total;
             $this->page_count = ceil($this->total / $this->page_size);
         } else {
             $error_msg = 'SQL语句不匹配。请以：Select(.*?)(From.*?)Limit的形式去书写，当前SQL ' . $this->sql_tpl;
@@ -102,6 +104,7 @@ class Page
         }
         // 计算偏移量
         $start_len = ($this->to_page - 1) * $this->page_size;
+        $start_len = (int)$start_len;
         // limit参数 压入数组
         array_push($this->data, $start_len, $this->page_size);
         return DB::select($this->sql_tpl, $this->data);
@@ -162,7 +165,7 @@ js_source;
 			    groups: 5 // 每次显示的码数数
 			});
 			";
-        $div    = '<div id="yth_pageination"></div>';
+        $div = '<div id="yth_pageination"></div>';
         $script = '<script>' . $source . $execute . '</script>';
         return $div . $script;
     }
