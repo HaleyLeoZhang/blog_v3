@@ -57,7 +57,7 @@ loadjs(arr_src, {
             effect: "fadeIn",
             threshold: 200,
             failurelimit: 10,
-            placeholder: "{{ static_host() }}/blog/upload/img/2018_08_26_rkpxZdJo.jpg",
+            placeholder: "{{ static_host() }}/static_pc/img/default/loading_400x400.gif",
             data_attribute: "original", // data-original属性
         });
 
