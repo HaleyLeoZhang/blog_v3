@@ -275,7 +275,7 @@
 					<div class="circle">09/29</div>
 					<h2 class="timeList_item_title">博客 v3.0</h2>
 					<div class="list_show show1">
-						<img src="//tencent.cdn.hlzblog.top/blog/upload/img/2018_10_12_QQ9tRLXI.jpg" width="500">
+						<img src="//img.cdn.hlzblog.top/blog/upload/img/2018_10_12_QQ9tRLXI.jpg" width="500">
 						<h2><a href="https://github.com/HaleyLeoZhang/blog_v3" target="_blank" >博客 v3.0</a></h2>
 						<p>
 							基于第二版前端视图，后端重构<br>
@@ -295,7 +295,7 @@
 					<div class="circle">08/20</div>
 					<h2 class="timeList_item_title">行为类爬虫框架</h2>
 					<div class="list_show show1">
-						<img src="//tencent.cdn.hlzblog.top/blog/upload/img/2019_09_22_xPzWod9Y.jpg" width="500">
+						<img src="//img.cdn.hlzblog.top/blog/upload/img/2019_09_22_xPzWod9Y.jpg" width="500">
 						<h2><a href="https://github.com/HaleyLeoZhang/node_puppeteer_framework" target="_blank" >行为类爬虫框架</a></h2>
 						<p>
 							使用谷歌无头浏览器puppeteer<br>
@@ -313,7 +313,7 @@
                     <div class="circle">03/02</div>
                     <h2 class="timeList_item_title">邮件通知服务</h2>
                     <div class="list_show show1">
-                        <img src="//tencent.cdn.hlzblog.top/blog/upload/img/2020_03_08_F3ttasb0.jpg" width="400">
+                        <img src="//img.cdn.hlzblog.top/blog/upload/img/2020_03_08_F3ttasb0.jpg" width="400">
                         <h2><a href="https://github.com/HaleyLeoZhang/email_server" target="_blank" >邮件通知服务</a></h2>
                         <p>
                             单独的邮件发送服务<br>
