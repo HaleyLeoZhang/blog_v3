@@ -42,22 +42,6 @@
 
 			<span class="login_icons">
 
-			@if( is_null(\CommonService::$user) )
-				<a href="/oauth2/redirect?gateway=qq" rel="nofollow">
-					<img src="{{ static_host() }}/static_pc/img/third/qq_50.png" alt="QQ" title="QQ登陆" />
-				</a>
-				<a href="/oauth2/redirect?gateway=sina" rel="nofollow">
-					<img src="{{ static_host() }}/static_pc/img/third/sina_50.png" alt="Sina" title="微博登陆" />
-				</a>
-				<a href="/oauth2/redirect?gateway=github" rel="nofollow">
-					<img src="{{ static_host() }}/static_pc/img/third/github_fake_50.png" alt="Github" title="Github登陆" />
-				</a>
-			@else
-				<a href="/oauth2/logout" rel="nofollow">
-					<img src="{{ static_host() }}/static_pc/img/default/logout.png" alt="QQ" title="注销" />
-				</a>
-			@endif
-
 			</span>
 
 
@@ -65,9 +49,6 @@
                 <a href="https://github.com/HaleyLeoZhang/books" target="_blank" rel="nofollow">
                     书架
                 </a>
-				<a href="http://comic.pre.hlzblog.top/" target="_blank" rel="nofollow">
-					漫画
-				</a>
 				<a href="/memorabilia.html" target="_blank">
 					大事记
 				</a>
@@ -75,9 +56,6 @@
 				<!-- <a href="/About">
 					关于我
 				</a> -->
-				<a href="/board">
-					留言板
-				</a>
 			</span>
 
 

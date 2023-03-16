@@ -26,7 +26,6 @@
 	</div>
 	@include('module/index/index_components/category')
 	@include('module/index/index_components/recommand')
-	@include('module/index/index_components/assignment')
 	@include('module/index/index_components/hot_article')
 </div>
 

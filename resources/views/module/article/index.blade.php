@@ -61,7 +61,7 @@
 		</div>
 	</div>
 
-	<div class="comments_logo" id="nav">
+	<div class="comments_logo" style="display:none;" id="nav">
 		<h4>
 			<i class="fa fa-comments-o"></i> 评论列表<span class="comment_main" title="点此评论"
 			 onclick="article.reply_floor(this)" yth-article_id="{{ $article_obj->id }}">点此评论</span>
