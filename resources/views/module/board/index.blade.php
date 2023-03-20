@@ -10,7 +10,7 @@
 @section('content')
 
 <link rel="stylesheet" href="{{ link_src('board.css') }}">
-<div class="board_container" >
+<div class="board_container" style="display:none">
         <div class="reply">
             <div class="message_board" onclick="board.reply_floor()" title="点此留言"><img src="{{ static_host() }}/static_pc/img/default/leave_message.png" alt="留言图标"></div>
             <div class="clr"></div>

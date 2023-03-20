@@ -73,7 +73,7 @@
 	</div>
 	
 	<!-- Comments List -->
-	<div class="article_comment" id="article_comment">
+	<div class="article_comment"  style="display:none" id="article_comment">
 		<!-- 一会儿取出来作为模板 -->
 		<!-- pic_test_src: http://tva1.sinaimg.cn/crop.0.0.640.640.180/65c897f9jw8faclt19le1j20hs0hsdgl.jpg -->
 	</div>
@@ -101,7 +101,7 @@
 		<div class="clr"></div>
 	</div>
 
-	<div class="donation">
+	<div class="donation"  style="display:none">
 		<div class="right_bar_title">
 			<h2><span><i class="fa fa-money"></i> 赞助天河 --- 支付宝</span></h2>
 		</div>
