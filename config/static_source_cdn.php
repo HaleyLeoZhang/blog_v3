@@ -12,7 +12,8 @@ return [
     // "jquery" => "//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js", // 百度，2019年3月30日 10:50:59 谷歌检测到安全攻击，已弃用
     "jquery" => "https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js", // 七牛
     // layer 弹出层
-    "layer" => "//cdn.staticfile.org/layer/2.3/layer.js", // 七牛
+    //"layer" => "//cdn.staticfile.org/layer/2.3/layer.js", // 七牛
+    "layer"=> "/static_pc/plugins/layer/js/layer.js",
     // 异步JS资源加载
     "load_js" => "//cdn.staticfile.org/loadjs/3.4.0/loadjs.min.js", // 七牛
     // WangEditor
