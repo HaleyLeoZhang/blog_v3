@@ -25,6 +25,7 @@
 	<script src="{{ config('static_source_cdn.load_js') }}"></script>
 	<script src="{{ config('static_source_cdn.jquery') }}"></script>
 	<script src="{{ link_src('global.js') }}"></script>
+        <style type="text/css">.fixed-thead{position:sticky;top:0;background-color:white;z-index:1;}</style>
 </head>
 <body class="global">
 

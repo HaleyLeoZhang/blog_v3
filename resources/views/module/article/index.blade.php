@@ -80,7 +80,7 @@
 	<div id="article_comment_pagenation"></div>
 </div>
 
-<div class="right">
+<div class="right fixed-thead">
 	<div class="search_article">
 		<form action="/" method="get">
 			<input type="text" name="search" placeholder="博文搜索">
