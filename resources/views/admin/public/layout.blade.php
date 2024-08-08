@@ -21,7 +21,7 @@
         <!-- logo -->
         <link rel="shortcut icon" href="{{ cdn_host() }}/favicon.ico" />
         <!-- v2.0博客后台，功能，被全部重写后，此区间资源可以删除掉 -->
-        <link rel="stylesheet" href="/static_pc/plugins/layui/js/css/layui.css"> @yield('css')
+        <link rel="stylesheet" href="/static_pc/plugins/layui2/js/css/layui.css"> @yield('css')
     </head>
 
     <body class="skin-blue sidebar-mini">
