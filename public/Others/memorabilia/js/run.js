@@ -182,7 +182,13 @@ $(function() {
 						$("#bgMusicSwitch").attr("title", "播放背景音乐");
 					}
 				});
-				$('#bgMusicSwitch').click()
+				var hasUser = fasle // 是否用户有动
+				// 1. 等待用户交互：才有权限播放
+				document.addEventListener('mousedown touchstart', function() {
+					if (!hasUser){
+						$('#bgMusicSwitch').click()
+					}
+				});
 			}
 		});
 		
