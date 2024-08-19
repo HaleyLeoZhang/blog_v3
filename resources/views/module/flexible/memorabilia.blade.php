@@ -337,7 +337,7 @@
 	<div class="gotop"> <a href="#top"><img src="/Others/memorabilia/img/top.png" title="回顶部"/></a></div>
 	<!-- 当前环境 jQuery 1.8.3版本-->
 	<!-- Sentry -->
-{{--	<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>--}}
+	<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
 {{--	<script src="//apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>--}}
 {{--	<script src="//apps.bdimg.com/libs/impress.js/0.5.3/impress.min.js"></script>--}}
 	<script src="/Others/memorabilia/js/jquery1.8.3.js"></script>
