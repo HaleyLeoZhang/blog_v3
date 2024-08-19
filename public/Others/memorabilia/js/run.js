@@ -188,7 +188,10 @@ $(function() {
 					if (!hasUserInteract){
 						$('#bgMusicSwitch').click()
 						hasUserInteract = true
+						console.log("1")
+						return
 					}
+					console.log("2")
 				});
 			}
 		});
