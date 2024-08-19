@@ -182,10 +182,7 @@ $(function() {
 						$("#bgMusicSwitch").attr("title", "播放背景音乐");
 					}
 				});
-				var bgSwitch = function() {
-					$('#bgMusicSwitch').trigger('click');
-				}
-				bgSwitch();
+				$('#bgMusicSwitch').click()
 			}
 		});
 		
