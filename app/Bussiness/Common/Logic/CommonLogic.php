@@ -16,7 +16,7 @@ class CommonLogic
     public static function memorabilia_bg()
     {
         // 2024-8-19 因为6年过去，网络带宽不再是问题，直接开放源文件
-        $bg_url = '/Others/memorabilia/music/memorabilia_bg.mp3';
+        $bg_url = 'http://www.hlzblog.top/Others/memorabilia/music/memorabilia_bg.mp3';
 //        $bg_url = CacheLogic::get_memorabilia_cache();
 //        if (!$bg_url) {
 //            $bg_url = CacheLogic::ini_memorabilia_cache();
