@@ -340,7 +340,7 @@
 	<script src="{{ config('static_source_cdn.sentry') }}" crossorigin="anonymous"></script>
 {{--	<script src="//apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>--}}
 {{--	<script src="//apps.bdimg.com/libs/impress.js/0.5.3/impress.min.js"></script>--}}
-	<script src="{{ config('static_source_cdn.jquery') }}"></script>
+	<script src="/Others/memorabilia/js/jquery1.8.3.js"></script>
 	<script src="/Others/memorabilia/js/impress.min.js"></script>
 	<script src="/Others/memorabilia/js/run.js"></script>
 	<script src="{{ config('static_source_cdn.baidu_statistic') }}"></script>
