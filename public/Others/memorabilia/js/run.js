@@ -166,7 +166,7 @@ $(function() {
 			"dataType":"json",
 			"success":function(d){
 				bgMusic = new Audio(d.data.url);
-				// console.log(d.data.url)
+				console.log(d.data.url)
 				bgMusic.loop = true;
 				bgMusic.volume = 0.7;
 				$('#bgMusicSwitch').click(function() {
