@@ -166,6 +166,7 @@ $(function() {
 			"dataType":"json",
 			"success":function(d){
 				bgMusic = new Audio(d.data.url);
+				console.log(d.data.url)
 				bgMusic.loop = true;
 				bgMusic.volume = 0.7;
 				$('#bgMusicSwitch').click(function() {
@@ -181,10 +182,17 @@ $(function() {
 						$("#bgMusicSwitch").attr("title", "播放背景音乐");
 					}
 				});
-				var bgSwitch = function() {
-					$('#bgMusicSwitch').trigger('click');
-				}
-				bgSwitch();
+				let hasUserInteract = false // 是否用户有动
+				// 1. 等待用户交互：才有权限播放
+				document.addEventListener('mmousedown', function() {
+					if (!hasUserInteract){
+						$('#bgMusicSwitch').click()
+						hasUserInteract = true
+						console.log("1")
+						return
+					}
+					console.log("2")
+				});
 			}
 		});
 		
